@@ -1,3 +1,8 @@
+*** Settings ***
+Library	HttpLibrary.HTTP
+
+Resource   ../variables/api_variables.robot
+
 *** Keywords ***
 Initialize API Session
     [Documentation]    Initializes API session with base URL and headers
