@@ -1,6 +1,5 @@
 *** Settings ***
 Documentation     Homepage functionality test suite for Typofix application
-Library           Browser
 Resource          ../resources/keywords/web_keywords.robot
 Resource          ../resources/variables/web_variables.robot
 Resource          ../resources/variables/environment.robot

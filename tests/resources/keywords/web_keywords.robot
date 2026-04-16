@@ -61,7 +61,7 @@ Refresh Page
 
 Verify Homepage Title
     [Documentation]    Verifies the homepage title is correct
-    Get Title     Typofix - Correct Your Typos
+    Title Should Be     Typofix - Correct Your Typos
 
 Verify Homepage Header Is Visible
     [Documentation]    Verifies homepage header is visible
@@ -161,7 +161,7 @@ Verify Filtered Results Are Displayed
 Verify Results Match Filter
     [Documentation]    Verifies results match applied filter
     [Arguments]    ${filter_value}
-    Get Element    xpath://div[@class='search-results' and contains(., '${filter_value}')]
+    Wait Until Element Is Visible    xpath://div[@class='search-results' and contains(., '${filter_value}')]
 
 Sort Results By
     [Documentation]    Sorts results by specified criteria
@@ -188,4 +188,4 @@ Verify Search Results Page Is Loaded
 
 Wait For Navigation
     [Documentation]    Waits for page navigation to complete
-    Wait For Load State    networkidle
+    Wait Until Element Is Visible    networkidle

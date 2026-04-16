@@ -1,3 +1,9 @@
+*** Settings ***
+Library    SeleniumLibrary
+Library    Collections
+Resource   ../variables/web_variables.robot
+Resource   ../variables/environment.robot
+
 *** Keywords ***
 Log Test Information
     [Documentation]    Logs test execution information
@@ -7,14 +13,14 @@ Log Test Information
 Wait For Element And Click
     [Documentation]    Waits for element to be visible and clicks it
     [Arguments]    ${locator}    ${timeout}=10s
-    Wait For Elements State    ${locator}    visible    timeout=${timeout}
-    Click    ${locator}
+    Wait Until Element Is Visible    ${locator}      timeout=${timeout}
+    Click Element   ${locator}
 
 Wait For Element And Type
     [Documentation]    Waits for element and types text
     [Arguments]    ${locator}    ${text}    ${timeout}=10s
-    Wait For Elements State    ${locator}    visible    timeout=${timeout}
-    Type Text    ${locator}    ${text}
+    Wait Until Element Is Visible    ${locator}     timeout=${timeout}
+    Input Text    ${locator}    ${text}
 
 Get Random String
     [Documentation]    Generates random string for test data
