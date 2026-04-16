@@ -1,7 +1,9 @@
 # Python cache files
 __pycache__/
 *.py[cod]
-
+.venv
+.robotcode_cache
+.idea
 # Test results
 results/
 
