@@ -1,0 +1,12 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Test results
+results/
+
+# Robot Framework
+*.log
+*.xml
+output.xml
+report.html
