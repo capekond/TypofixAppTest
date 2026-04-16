@@ -12,25 +12,25 @@ GET
     [Documentation]    Sends GET request to API endpoint
     [Arguments]    ${endpoint}    ${params}=${EMPTY}
     ${response}=    Get Request    API    ${endpoint}    params=${params}
-    [Return]    ${response}
+    RETURN    ${response}
 
 POST
     [Documentation]    Sends POST request to API endpoint
     [Arguments]    ${endpoint}    ${json}=${EMPTY}
     ${response}=    Post Request    API    ${endpoint}    json=${json}
-    [Return]    ${response}
+    RETURN    ${response}
 
 PUT
     [Documentation]    Sends PUT request to API endpoint
     [Arguments]    ${endpoint}    ${json}=${EMPTY}
     ${response}=    Put Request    API    ${endpoint}    json=${json}
-    [Return]    ${response}
+    RETURN    ${response}
 
 DELETE
     [Documentation]    Sends DELETE request to API endpoint
     [Arguments]    ${endpoint}
     ${response}=    Delete Request    API    ${endpoint}
-    [Return]    ${response}
+    RETURN    ${response}
 
 Verify Response Status
     [Documentation]    Verifies API response status code

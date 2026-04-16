@@ -20,18 +20,18 @@ Get Random String
     [Documentation]    Generates random string for test data
     [Arguments]    ${length}=10
     ${random}=    Evaluate    ''.join(__import__('random').choices(__import__('string').ascii_letters, k=${length}))
-    [Return]    ${random}
+    RETURN    ${random}
 
 Get Timestamp
     [Documentation]    Returns current timestamp
     ${timestamp}=    Evaluate    __import__('time').strftime('%Y%m%d%H%M%S')
-    [Return]    ${timestamp}
+    RETURN    ${timestamp}
 
 Create Test Email
     [Documentation]    Creates unique test email address
     ${timestamp}=    Get Timestamp
     ${email}=    Evaluate    f'test{${timestamp}}@typofix.org'
-    [Return]    ${email}
+    RETURN    ${email}
 
 Verify Response Is Valid JSON
     [Documentation]    Verifies response is valid JSON
