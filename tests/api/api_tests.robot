@@ -1,5 +1,5 @@
 *** Settings ***
-Library    Requests
+Library  RequestsLibrary
 
 *** Variables ***
 ${BASE_URL}    https://www.typofix.org/
@@ -22,9 +22,9 @@ POST Request Test
 Get Request
     [Arguments]    ${url}
     ${response}=    GET    ${url}
-    [Return]    ${response}
+    RETURN    ${response}
 
 Post Request
     [Arguments]    ${url}    ${data}
     ${response}=    POST    ${url}    json=${data}
-    [Return]    ${response}
+    RETURN    ${response}
