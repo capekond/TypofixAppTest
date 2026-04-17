@@ -2,7 +2,7 @@
 Library    SeleniumLibrary
 
 *** Variables ***
-${BASE_URL}    https://www.typofix.org/
+${BASE_URL}   https://www.typofix.org/application
 
 #*** Test Suites ***
 #Homepage Tests

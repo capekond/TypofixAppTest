@@ -4,6 +4,7 @@ __pycache__/
 .venv
 .robotcode_cache
 .idea
+
 # Test results
 results/
 
@@ -12,3 +13,5 @@ results/
 *.xml
 output.xml
 report.html
+
+# Security
