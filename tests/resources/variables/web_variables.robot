@@ -1,12 +1,15 @@
 *** Variables ***
-# UI Element Locators
+${WEB_BASE_URL}   https://www.typofix.org/application
 
 # Login Page Locators
-${USERNAME_INPUT}         id:username
-${PASSWORD_INPUT}         id:password
-${LOGIN_BUTTON}           xpath://button[@type='submit']
-${FORGOT_PASSWORD_LINK}   xpath://a[contains(text(), 'Forgot')]
-${ERROR_MESSAGE}          xpath://div[@class='error-message']
+${EMAIL}               ocapek@gmail.com
+${LOGIN_BUTTON}        xpath://button[@type='submit']
+
+
+
+
+
+
 
 # Homepage Locators
 ${MAIN_HEADER}            xpath://header[@class='main-header']

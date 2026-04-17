@@ -8,11 +8,14 @@ Resource   ../variables/api_variables.robot
 *** Test Cases ***
 
 Create Reference Set
-    Static Predefind Preference Set    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
+    Set Predefined Preference    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
+
+Sinple compare fixed entry with expected result
+    Set Predefined Preference    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
 
 *** Keywords ***
 
-Static Predefind Preference Set
+Set Predefined Preference
     [Documentation]   Manage Stetic Predefind Preference Set defind at file in parameter
     [Arguments]    ${file_path}
     ${headers}=    Create Dictionary    Authorization=${BEARER_TOKEN}
