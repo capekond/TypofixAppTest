@@ -1,3 +1,3 @@
 *** Variables ***
-${WEB_PASSWORD}    fill this
-${BEARER_TOKEN}    Bearer fill this
+${WEB_PASSWORD}    fill_this
+${BEARER_TOKEN}    Bearer fill_this
