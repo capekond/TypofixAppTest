@@ -1,0 +1,267 @@
+{
+  "preferencesets": [
+    {
+      "id": "77",
+      "title": "Start CZ",
+      "languageId": 2,
+      "categoryPreferences": [
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "DashRange",
+          "value": "–"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "GeoSpace",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "DateSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "Dash",
+          "value": "–"
+        },
+        {
+          "code": "FigSpace",
+          "value": "\\u{202F}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "GeoSpaceLast",
+          "value": "‍\\u{00A0}"
+        }
+      ],
+      "isDefault": false
+    },
+    {
+      "id": "c59637bd-071a-468b-bd47-eeb1f9f8acba",
+      "title": "TEST_AUT_ReferenceSet_cz_ak",
+      "languageId": 1,
+      "categoryPreferences": [
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "DashRange",
+          "value": "–"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DashRangeSpaces",
+          "value": "\\u{00A0}–\\u{0020}"
+        },
+        {
+          "code": "GeoSpace",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DateSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "Dash",
+          "value": "–"
+        },
+        {
+          "code": "FigSpace",
+          "value": "\\u{202F}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "GeoSpaceLast",
+          "value": "‍\\u{00A0}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,31 +1,17 @@
 *** Settings ***
+Resource   ../resources/keywords/api.robot
+Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary
-
 *** Variables ***
-${BASE_URL}    https://www.typofix.org/
-
-#*** Test Suites ***
-#Homepage Tests
+${BASE_URL}   https://www.typofix.org/application
 
 *** Test Cases ***
-Load Homepage
-    [Documentation]    Verify that the homepage loads correctly
-    Open Browser    ${BASE_URL}    chrome
-    Title Should Be    Typofix.org
-    Close Browser
 
-#Verify Content
-#    [Documentation]    Verify the content on the homepage
-#    Open Browser    ${BASE_URL}    chrome
-#    Page Should Contain    Welcome to Typofix!
-#    Close Browser
-#
-#Navigation Links
-#    [Documentation]    Verify that navigation links work
-#    Open Browser    ${BASE_URL}    chrome
-#    Click Link    About
-#    Title Should Be    About Us - Typofix
-#    Go Back
-#    Click Link    Contact
-#    Title Should Be    Contact Us - Typofix
-#    Close Browser
+Simple compare fixed entry with expected result
+    [Documentation]    Basic test
+    Set Predefined Preference    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
+    Open Browser And Login If Necessary
+#    Select Language
+#    Select Reference Set
+#    Wait Until Element Is Enabled
+    Close Browser

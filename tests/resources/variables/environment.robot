@@ -1,7 +1,7 @@
 *** Variables ***
 # Environment Settings
 ${BASE_URL}                https://www.typofix.org/
-${API_BASE_URL}            https://api.typofix.org/v1
+#${API_BASE_URL}            https://api.typofix.org/v1
 ${BROWSER}                 headlesschrome
 
 # Timeouts
