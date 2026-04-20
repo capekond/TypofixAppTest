@@ -32,4 +32,13 @@ Select Reference Set
     Click Element    ${REFERENCE_SET}
     Click Element    xpath://option[contains(text(), '${ref_set}')]
 
-
+Input Text for Corretion
+    [Arguments]    ${input}
+#    Press Key    ${INPUT_INNER}    \\1
+#    Press Key    ${INPUT_INNER}    \\127
+#    Sleep    2s
+#    Input Text       ${INPUT_INNER_EMPTY}    ${input}
+    Input Text       ${INPUT_INNER}    ${input}
+#    FOR    ${id}    IN RANGE    400
+#        Press Key    ${INPUT_INNER}    \\127
+#    END
