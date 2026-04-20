@@ -3,7 +3,7 @@ Library    RequestsLibrary
 Library    OperatingSystem
 Library    ../keywords/KeywordsTypofix.py
 Resource   ../variables/secret.robot
-Resource   ../variables/api_variables.robot
+Resource   ../variables/api.robot
 
 *** Keywords ***
 

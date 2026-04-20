@@ -1,8 +1,8 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    ../keywords/KeywordsTypofix.py
-Resource   ../variables/web_variables.robot
-Resource   ../variables/environment.robot
+Resource   ../variables/web.robot
+Resource   ../variables/secret.robot
 
 *** Keywords ***
 Open Browser And Login If Necessary
@@ -19,10 +19,17 @@ Open Browser And Login If Necessary
         Log To Console  Reuse open session
     END
 
-#Select Language
-#    Wait Until Element Is Not Visible
-#
-#Select Reference Set
-#    Wait Until Element Is Not Visible
+
+Select Language
+    [Arguments]    ${lang}
+    Wait Until Element Contains    locator=${LANGUAGE}    text=Select language    timeout=2s
+    Click Element    ${LANGUAGE}
+    Click Element    xpath://option[contains(text(), '${lang}')]
+
+Select Reference Set
+    [Arguments]    ${ref_set}
+    Wait Until Element Is Visible    ${REFERENCE_SET}
+    Click Element    ${REFERENCE_SET}
+    Click Element    xpath://option[contains(text(), '${ref_set}')]
 
 
