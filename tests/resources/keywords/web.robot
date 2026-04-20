@@ -42,3 +42,14 @@ Input Text for Corretion
 #    FOR    ${id}    IN RANGE    400
 #        Press Key    ${INPUT_INNER}    \\127
 #    END
+
+Correct Text For Correction By Click On Buttons
+    Click Element    ${TYPOFIX}
+    Wait Until Element Is Visible    ${REPLACE}
+    ${end}=    Page Should Not Contain    No replacements available.
+    WHILE
+        ${element}=    Get WebElement    ${REPLACE}
+        Click Element    ${element}
+        ${end}=    Page Should Not Contain    No replacements available.
+    END
+
