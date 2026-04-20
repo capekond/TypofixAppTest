@@ -19,9 +19,9 @@ Open Browser And Login If Necessary
         Log To Console  Reuse open session
     END
 
-
 Select Language
     [Arguments]    ${lang}
+    Wait Until Element Is Visible      locator=${LANGUAGE}
     Wait Until Element Contains    locator=${LANGUAGE}    text=Select language    timeout=2s
     Click Element    ${LANGUAGE}
     Click Element    xpath://option[contains(text(), '${lang}')]

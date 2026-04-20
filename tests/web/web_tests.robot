@@ -11,3 +11,12 @@ Simple compare fixed entry with expected result
     Open Browser And Login If Necessary
     Select Language    Czech (academic rules)
     Select Reference Set    TEST_AUT_ReferenceSet_cz_ak
+#    Input Text       ${INPUT}     Babi,ahoj
+    Input Text       ${INPUT_INNER}     Babi,ahoj
+
+    FOR    ${id}    IN    3
+        Press Key    ${INPUT_INNER}    \\127
+    END
+
+#    Input Text    locator=${INPUT_INNER_EMPTY}    text=Babi,ahoj     clear=True,
+    Click Element    ${TYPOFIX}
