@@ -43,9 +43,14 @@ Select Reference Set
 
 Input Text for Corretion
     [Arguments]    ${input}
-    Input Text       ${INPUT_INNER}    ${input}
-    #TODO ddelete old text
-#    FOR    ${id}    IN RANGE    400
+
+#    Press Key    ${INPUT_INNER}    \\1
+#    Press Key    ${INPUT_INNER}    \\127
+    Input Text       ${INPUT_INNER_EMPTY}    ${input}
+    Press Key    ${INPUT_INNER}    \\127
+#    Input Text       ${INPUT_INNER}    ${input}
+
+#    FOR    ${id}    IN RANGE    100
 #        Press Key    ${INPUT_INNER}    \\127
 #    END
 

@@ -1,5 +1,5 @@
 *** Variables ***
-${WEB_BASE_URL}   https://www.typofix.org/application
+${WEB_BASE_URL}   https://www.typofix.org/application#testing
 
 # Login Page Locators
 ${EMAIL}               ocapek@gmail.com
