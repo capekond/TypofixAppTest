@@ -10,7 +10,6 @@ Setup Web Session
     Open Browser And Login If Necessary
     Set Predefined Preference    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
 
-
 Open Browser And Login If Necessary
     [Documentation]    Opens a browser and provide email password to login
     Open Browser    ${WEB_BASE_URL}    chrome
@@ -30,7 +29,7 @@ Select Language
     Wait Until Element Is Visible      locator=${LANGUAGE}
     Wait Until Element Contains    locator=${LANGUAGE}    text=Select language    timeout=2s
     Click Element    ${LANGUAGE}
-     Click Element    xpath://option[contains(text(), '${lang}')]
+    Click Element    xpath://option[contains(text(), '${lang}')]
 
 Select Reference Set
     [Arguments]    ${ref_set}
