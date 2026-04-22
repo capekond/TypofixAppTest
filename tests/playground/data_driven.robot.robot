@@ -1,6 +1,3 @@
-#*** Settings ***
-#Library    DataDriver    file=tests/resources/test_data/TestCases.xlsx    sheet_name=tc
-
 *** Settings ***
 Documentation     Example test cases using the data-driven testing approach.
 Test Template     Show

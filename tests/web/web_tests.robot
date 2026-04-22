@@ -3,6 +3,7 @@ Resource   ../resources/keywords/api.robot
 Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary
 
+
 *** Test Cases ***
 
 Simple compare fixed entry with expected result
@@ -15,5 +16,3 @@ Simple compare fixed entry with expected result
     Correct Text For Correction By Click On Buttons
     Click Element    ${TYPOFIX}
     Element Text Should Be    locator=${INPUT_INNER}    expected=Ahoj, Babi
-
-

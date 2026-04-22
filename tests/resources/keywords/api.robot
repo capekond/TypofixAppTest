@@ -15,7 +15,7 @@ Set Predefined Preference
     Create Session    typofix_api    ${API_BASE_URL}    verify=True    debug=1
     ${response}=    PUT On Session
     ...    alias=typofix_api
-    ...    url=${API_PATH}
+    ...    url=${API_REFERENCE_SETS}
     ...    json=${payload}
     ...    headers=${headers}
     Status Should Be    200    ${response}

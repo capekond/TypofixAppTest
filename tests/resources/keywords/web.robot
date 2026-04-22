@@ -34,11 +34,8 @@ Select Reference Set
 
 Input Text for Corretion
     [Arguments]    ${input}
-#    Press Key    ${INPUT_INNER}    \\1
-#    Press Key    ${INPUT_INNER}    \\127
-#    Sleep    2s
-#    Input Text       ${INPUT_INNER_EMPTY}    ${input}
     Input Text       ${INPUT_INNER}    ${input}
+    #TODO ddelete old text
 #    FOR    ${id}    IN RANGE    400
 #        Press Key    ${INPUT_INNER}    \\127
 #    END
@@ -46,10 +43,11 @@ Input Text for Corretion
 Correct Text For Correction By Click On Buttons
     Click Element    ${TYPOFIX}
     Wait Until Element Is Visible    ${REPLACE}
-    ${end}=    Page Should Not Contain    No replacements available.
-    WHILE
-        ${element}=    Get WebElement    ${REPLACE}
-        Click Element    ${element}
-        ${end}=    Page Should Not Contain    No replacements available.
+    TRY
+        WHILE
+            ${element}=    Get WebElement    ${REPLACE}
+            Click Element    ${element}
+        END
+    EXCEPT
+        Log To Console    Done, no mere to correct
     END
-
