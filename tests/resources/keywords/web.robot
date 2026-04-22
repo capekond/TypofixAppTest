@@ -24,6 +24,24 @@ Open Browser And Login If Necessary
         Log To Console  Reuse open session
     END
 
+Let Open Browser
+    [Documentation]    Opens a browser and provide email password to login
+    Open Browser    ${WEB_BASE_URL}    chrome
+    Maximize Browser Window
+
+Login If Necessary
+    [Documentation]    Opens a browser and provide email password to login
+    Reload Page
+    ${element_exists} =    Run Keyword And Return Status    Page Should Contain Element    id=email
+    IF    ${element_exists}
+        Input Text      id:email    ${EMAIL}
+        Input Text      id:password    ${WEB_PASSWORD}
+        Click Button    xpath://button[@type='submit']
+        Log To Console  Login, session created
+    ELSE
+        Log To Console  Reuse open session
+    END
+
 Select Language
     [Arguments]    ${lang}
     Wait Until Element Is Visible      locator=${LANGUAGE}
@@ -43,16 +61,8 @@ Select Reference Set
 
 Input Text for Corretion
     [Arguments]    ${input}
-
-#    Press Key    ${INPUT_INNER}    \\1
-#    Press Key    ${INPUT_INNER}    \\127
-    Input Text       ${INPUT_INNER_EMPTY}    ${input}
-    Press Key    ${INPUT_INNER}    \\127
-#    Input Text       ${INPUT_INNER}    ${input}
-
-#    FOR    ${id}    IN RANGE    100
-#        Press Key    ${INPUT_INNER}    \\127
-#    END
+    Input Text     ${INPUT_INNER_EMPTY}    ${input}
+    Press Key      ${INPUT_INNER}    \\127
 
 Correct Text For Correction By Click On Buttons
     Click Element    ${TYPOFIX}

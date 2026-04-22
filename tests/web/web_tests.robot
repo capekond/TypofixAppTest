@@ -7,7 +7,7 @@ Suite Teardown      Close All Browsers
 
 *** Test Cases ***
 
-Simple compare fixed entry with expected result
+Simple compare fixed entry with expected result backup
     [Documentation]    Basic test
     Select Language    Czech (academic rules)
     Select Reference Set    TEST_AUT_ReferenceSet_cz_ak
