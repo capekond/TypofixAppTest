@@ -67,7 +67,6 @@ pip install robotframework selenium robotframework-requests
 Execute the tests using the command:
 ```bash
 robot tests/web/web_tests.robot
-robot tests/api/api_tests.robot
 ```
 
 ## Conclusion
