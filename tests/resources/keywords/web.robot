@@ -6,24 +6,6 @@ Resource   ../variables/secret.robot
 
 *** Keywords ***
 
-Setup Web Session
-    Open Browser And Login If Necessary
-    Set Predefined Preference    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
-
-Open Browser And Login If Necessary
-    [Documentation]    Opens a browser and provide email password to login
-    Open Browser    ${WEB_BASE_URL}    chrome
-    Maximize Browser Window
-    ${element_exists} =    Run Keyword And Return Status    Page Should Contain Element    id=email
-    IF    ${element_exists}
-        Input Text      id:email    ${EMAIL}
-        Input Text      id:password    ${WEB_PASSWORD}
-        Click Button    xpath://button[@type='submit']
-        Log To Console  Login, session created
-    ELSE
-        Log To Console  Reuse open session
-    END
-
 Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
     Open Browser    ${WEB_BASE_URL}    chrome

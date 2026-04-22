@@ -13,7 +13,7 @@ Check correction
 *** Keywords ***
 Simple compare fixed entry with expected result backup
     [Documentation]    Basic test
-    [Arguments]    ${language}    ${preference}    ${given}    ${expected}
+    [Arguments]    ${language}    ${preference}    ${given}    ${expected}    ${fixes_count}
     Login If Necessary
     Select Language    ${language}
     Select Reference Set    ${preference}
