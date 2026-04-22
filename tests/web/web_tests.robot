@@ -2,8 +2,7 @@
 Resource   ../resources/keywords/api.robot
 Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary
-Suite Setup  Set Predefined Preference  ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json  Open Browser And Login If Necessary
-
+Suite Setup  Setup Web Session
 Suite Teardown      Close All Browsers
 
 *** Test Cases ***
