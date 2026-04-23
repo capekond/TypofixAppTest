@@ -13,13 +13,13 @@ Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary
 Suite Setup  Let Open Browser
 Suite Teardown      Close All Browsers
-Test Template     Simple compare fixed entry with expected result backup
+Test Template     Simple compare fixed entry with expected result
 
 *** Test Cases ***
 Check correction
 
 *** Keywords ***
-Simple compare fixed entry with expected result backup
+Simple compare fixed entry with expected result
     [Documentation]    Basic test
     [Arguments]    ${language}    ${preference}    ${given}    ${expected}    ${fixes_count}
     Set Predefined Preference    ${preference}
