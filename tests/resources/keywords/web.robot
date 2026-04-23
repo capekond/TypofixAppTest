@@ -47,8 +47,10 @@ Input Text for Corretion
     Press Key      ${INPUT_INNER}    \\127
 
 Correct Text For Correction By Click On Buttons
+    [Arguments]    ${fixes_count}
     Click Element    ${TYPOFIX}
     Wait Until Element Is Visible    ${REPLACE}
+    Page Should Contain Element    locator=${REPLACEMENTS}    limit=${fixes_count}
     TRY
         WHILE
             ${element}=    Get WebElement    ${REPLACE}

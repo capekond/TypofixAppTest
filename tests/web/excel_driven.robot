@@ -18,6 +18,5 @@ Simple compare fixed entry with expected result backup
     Select Language    ${language}
     Select Reference Set    ${preference}
     Input Text for Corretion    input=${given}
-    Correct Text For Correction By Click On Buttons
-    Click Element    ${TYPOFIX}
+    Correct Text For Correction By Click On Buttons    ${fixes_count}
     Element Text Should Be    locator=${INPUT_INNER}    expected=${expected}
