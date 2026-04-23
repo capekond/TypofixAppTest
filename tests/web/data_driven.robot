@@ -1,17 +1,25 @@
+*** Variables ***
+${CSV_DELIMITER}    |
+${DATA_FILE}        TestCases.xlsx
+#${DATA_FILE}        TestCases.csv
+
 *** Settings ***
-Library    DataDriver    ../resources/test_data/TestCases.xlsx    sheet_name=tc
+Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UTF8
+...    dialect=UserDefined
+...    delimiter=${CSV_DELIMITER}
+...    lineterminator='\r\n'
 Resource   ../resources/keywords/api.robot
 Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary
 Suite Setup  Let Open Browser
 Suite Teardown      Close All Browsers
-Test Template     Simple compare fixed entry with expected result backup
+Test Template     Simple compare fixed entry with expected result
 
 *** Test Cases ***
 Check correction
 
 *** Keywords ***
-Simple compare fixed entry with expected result backup
+Simple compare fixed entry with expected result
     [Documentation]    Basic test
     [Arguments]    ${language}    ${preference}    ${given}    ${expected}    ${fixes_count}
     Set Predefined Preference    ${preference}
