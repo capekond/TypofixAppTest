@@ -1,9 +1,13 @@
 *** Variables ***
 ${CSV_DELIMITER}    |
 ${DATA_FILE}        TestCases.xlsx
+#${DATA_FILE}        TestCases.csv
 
 *** Settings ***
-Library    DataDriver    ../resources/test_data/${DATA_FILE}
+Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UTF8
+...    dialect=UserDefined
+...    delimiter=${CSV_DELIMITER}
+...    lineterminator='\r\n'
 Resource   ../resources/keywords/api.robot
 Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary
