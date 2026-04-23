@@ -1,0 +1,3 @@
+*** Test Cases ***|[Documentation]|[Tags]|${language}|${preference}|${given}|${expected}|${fixes_count}
+Space after comma|Space after comma|demo|Czech (academic rules)|TEST_AUT_ReferenceSet_cz_ak|Ahoj,babi|Ahoj, babi|1
+Wrong format viz|Wrong format viz|demo|Czech (academic rules)|TEST_AUT_ReferenceSet_cz_ak|Ahoj,babi,znovu|Ahoj, babi, znovu|2

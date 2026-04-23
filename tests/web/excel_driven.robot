@@ -1,5 +1,9 @@
+*** Variables ***
+${CSV_DELIMITER}    |
+${DATA_FILE}        TestCases.xlsx
+
 *** Settings ***
-Library    DataDriver    ../resources/test_data/TestCases.xlsx    sheet_name=tc
+Library    DataDriver    ../resources/test_data/${DATA_FILE}
 Resource   ../resources/keywords/api.robot
 Resource   ../resources/keywords/web.robot
 Library    SeleniumLibrary

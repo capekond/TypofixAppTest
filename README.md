@@ -65,18 +65,15 @@ The test suites structure can be organized into separate folders for web and API
         |-- api_tests.robot
 ```
 
-## 4. Running Tests
-
-To run the tests, ensure you have Robot Framework and the necessary libraries installed:
+## 4. Before Running Tests
+1. execute requirements 
 ```bash
-pip install robotframework selenium robotframework-requests
+cd <project folder>/TypofixAppTest/
+pip install  -r  requirements.txt
 ```
+2. decrypt file with credentials:
 
-Execute the tests using the command:
 ```bash
-robot tests/web/web_tests.robot
+cd <project folder>/TypofixAppTest/tests/resources/variables/
+mcrypt -d secret.robot.nc
 ```
-
-## Conclusion
-
-This documentation serves as a starting point for understanding and executing the Robot Framework test suites for the Typofix application. For additional information on the Robot Framework, refer to the [Robot Framework User Guide](https://robotframework.org/).
