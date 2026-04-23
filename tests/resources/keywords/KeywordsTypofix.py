@@ -1,8 +1,6 @@
 import json
 import os
 
-
-
 class KeywordsTypofix(object):
 
     def get_json_reference_file(self, file_name: str) -> dict:

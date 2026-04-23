@@ -43,7 +43,7 @@ Select Reference Set
 
 Input Text for Corretion
     [Arguments]    ${input}
-    Input Text     ${INPUT_INNER_EMPTY}    ${input}
+    Input Text     ${INPUT_INNER}    ${input}
     Press Key      ${INPUT_INNER}    \\127
 
 Correct Text For Correction By Click On Buttons
