@@ -1,3 +1,7 @@
+USE 
+mcrypt secret.robot
+mcrypt -d secret.robot.nc
+
 # Robot Framework Test Suites Documentation
 
 This README provides comprehensive documentation for the Robot Framework test suites that are designed to test the functionalities of the Typofix application, including web browser and REST API tests.
