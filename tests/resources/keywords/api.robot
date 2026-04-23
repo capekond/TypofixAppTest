@@ -9,9 +9,9 @@ Resource   ../variables/api.robot
 
 Set Predefined Preference
     [Documentation]   Manage Stetic Predefind Preference Set defind at file in parameter
-    [Arguments]    ${file_path}
+    [Arguments]    ${file_part_name}
     ${headers}=    Create Dictionary    Authorization=${BEARER_TOKEN}
-    ${payload}=    Get Json File    ${file_path}
+    ${payload}=    Get Json Reference File    ${file_part_name}
     Create Session    typofix_api    ${API_BASE_URL}    verify=True    debug=1
     ${response}=    PUT On Session
     ...    alias=typofix_api

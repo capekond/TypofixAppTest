@@ -6,14 +6,14 @@ Resource   ../variables/secret.robot
 
 *** Keywords ***
 
-Setup Web Session
-    Open Browser And Login If Necessary
-    Set Predefined Preference    ${EXECDIR}/tests/resources/test_data/ReferenceSetAdd.json
-
-Open Browser And Login If Necessary
+Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
     Open Browser    ${WEB_BASE_URL}    chrome
     Maximize Browser Window
+
+Login If Necessary
+    [Documentation]    Opens a browser and provide email password to login
+    Reload Page
     ${element_exists} =    Run Keyword And Return Status    Page Should Contain Element    id=email
     IF    ${element_exists}
         Input Text      id:email    ${EMAIL}
@@ -43,15 +43,14 @@ Select Reference Set
 
 Input Text for Corretion
     [Arguments]    ${input}
-    Input Text       ${INPUT_INNER}    ${input}
-    #TODO ddelete old text
-#    FOR    ${id}    IN RANGE    400
-#        Press Key    ${INPUT_INNER}    \\127
-#    END
+    Input Text     ${INPUT_INNER}    ${input}
+    Press Key      ${INPUT_INNER}    \\127
 
 Correct Text For Correction By Click On Buttons
+    [Arguments]    ${fixes_count}
     Click Element    ${TYPOFIX}
     Wait Until Element Is Visible    ${REPLACE}
+    Page Should Contain Element    locator=${REPLACEMENTS}    limit=${fixes_count}
     TRY
         WHILE
             ${element}=    Get WebElement    ${REPLACE}
