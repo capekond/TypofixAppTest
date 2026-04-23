@@ -1,6 +1,10 @@
-USE 
+```security 
+
+cd /mnt/c/Users/ocape/IdeaProjects/TypofixAppTest/tests/resources/variables/
 mcrypt secret.robot
+rm secret.robot
 mcrypt -d secret.robot.nc
+```
 
 # Robot Framework Test Suites Documentation
 
