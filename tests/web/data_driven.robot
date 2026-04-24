@@ -1,7 +1,7 @@
 *** Variables ***
 ${CSV_DELIMITER}    |
-#${DATA_FILE}        TestCases.xlsx
-${DATA_FILE}        TestCasesPipe.csv
+${DATA_FILE}        TestCases.xlsx
+#${DATA_FILE}        TestCasesPipe.csv
 #${DATA_FILE}        TestCasesSemicolon.csv
 
 *** Settings ***
