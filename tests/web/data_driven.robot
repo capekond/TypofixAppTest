@@ -1,7 +1,8 @@
 *** Variables ***
 ${CSV_DELIMITER}    |
-${DATA_FILE}        TestCases.xlsx
-#${DATA_FILE}        TestCases.csv
+#${DATA_FILE}        TestCases.xlsx
+${DATA_FILE}        TestCasesPipe.csv
+#${DATA_FILE}        TestCasesSemicolon.csv
 
 *** Settings ***
 Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UTF8
