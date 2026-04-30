@@ -14,6 +14,12 @@ pip install  -r  requirements.txt
 cd <projects folder>/TypofixAppTest/tests/resources/variables/
 mcrypt -d secret.robot.nc
 ```
+3. ecrypt file with rules:
+
+```bash
+cd <projects folder>/TypofixAppTest/tests/resources/test_data
+tar cz rules/ | mcrypt -k "typ***" > rules.tar.gz.nc
+```
 ## How to setup test functional scope
 There are 2 possibilities to set up the scope. The differences depend on used data file with definition of Test Cases
 ### Excel file
@@ -44,3 +50,9 @@ Reporting is available as html local file <projects folder>/TypofixAppTest/resul
   - local python setup and run
   - CI/CD pipeline https://docs.robotframework.org/docs/using_rf_in_ci_systems/ci/github-actions
   - run from container 
+
+### my notes 
+```bash
+cd /mnt/c/Users/ocape/IdeaProjects/TypofixAppTest/tests/resources/test_data
+tar cz rules/ | mcrypt -k "typ***" > rules.tar.gz.nc
+```
