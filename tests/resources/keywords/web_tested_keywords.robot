@@ -1,7 +1,8 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    ../keywords/KeywordsTypofix.py
-Resource   ../variables/web.robot
+Resource   ../variables/web_tested_variables.robot
+Resource   ../variables/api_tested_variables.robot
 Resource   ../variables/secret.robot
 
 *** Keywords ***
