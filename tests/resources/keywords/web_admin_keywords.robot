@@ -31,21 +31,27 @@ Admin Login If Necessary
 
 Admin Get All Text Replaces
     Go To    ${ADMIN_BASE_URL}/text-replace
-    ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-
-    FOR    ${a}    IN RANGE    0    ${rows}
-        Wait Until Element Is Enabled    //td[@class='col-ID']
-        @{ids}=    Get WebElements    //td[@class='col-ID']
-        @{names}=    Get WebElements    //td[@class='col-Name']
-        @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
-        ${id}=       Get Text    ${ids}[${a}]
-        Log To Console    ${id}
-        ${name}=       Get Text    ${names}[${a}]
-        Log To Console    ${name}
-        ${lang}=       Get Text    ${langs}[${a}]
-        Log To Console    ${lang}
-        Admin Get Test Replaces Details      ${ids}[${a}]
-        Log To Console    DONE
+    WHILE    True
+        ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
+        FOR    ${a}    IN RANGE    0    ${rows}
+            Wait Until Element Is Enabled    //td[@class='col-ID']
+            @{ids}=    Get WebElements    //td[@class='col-ID']
+            @{names}=    Get WebElements    //td[@class='col-Name']
+            @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
+            ${id}=       Get Text    ${ids}[${a}]
+            Log To Console    ${id}
+            ${name}=       Get Text    ${names}[${a}]
+            Log To Console    ${name}
+            ${lang}=       Get Text    ${langs}[${a}]
+            Log To Console    ${lang}
+            Admin Get Test Replaces Details      ${ids}[${a}]
+            Log To Console    DONE
+        END
+        Wait Until Element Is Visible    ${ADMIN_NEXT}
+        ${can_next}=    Element Should Be Enabled    ${ADMIN_NEXT}
+        IF    ${can_next}    BREAK
+        Click Element    ${ADMIN_NEXT}
+        Sleep    10s
     END
 
 Admin Get Test Replaces Details
