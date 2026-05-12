@@ -10,6 +10,9 @@ Add defined examples to data store
     Admin Get All Text Replaces
 
 
+Add Add Temp
+    Admin Login If Necessary
+    Admin TEMP
 
 
 

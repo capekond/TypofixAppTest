@@ -66,4 +66,18 @@ Admin Get Test Replaces Details
     Click Element    ${ADMIN_GO_BACK}
 
 
+Admin TEMP
+    Go To    ${ADMIN_BASE_URL}/text-replace
+    ${str}=    Get Text    //span[@class='pagination-page-number']
+    Log To Console    ${str}
+    ${pgs}     Evaluate    "${str}".split(" ")[2]
+    FOR    ${i}    IN RANGE    1     ${pgs}
+
+        Log To Console    ${i}
+#        Input Text    //input[@class='text no-change-track']    ${i}
+#        Press Keys    //input[@class='text no-change-track']     ENTER
+        Click Button    ${ADMIN_NEXT}
+        Sleep    5s
+    END
+
 
