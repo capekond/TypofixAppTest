@@ -10,10 +10,6 @@ Add defined examples to data store
     Admin Get All Text Replaces
 
 
-Nested container
-    ${nested} =    Evaluate    [['a', 'b', 'c'], {'key': ['x', 'y']}]
-    Log Many    @{nested}[0]         # Logs 'a', 'b' and 'c'.
-    Log Many    @{nested}[1][key]    # Logs 'x' and 'y'.
 
 
 

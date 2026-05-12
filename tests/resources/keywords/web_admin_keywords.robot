@@ -42,8 +42,20 @@ Admin Get All Text Replaces
         Log To Console    ${name}
         ${lang}=       Get Text    ${langs}[${a}]
         Log To Console    ${lang}
-
-
-
-
+        Admin Get Test Replaces Details      ${ids}[${a}]
+        Log To Console    DONE
     END
+
+Admin Get Test Replaces Details
+    [Arguments]    ${click_id}
+    Click Element    ${click_id}
+    Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
+    Wait Until Element Is Enabled     ${ADMIN_BEFORE_TEXT_REPLACE}
+    ${txtBefore}=    Get Text        ${ADMIN_BEFORE_TEXT_REPLACE}
+    ${txtAfter}=    Get Text        ${ADMIN_AFTER_TEXT_REPLACE}
+    Log To Console    ${txtBefore}
+    Log To Console    ${txtAfter}
+    Click Element    ${ADMIN_GO_BACK}
+
+
+
