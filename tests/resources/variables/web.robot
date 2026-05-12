@@ -1,5 +1,6 @@
 *** Variables ***
-${WEB_BASE_URL}   https://www.typofix.org/application#testing
+${TESTED_BASE_URL}   https://www.typofix.org/application#testing
+
 
 # Homepage Locators
 ${LANGUAGE}               id:language-select
