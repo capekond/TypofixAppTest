@@ -32,10 +32,12 @@ Admin Login If Necessary
 Admin Get All Text Replaces
     Go To    ${ADMIN_BASE_URL}/text-replace
     ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-    @{ids}=    Get WebElements    //td[@class='col-ID']
-    @{names}=    Get WebElements    //td[@class='col-Name']
-    @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
+
     FOR    ${a}    IN RANGE    0    ${rows}
+        Wait Until Element Is Enabled    //td[@class='col-ID']
+        @{ids}=    Get WebElements    //td[@class='col-ID']
+        @{names}=    Get WebElements    //td[@class='col-Name']
+        @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
         ${id}=       Get Text    ${ids}[${a}]
         Log To Console    ${id}
         ${name}=       Get Text    ${names}[${a}]
@@ -51,8 +53,8 @@ Admin Get Test Replaces Details
     Click Element    ${click_id}
     Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
     Wait Until Element Is Enabled     ${ADMIN_BEFORE_TEXT_REPLACE}
-    ${txtBefore}=    Get Text        ${ADMIN_BEFORE_TEXT_REPLACE}
-    ${txtAfter}=    Get Text        ${ADMIN_AFTER_TEXT_REPLACE}
+    ${txtBefore}=    Get Value        ${ADMIN_BEFORE_TEXT_REPLACE}
+    ${txtAfter}=    Get Value        ${ADMIN_AFTER_TEXT_REPLACE}
     Log To Console    ${txtBefore}
     Log To Console    ${txtAfter}
     Click Element    ${ADMIN_GO_BACK}
