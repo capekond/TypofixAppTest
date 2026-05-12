@@ -12,5 +12,6 @@ ${REPLACE}                xpath://button[text()='Replace']
 ${REPLACEMENTS}           class:replacements-item
 
 # Homepage Locators for admin
-${ADMIN_EMAIL}
-${ADMIN_PASSWORD}
+#${ADMIN_EMAIL}
+#${ADMIN_PASSWORD}
+${ADMIN_TABLE_TEXT_REPLACE}    //table[@class="table grid-field__table"]/tbody/tr
