@@ -31,27 +31,26 @@ Admin Login If Necessary
 
 Admin Get All Text Replaces
     Go To    ${ADMIN_BASE_URL}/text-replace
-    WHILE    True
+    ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
+    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
+    FOR    ${i}    IN RANGE    1     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         FOR    ${a}    IN RANGE    0    ${rows}
-            Wait Until Element Is Enabled    //td[@class='col-ID']
-            @{ids}=    Get WebElements    //td[@class='col-ID']
+            Wait Until Element Is Enabled   //td[@class='col-ID']
+            @{ids}=    Get WebElements      //td[@class='col-ID']
             @{names}=    Get WebElements    //td[@class='col-Name']
             @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
             ${id}=       Get Text    ${ids}[${a}]
             Log To Console    ${id}
             ${name}=       Get Text    ${names}[${a}]
-            Log To Console    ${name}
             ${lang}=       Get Text    ${langs}[${a}]
             Log To Console    ${lang}
             Admin Get Test Replaces Details      ${ids}[${a}]
-            Log To Console    DONE
+            Log To Console    ${name}
         END
         Wait Until Element Is Visible    ${ADMIN_NEXT}
-        ${can_next}=    Element Should Be Enabled    ${ADMIN_NEXT}
-        IF    ${can_next}    BREAK
-        Click Element    ${ADMIN_NEXT}
-        Sleep    10s
+        Click Button    ${ADMIN_NEXT}
+        Sleep    5s
     END
 
 Admin Get Test Replaces Details
@@ -74,8 +73,6 @@ Admin TEMP
     FOR    ${i}    IN RANGE    1     ${pgs}
 
         Log To Console    ${i}
-#        Input Text    //input[@class='text no-change-track']    ${i}
-#        Press Keys    //input[@class='text no-change-track']     ENTER
         Click Button    ${ADMIN_NEXT}
         Sleep    5s
     END

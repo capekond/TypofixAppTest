@@ -17,3 +17,4 @@ ${ADMIN_GO_BACK}                  //*[@id="Form_ItemEditForm"]/div[1]/div[1]/a
 ${ADMIN_BEFORE_TEXT_REPLACE}      xpath://textarea[@name='ExampleBefore']
 ${ADMIN_AFTER_TEXT_REPLACE}       xpath://textarea[@name='ExampleAfter']
 ${ADMIN_NEXT}                     xpath://button[@value='Next']
+${ADMIM_PG_INFO}                  xpath://span[@class='pagination-page-number']
