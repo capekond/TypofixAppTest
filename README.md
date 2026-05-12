@@ -55,4 +55,6 @@ Reporting is available as html local file <projects folder>/TypofixAppTest/resul
 ```bash
 cd /mnt/c/Users/ocape/IdeaProjects/TypofixAppTest/tests/resources/test_data
 tar cz rules/ | mcrypt -k "typ***" > rules.tar.gz.nc
+
+ sudo apt install enca
 ```
