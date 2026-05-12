@@ -2,10 +2,9 @@
 
 
 *** Settings ***
-Resource   ../resources/keywords/api_tested_keywords.robot
-Resource   ../resources/keywords/web_tested_keywords.robot
+Resource   ../resources/keywords/web_admin_keywords.robot
 Library    SeleniumLibrary
-Suite Setup  Let Open Browser    ${ADMIN_BASE_URL}
+Suite Setup  Admin Let Open Browser
 #Suite Teardown      Close All Browsers
 
 

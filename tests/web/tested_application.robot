@@ -9,13 +9,10 @@ Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UT
 ...    dialect=UserDefined
 ...    delimiter=${CSV_DELIMITER}
 ...    lineterminator='\r\n'
-#Resource   ../resources/keywords/api_tested_keywords.robot
 Resource    ../resources/keywords/api_tested_keywords.robot
-#Resource   ../resources/keywords/web_tested_keywords.robot
 Resource    ../resources/keywords/web_tested_keywords.robot
-Resource    ../resources/variables/web_tested_variables.robot
 Library    SeleniumLibrary
-Suite Setup  Let Open Browser    ${TESTED_BASE_URL}
+Suite Setup  Let Open Browser
 Suite Teardown      Close All Browsers
 Test Template     Simple compare fixed entry with expected result
 

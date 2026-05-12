@@ -9,8 +9,7 @@ Resource   ../variables/secret.robot
 
 Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
-    [Arguments]    ${url}
-    Open Browser    ${url}    chrome
+    Open Browser    ${TESTED_BASE_URL}    chrome
     Maximize Browser Window
 
 Login If Necessary
