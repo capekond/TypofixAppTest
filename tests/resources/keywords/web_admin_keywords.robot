@@ -9,7 +9,7 @@ Resource   ../variables/secret.robot
 
 Admin Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
-    Open Browser    ${ADMIN_BASE_URL}    chrome
+    Open Browser    ${ADMIN_BASE_URL}    headlesschrome
     Maximize Browser Window
 
 Admin Login If Necessary
@@ -39,16 +39,19 @@ Admin Get All Text Replaces
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         FOR    ${a}    IN RANGE    0    ${rows}
             Wait Until Element Is Enabled   //td[@class='col-ID']
-            @{ids}=    Get WebElements      //td[@class='col-ID']
+            @{ids}=      Get WebElements      //td[@class='col-ID']
             @{names}=    Get WebElements    //td[@class='col-Name']
             @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
             ${id}=       Get Text    ${ids}[${a}]
-            Log To Console    ${id}
-            ${name}=       Get Text    ${names}[${a}]
-            ${lang}=       Get Text    ${langs}[${a}]
-            Log To Console    ${lang}
+            ${name}=     Get Text    ${names}[${a}]
+            ${lang}=     Get Text    ${langs}[${a}]
+            Data Store Add Item    id          ${id}
+            Data Store Add Item    name        ${name}
+            Data Store Add Item    languages   ${lang}
             Admin Get Test Replaces Details      ${ids}[${a}]
+            Log To Console    ${id}
             Log To Console    ${name}
+            Log To Console    ${lang}
         END
         Wait Until Element Is Visible    ${ADMIN_NEXT}
         Click Button    ${ADMIN_NEXT}
@@ -62,9 +65,6 @@ Admin Get Test Replaces Details
     Wait Until Element Is Enabled     ${ADMIN_BEFORE_TEXT_REPLACE}
     ${txtBefore}=    Get Value        ${ADMIN_BEFORE_TEXT_REPLACE}
     ${txtAfter}=    Get Value        ${ADMIN_AFTER_TEXT_REPLACE}
-    Log To Console    ${txtBefore}
-    Log To Console    ${txtAfter}
+    Data Store Add Item    text before    ${txtBefore}
+    Data Store Add Item    text after     ${txtAfter}    new_line=True
     Click Element    ${ADMIN_GO_BACK}
-
-
-
