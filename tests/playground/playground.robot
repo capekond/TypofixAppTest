@@ -4,8 +4,7 @@ Library    ../resources/keywords/KeywordsTypofix.py
 
 *** Test Cases ***
 Data store File Add List
-    Data Store Create List
-    FOR    ${i}    IN RANGE     1    3
+    FOR    ${i}    IN RANGE     1    10
         Data Store New Line
         Data Store Add Item     name    Some rule name ${i}
         Data Store Add Item     before    Line before ${i}
