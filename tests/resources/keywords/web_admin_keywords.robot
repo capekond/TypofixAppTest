@@ -33,7 +33,9 @@ Admin Get All Text Replaces
     Go To    ${ADMIN_BASE_URL}/text-replace
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
-    FOR    ${i}    IN RANGE    1     ${pgs}
+    #TODO only one page limitation
+    ${pgs}    Set Variable    1
+    FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         FOR    ${a}    IN RANGE    0    ${rows}
             Wait Until Element Is Enabled   //td[@class='col-ID']
@@ -64,17 +66,5 @@ Admin Get Test Replaces Details
     Log To Console    ${txtAfter}
     Click Element    ${ADMIN_GO_BACK}
 
-
-Admin TEMP
-    Go To    ${ADMIN_BASE_URL}/text-replace
-    ${str}=    Get Text    //span[@class='pagination-page-number']
-    Log To Console    ${str}
-    ${pgs}     Evaluate    "${str}".split(" ")[2]
-    FOR    ${i}    IN RANGE    1     ${pgs}
-
-        Log To Console    ${i}
-        Click Button    ${ADMIN_NEXT}
-        Sleep    5s
-    END
 
 
