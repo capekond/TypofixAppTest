@@ -32,14 +32,15 @@ Admin Login If Necessary
 Admin Get All Text Replaces
     Go To    ${ADMIN_BASE_URL}/text-replace
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
-    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
     #TODO only one page limitation
+    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
+    #TODO end
     ${pgs}    Set Variable    1
     FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         FOR    ${a}    IN RANGE    0    ${rows}
             Wait Until Element Is Enabled   //td[@class='col-ID']
-            @{ids}=      Get WebElements      //td[@class='col-ID']
+            @{ids}=      Get WebElements    //td[@class='col-ID']
             @{names}=    Get WebElements    //td[@class='col-Name']
             @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
             ${id}=       Get Text    ${ids}[${a}]
@@ -65,6 +66,6 @@ Admin Get Test Replaces Details
     Wait Until Element Is Enabled     ${ADMIN_BEFORE_TEXT_REPLACE}
     ${txtBefore}=    Get Value        ${ADMIN_BEFORE_TEXT_REPLACE}
     ${txtAfter}=    Get Value        ${ADMIN_AFTER_TEXT_REPLACE}
-    Data Store Add Item    text before    ${txtBefore}
-    Data Store Add Item    text after     ${txtAfter}    new_line=True
+    Data Store Add Item    text before    ${txtBefore}    html_tag_cleanup=True
+    Data Store Add Item    text after     ${txtAfter}     html_tag_cleanup=True   new_line=True
     Click Element    ${ADMIN_GO_BACK}
