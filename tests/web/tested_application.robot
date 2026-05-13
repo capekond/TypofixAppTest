@@ -9,8 +9,8 @@ Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UT
 ...    dialect=UserDefined
 ...    delimiter=${CSV_DELIMITER}
 ...    lineterminator='\r\n'
-Resource   ../resources/keywords/api.robot
-Resource   ../resources/keywords/web.robot
+Resource    ../resources/keywords/api_tested_keywords.robot
+Resource    ../resources/keywords/web_tested_keywords.robot
 Library    SeleniumLibrary
 Suite Setup  Let Open Browser
 Suite Teardown      Close All Browsers

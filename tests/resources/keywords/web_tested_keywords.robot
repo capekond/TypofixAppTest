@@ -1,14 +1,15 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    ../keywords/KeywordsTypofix.py
-Resource   ../variables/web.robot
+Resource   ../variables/web_tested_variables.robot
+Resource   ../variables/api_tested_variables.robot
 Resource   ../variables/secret.robot
 
 *** Keywords ***
 
 Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
-    Open Browser    ${WEB_BASE_URL}    chrome
+    Open Browser    ${TESTED_BASE_URL}    chrome
     Maximize Browser Window
 
 Login If Necessary
