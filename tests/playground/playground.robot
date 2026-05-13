@@ -11,6 +11,7 @@ Data store File Add List
         Data Store Add Item     before    Line before ${i}
         Data Store Add Item     after    Line after ${i}
     END
+    Data Store Save
 
 
 
