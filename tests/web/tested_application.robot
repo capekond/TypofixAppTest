@@ -23,7 +23,6 @@ Check correction
 Simple compare fixed entry with expected result
     [Documentation]    Basic test
     [Arguments]    ${language}    ${preference}    ${given}    ${expected}    ${fixes_count}
-    Set Predefined Preference    ${preference}
     Login If Necessary
     Select Language    ${language}
     Select Reference Set    ${preference}
