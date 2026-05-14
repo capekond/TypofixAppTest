@@ -2,16 +2,16 @@ import json
 import os
 import re
 from datetime import datetime
-
+import pandas as pd
 from openpyxl import load_workbook
-
+from pathlib import Path
 
 
 class KeywordsTypofix(object):
     def __init__(self):
-        self.TEST_DATA_DIR = os.path.join(os.getcwd(),  'tests', 'resources', 'test_data')
+        self.RESOURCES_DIR = Path(__file__).parent.parent
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
-        data_store = load_workbook(os.path.join(self.TEST_DATA_DIR, "DataStore.xlsx"))
+        data_store = load_workbook(os.path.join(self.RESOURCES_DIR, "test_data","DataStore.xlsx"))
         self.data_store_list = data_store.copy_worksheet(data_store["_pattern"])
         self.data_store_list.title = datetime.now().strftime('%Y-%m-%d_%H_%M_%S')
         self.data_store_offset = 2
@@ -27,7 +27,7 @@ class KeywordsTypofix(object):
         self.data_store_offset = self.data_store_offset + 1 if new_line else self.data_store_offset
 
     def data_store_save(self):
-        self.data_store_list.parent.save(os.path.join(self.TEST_DATA_DIR, "DataStore.xlsx"))
+        self.data_store_list.parent.save(os.path.join(self.RESOURCES_DIR, "test_data", "DataStore.xlsx"))
 
     def str_cleanup(self, v:str, cleaned, cleaning='', case_sensitive=True, html_pairs=True) -> str:
         for tag in cleaned:
@@ -38,6 +38,15 @@ class KeywordsTypofix(object):
         return v
 
     def get_json_reference_file(self, file_name: str) -> dict:
-        json_file_path = os.path.join(self.TEST_DATA_DIR, 'references' , file_name + ".json")
+        file_name = file_name if file_name.endswith('.json') else file_name + '.json'
+        json_file_path = os.path.join(self.RESOURCES_DIR, 'references', file_name)
         return json.load(open(json_file_path))
 
+    def get_reference_from_list(self, language: str, field: str) -> str:
+        f_name = os.path.join(self.RESOURCES_DIR, 'test_data'  , 'references', '_list.csv')
+        df = pd.read_csv(f_name, sep=';').query(f"language == '{language}'")
+        return df[field].values[0]
+
+
+# print(KeywordsTypofix().get_reference_from_list('Croatian', 'file'))
+# print(KeywordsTypofix().get_reference_from_list('Bulgarian', 'name'))

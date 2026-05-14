@@ -1,0 +1,3131 @@
+{
+  "preferencesets": [
+    {
+      "id": "3394",
+      "title": "Start CZ",
+      "languageId": 2,
+      "categoryPreferences": [
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "DashRange",
+          "value": "–"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "GeoSpace",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "DateSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "Dash",
+          "value": "–"
+        },
+        {
+          "code": "FigSpace",
+          "value": "\\u{202F}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "GeoSpaceLast",
+          "value": "‍\\u{00A0}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3396",
+      "title": "Default",
+      "languageId": 4,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3397",
+      "title": "Default",
+      "languageId": 5,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3398",
+      "title": "Default",
+      "languageId": 11,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3399",
+      "title": "Default",
+      "languageId": 14,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "“"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{002E}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3400",
+      "title": "Default",
+      "languageId": 26,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "QR1",
+          "value": "’"
+        },
+        {
+          "code": "QL2",
+          "value": "“"
+        },
+        {
+          "code": "QR2",
+          "value": "”"
+        },
+        {
+          "code": "QL1",
+          "value": "‘"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3401",
+      "title": "Default",
+      "languageId": 28,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "EmDash",
+          "value": "\\u{2014}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002F}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3402",
+      "title": "Default",
+      "languageId": 18,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3403",
+      "title": "Default",
+      "languageId": 10,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QR1",
+          "value": "”"
+        },
+        {
+          "code": "QL1",
+          "value": "”"
+        },
+        {
+          "code": "FigSpace",
+          "value": "\\u{202F}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3404",
+      "title": "Default",
+      "languageId": 9,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "PunctSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "GuillSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{2011}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3405",
+      "title": "Default",
+      "languageId": 12,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3406",
+      "title": "Default",
+      "languageId": 13,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "«"
+        },
+        {
+          "code": "QR1",
+          "value": "»"
+        },
+        {
+          "code": "GreekNumSym",
+          "value": "\\u{00B4}"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "DashRange",
+          "value": "\\u{2013} \\u{002D}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3407",
+      "title": "Default",
+      "languageId": 6,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "Dash",
+          "value": "–"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{00A0}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3408",
+      "title": "Default",
+      "languageId": 23,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "DateSep",
+          "value": "\\u{2011}"
+        },
+        {
+          "code": "DashRangeSpaces",
+          "value": "\\u{2009}–\\u{2009}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3409",
+      "title": "Default",
+      "languageId": 19,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QR1",
+          "value": "»"
+        },
+        {
+          "code": "QR2",
+          "value": "”"
+        },
+        {
+          "code": "QL1",
+          "value": "«"
+        },
+        {
+          "code": "QL2",
+          "value": "“"
+        },
+        {
+          "code": "DashRange",
+          "value": "\\u{2013}"
+        },
+        {
+          "code": "MultiplySpace",
+          "value": "\\u{200A}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3410",
+      "title": "Default",
+      "languageId": 20,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "“"
+        },
+        {
+          "code": "QR1",
+          "value": "”"
+        },
+        {
+          "code": "QL2",
+          "value": "“"
+        },
+        {
+          "code": "QR2",
+          "value": "”"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3411",
+      "title": "Default",
+      "languageId": 21,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "NarrowSpace",
+          "value": "\\u{202F}"
+        },
+        {
+          "code": "MultiplySpace",
+          "value": "\\u{2009}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3412",
+      "title": "Default",
+      "languageId": 24,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "Dash",
+          "value": "–"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3413",
+      "title": "Default",
+      "languageId": 7,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "”"
+        },
+        {
+          "code": "QL2",
+          "value": "»"
+        },
+        {
+          "code": "QR2",
+          "value": "«"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{2006}"
+        },
+        {
+          "code": "DashDialog",
+          "value": "–\\t"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3414",
+      "title": "Default",
+      "languageId": 15,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "NarrowSpace",
+          "value": "\\u{202F} \\u{2009}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002F}"
+        },
+        {
+          "code": "MultiplySpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "QL1",
+          "value": "«"
+        },
+        {
+          "code": "QR1",
+          "value": "»"
+        },
+        {
+          "code": "QL2",
+          "value": "“"
+        },
+        {
+          "code": "QR2",
+          "value": "”"
+        },
+        {
+          "code": "currSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3415",
+      "title": "Default",
+      "languageId": 22,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "DashDialog",
+          "value": "–\\t"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3416",
+      "title": "Default",
+      "languageId": 8,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "DashRange",
+          "value": "\\u{2013}"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "DashRangeSpaces",
+          "value": "\\u{2009}–\\u{2009}"
+        },
+        {
+          "code": "NarrowSpace",
+          "value": "\\u{202F}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "DateSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "Dash",
+          "value": "–"
+        },
+        {
+          "code": "MultiplySpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "GeoSpaceLast",
+          "value": ""
+        },
+        {
+          "code": "FigSpace",
+          "value": "\\u{202F}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3417",
+      "title": "Default",
+      "languageId": 25,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QR1",
+          "value": "«"
+        },
+        {
+          "code": "QL1",
+          "value": "»"
+        },
+        {
+          "code": "QL2",
+          "value": "›"
+        },
+        {
+          "code": "QR2",
+          "value": "‹"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3418",
+      "title": "Default",
+      "languageId": 16,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "«"
+        },
+        {
+          "code": "QR1",
+          "value": "»"
+        },
+        {
+          "code": "QL2",
+          "value": "“"
+        },
+        {
+          "code": "QR2",
+          "value": "”"
+        },
+        {
+          "code": "DashDialog",
+          "value": "–\\t —"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "GeoSpace",
+          "value": ""
+        },
+        {
+          "code": "GeoSpaceLast",
+          "value": "‍\\u{200D}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002F}"
+        },
+        {
+          "code": "currSpace",
+          "value": "\\u{00A0} \\u{202F}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3419",
+      "title": "Default",
+      "languageId": 17,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "”"
+        },
+        {
+          "code": "QR1",
+          "value": "”"
+        },
+        {
+          "code": "QR2",
+          "value": "’"
+        },
+        {
+          "code": "NarrowSpace",
+          "value": "\\u{202F} \\u{2006}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "0706747d-d553-4753-84de-925d8e64082c",
+      "title": "test-czech-academic-rules",
+      "languageId": 1,
+      "categoryPreferences": [
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": true
+        },
+        {
+          "categoryId": 60,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": true
+        },
+        {
+          "categoryId": 61,
+          "active": true
+        },
+        {
+          "categoryId": 25,
+          "active": true
+        },
+        {
+          "categoryId": 8,
+          "active": true
+        },
+        {
+          "categoryId": 38,
+          "active": true
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": true
+        },
+        {
+          "categoryId": 54,
+          "active": true
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "QL2",
+          "value": "‚"
+        },
+        {
+          "code": "QR2",
+          "value": "‘"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        },
+        {
+          "code": "DashRange",
+          "value": "\\u{2013}"
+        },
+        {
+          "code": "ThousandsSep",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DashRangeSpaces",
+          "value": "\\u{00A0}–\\u{0020}"
+        },
+        {
+          "code": "GeoSpace",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "InitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "LastInitSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "DateSpace",
+          "value": "\\u{00A0}"
+        },
+        {
+          "code": "Dash",
+          "value": "–"
+        },
+        {
+          "code": "FigSpace",
+          "value": "\\u{202F}"
+        },
+        {
+          "code": "Prime",
+          "value": "′"
+        },
+        {
+          "code": "DblPrime",
+          "value": "″"
+        },
+        {
+          "code": "SpaceEll",
+          "value": "\\u{0020}"
+        },
+        {
+          "code": "GeoSpaceLast",
+          "value": "‍\\u{00A0}"
+        },
+        {
+          "code": "DateSep",
+          "value": "\\u{002E}"
+        }
+      ]
+    }
+  ]
+}
