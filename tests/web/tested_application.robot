@@ -12,7 +12,7 @@ Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UT
 Resource    ../resources/keywords/api_tested_keywords.robot
 Resource    ../resources/keywords/web_tested_keywords.robot
 Library    SeleniumLibrary
-Suite Setup  Let Open Browser
+Suite Setup  Let Open Browser and Set All Preferences
 Suite Teardown      Close All Browsers
 Test Template     Simple compare fixed entry with expected result
 
