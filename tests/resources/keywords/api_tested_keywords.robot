@@ -4,7 +4,7 @@ Library    OperatingSystem
 Library    Collections
 Library    ../keywords/KeywordsTypofix.py
 Resource   ../variables/secret.robot
-Resource   ../variables/api_tested_keywords.robot
+Resource   ../variables/api_tested_variables.robot
 
 *** Keywords ***
 Set All Predefined References

@@ -12,9 +12,5 @@ Data store File Add List
     END
     Data Store Save
 
-Get file field
-    ${str}=     Get Reference From List  language=Croatian    field=file
-    Log To Console    ${str}
-
 
 
