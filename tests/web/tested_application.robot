@@ -12,7 +12,9 @@ Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UT
 Resource    ../resources/keywords/api_tested_keywords.robot
 Resource    ../resources/keywords/web_tested_keywords.robot
 Library    SeleniumLibrary
-Suite Setup  Let Open Browser
+Library    ../keywords/KeywordsTypofix.py
+
+Suite Setup  Let Open Browser and Set All Preferences
 Suite Teardown      Close All Browsers
 Test Template     Simple compare fixed entry with expected result
 
@@ -22,10 +24,10 @@ Check correction
 *** Keywords ***
 Simple compare fixed entry with expected result
     [Documentation]    Basic test
-    [Arguments]    ${language}    ${preference}    ${given}    ${expected}    ${fixes_count}
-    Set Predefined Preference    ${preference}
+    [Arguments]    ${language}    ${given}    ${expected}    ${fixes_count}
     Login If Necessary
     Select Language    ${language}
+    ${preference}=    Get Field For Language From Reference    language=${language}    field=name
     Select Reference Set    ${preference}
     Input Text for Corretion    input=${given}
     Correct Text For Correction By Click On Buttons    ${fixes_count}

@@ -7,8 +7,9 @@ Resource   ../variables/secret.robot
 
 *** Keywords ***
 
-Let Open Browser
+Let Open Browser and Set All Preferences
     [Documentation]    Opens a browser and provide email password to login
+    Set All Predefined References
     Open Browser    ${TESTED_BASE_URL}    chrome
     Maximize Browser Window
 
