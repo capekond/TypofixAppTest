@@ -41,7 +41,12 @@ if __name__ == "__main__":
     print("For more info let try --help")
     if p.no_question or input('Do you like to proceed the task? [Y/n]  ') == "Y":
         s, target = m.get_sheets(p.input, p.output)
-        values = [  {"name" : s.cell(i, 1).value + ". " + s.cell(i, 2).value } for i in range(2, s.max_row + 1)]
+        values = [  [{"name" : s.cell(i, 1).value + ". " + s.cell(i, 2).value },
+                     {"before": "a"},
+                     {"after": "a"},
+                     {"after": "a"},
+                     {"lang": "a"},
+                     ] for i in range(2, s.max_row + 1)]
         print(values)
 
     else:
