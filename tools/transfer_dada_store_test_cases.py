@@ -41,13 +41,14 @@ if __name__ == "__main__":
     print("For more info let try --help")
     if p.no_question or input('Do you like to proceed the task? [Y/n]  ') == "Y":
         s, target = m.get_sheets(p.input, p.output)
-        values = [  [{"name" : s.cell(i, 1).value + ". " + s.cell(i, 2).value },
-                     {"before": "a"},
-                     {"after": "a"},
-                     {"after": "a"},
-                     {"lang": "a"},
+        rows = [  [{"name" : s.cell(i, 1).value + ". " + s.cell(i, 2).value },
+                     {"before": s.cell(i, 3).value},
+                     {"after": s.cell(i, 4).value},
+                     {"lang": s.cell(i, 5).value},
                      ] for i in range(2, s.max_row + 1)]
-        print(values)
+        for row in rows:
+            print(row)
+
 
     else:
         print("Disapproved by user ")
