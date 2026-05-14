@@ -9,6 +9,11 @@ Resource   ../variables/api_tested_keywords.robot
 
 Set All Predefined References
     [Documentation]   Set All Predefined References from tests/resources/test_data/references/_list.csv file
+    @{langs}=    Get Languages From Reference
+        FOR    ${lang}    IN    @{langs}
+            Log To Console    ${lang}
+        END
+
 
 Set Predefined Preference
     [Documentation]   Manage Stetic Predefind Preference Set defind at file in parameter

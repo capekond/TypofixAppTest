@@ -38,15 +38,20 @@ class KeywordsTypofix(object):
         return v
 
     def get_json_reference_file(self, file_name: str) -> dict:
+        #todo delete
         file_name = file_name if file_name.endswith('.json') else file_name + '.json'
         json_file_path = os.path.join(self.RESOURCES_DIR, 'references', file_name)
         return json.load(open(json_file_path))
 
-    def get_reference_from_list(self, language: str, field: str) -> str:
+    def get_field_for_language_from_reference(self, language: str, field: str) -> str:
         f_name = os.path.join(self.RESOURCES_DIR, 'test_data'  , 'references', '_list.csv')
         df = pd.read_csv(f_name, sep=';').query(f"language == '{language}'")
         return df[field].values[0]
 
+    def get_languages_from_reference(self) -> list:
+        f_name = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
+        df = pd.read_csv(f_name, sep=';')
+        return df['language'].values
 
-# print(KeywordsTypofix().get_reference_from_list('Croatian', 'file'))
-# print(KeywordsTypofix().get_reference_from_list('Bulgarian', 'name'))
+# print(KeywordsTypofix().get_field_for_language_from_reference('Croatian', 'file'))
+# print(KeywordsTypofix().get_languages_from_reference())
