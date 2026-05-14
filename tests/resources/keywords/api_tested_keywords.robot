@@ -11,15 +11,16 @@ Set All Predefined References
     [Documentation]   Set All Predefined References from tests/resources/test_data/references/_list.csv file
     @{langs}=    Get Languages From Reference
         FOR    ${lang}    IN    @{langs}
-            Log To Console    ${lang}
+            ${file_name}=    Get Field For Language From Reference    language=${lang}    field=file
+            Set Predefined Preference    ${file_name}
         END
 
 
 Set Predefined Preference
     [Documentation]   Manage Stetic Predefind Preference Set defind at file in parameter
-    [Arguments]    ${file_part_name}
+    [Arguments]    ${file_name}
     ${headers}=    Create Dictionary    Authorization=${BEARER_TOKEN}
-    ${payload}=    Get Json Reference File    ${file_part_name}
+    ${payload}=    Get Json Reference File    ${file_name}
     Create Session    typofix_api    ${API_BASE_URL}    verify=True    debug=1
     ${response}=    PUT On Session
     ...    alias=typofix_api

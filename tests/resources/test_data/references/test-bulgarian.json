@@ -1,7 +1,117 @@
 {
   "preferencesets": [
     {
-      "id": "3397",
+      "id": "3881",
+      "title": "Default",
+      "languageId": 4,
+      "categoryPreferences": [
+        {
+          "categoryId": 52,
+          "active": true
+        },
+        {
+          "categoryId": 50,
+          "active": true
+        },
+        {
+          "categoryId": 32,
+          "active": true
+        },
+        {
+          "categoryId": 57,
+          "active": false
+        },
+        {
+          "categoryId": 60,
+          "active": false
+        },
+        {
+          "categoryId": 49,
+          "active": true
+        },
+        {
+          "categoryId": 48,
+          "active": false
+        },
+        {
+          "categoryId": 44,
+          "active": false
+        },
+        {
+          "categoryId": 61,
+          "active": false
+        },
+        {
+          "categoryId": 25,
+          "active": false
+        },
+        {
+          "categoryId": 46,
+          "active": false
+        },
+        {
+          "categoryId": 8,
+          "active": false
+        },
+        {
+          "categoryId": 56,
+          "active": false
+        },
+        {
+          "categoryId": 12,
+          "active": false
+        },
+        {
+          "categoryId": 53,
+          "active": false
+        },
+        {
+          "categoryId": 45,
+          "active": false
+        },
+        {
+          "categoryId": 47,
+          "active": false
+        },
+        {
+          "categoryId": 38,
+          "active": false
+        },
+        {
+          "categoryId": 55,
+          "active": true
+        },
+        {
+          "categoryId": 42,
+          "active": false
+        },
+        {
+          "categoryId": 51,
+          "active": false
+        },
+        {
+          "categoryId": 54,
+          "active": false
+        }
+      ],
+      "variablePreferences": [
+        {
+          "code": "QL1",
+          "value": "„"
+        },
+        {
+          "code": "QR1",
+          "value": "“"
+        },
+        {
+          "code": "abbSpace",
+          "value": "\\u{2009}"
+        }
+      ],
+      "isDefault": true
+    },
+    {
+      "id": "3882",
       "title": "Default",
       "languageId": 5,
       "categoryPreferences": [
@@ -111,7 +221,7 @@
       "isDefault": true
     },
     {
-      "id": "3398",
+      "id": "3883",
       "title": "Default",
       "languageId": 11,
       "categoryPreferences": [
@@ -229,7 +339,7 @@
       "isDefault": true
     },
     {
-      "id": "3399",
+      "id": "3884",
       "title": "Default",
       "languageId": 14,
       "categoryPreferences": [
@@ -339,7 +449,7 @@
       "isDefault": true
     },
     {
-      "id": "3400",
+      "id": "3885",
       "title": "Default",
       "languageId": 26,
       "categoryPreferences": [
@@ -473,7 +583,7 @@
       "isDefault": true
     },
     {
-      "id": "3401",
+      "id": "3886",
       "title": "Default",
       "languageId": 28,
       "categoryPreferences": [
@@ -599,7 +709,7 @@
       "isDefault": true
     },
     {
-      "id": "3402",
+      "id": "3887",
       "title": "Default",
       "languageId": 18,
       "categoryPreferences": [
@@ -709,7 +819,7 @@
       "isDefault": true
     },
     {
-      "id": "3403",
+      "id": "3888",
       "title": "Default",
       "languageId": 10,
       "categoryPreferences": [
@@ -819,7 +929,7 @@
       "isDefault": true
     },
     {
-      "id": "3404",
+      "id": "3889",
       "title": "Default",
       "languageId": 9,
       "categoryPreferences": [
@@ -929,7 +1039,7 @@
       "isDefault": true
     },
     {
-      "id": "3405",
+      "id": "3890",
       "title": "Default",
       "languageId": 12,
       "categoryPreferences": [
@@ -1051,7 +1161,7 @@
       "isDefault": true
     },
     {
-      "id": "3406",
+      "id": "3891",
       "title": "Default",
       "languageId": 13,
       "categoryPreferences": [
@@ -1169,7 +1279,7 @@
       "isDefault": true
     },
     {
-      "id": "3407",
+      "id": "3892",
       "title": "Default",
       "languageId": 6,
       "categoryPreferences": [
@@ -1275,7 +1385,7 @@
       "isDefault": true
     },
     {
-      "id": "3408",
+      "id": "3893",
       "title": "Default",
       "languageId": 23,
       "categoryPreferences": [
@@ -1389,7 +1499,7 @@
       "isDefault": true
     },
     {
-      "id": "3409",
+      "id": "3894",
       "title": "Default",
       "languageId": 19,
       "categoryPreferences": [
@@ -1511,7 +1621,7 @@
       "isDefault": true
     },
     {
-      "id": "3410",
+      "id": "3895",
       "title": "Default",
       "languageId": 20,
       "categoryPreferences": [
@@ -1625,7 +1735,7 @@
       "isDefault": true
     },
     {
-      "id": "3411",
+      "id": "3896",
       "title": "Default",
       "languageId": 21,
       "categoryPreferences": [
@@ -1731,7 +1841,7 @@
       "isDefault": true
     },
     {
-      "id": "3412",
+      "id": "3897",
       "title": "Default",
       "languageId": 24,
       "categoryPreferences": [
@@ -1833,7 +1943,7 @@
       "isDefault": true
     },
     {
-      "id": "3413",
+      "id": "3898",
       "title": "Default",
       "languageId": 7,
       "categoryPreferences": [
@@ -1963,7 +2073,7 @@
       "isDefault": true
     },
     {
-      "id": "3414",
+      "id": "3899",
       "title": "Default",
       "languageId": 15,
       "categoryPreferences": [
@@ -2097,7 +2207,7 @@
       "isDefault": true
     },
     {
-      "id": "3415",
+      "id": "3900",
       "title": "Default",
       "languageId": 22,
       "categoryPreferences": [
@@ -2211,7 +2321,7 @@
       "isDefault": true
     },
     {
-      "id": "3416",
+      "id": "3901",
       "title": "Default",
       "languageId": 8,
       "categoryPreferences": [
@@ -2369,7 +2479,7 @@
       "isDefault": true
     },
     {
-      "id": "3417",
+      "id": "3902",
       "title": "Default",
       "languageId": 25,
       "categoryPreferences": [
@@ -2495,7 +2605,7 @@
       "isDefault": true
     },
     {
-      "id": "3418",
+      "id": "3903",
       "title": "Default",
       "languageId": 16,
       "categoryPreferences": [
@@ -2641,7 +2751,7 @@
       "isDefault": true
     },
     {
-      "id": "3419",
+      "id": "3904",
       "title": "Default",
       "languageId": 17,
       "categoryPreferences": [
@@ -2755,7 +2865,7 @@
       "isDefault": true
     },
     {
-      "id": "0706747d-d553-4753-84de-925d8e64082c",
+      "id": "3905",
       "title": "test-czech-academic-rules",
       "languageId": 1,
       "categoryPreferences": [
@@ -2885,10 +2995,11 @@
           "code": "DateSep",
           "value": "\\u{002E}"
         }
-      ]
+      ],
+      "isDefault": true
     },
     {
-      "id": "0b03ade3-2e7e-40b9-9071-6969dd6961d0",
+      "id": "3906",
       "title": "test-czech-traditional-rules",
       "languageId": 2,
       "categoryPreferences": [
@@ -3014,10 +3125,11 @@
           "code": "GeoSpaceLast",
           "value": "‍\\u{00A0}"
         }
-      ]
+      ],
+      "isDefault": true
     },
     {
-      "id": "db54dabf-bbbf-4f69-a87d-9d58ad6c91e0",
+      "id": "b7762513-1e78-46fd-8e83-64380fec223c",
       "title": "test-bulgarian",
       "languageId": 4,
       "categoryPreferences": [
