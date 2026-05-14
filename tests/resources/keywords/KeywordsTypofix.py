@@ -49,7 +49,7 @@ class KeywordsTypofix(object):
         df = pd.read_csv(f_name, sep=';').query(f"language == '{language}'")
         return df[field].values[0]
 
-    def get_languages_from_reference(self) -> list:
+    def get_column_from_reference(self, column) -> list:
         f_name = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
         df = pd.read_csv(f_name, sep=';')
-        return df['language'].values
+        return df[column].values

@@ -1,20 +1,19 @@
 *** Settings ***
 Library    RequestsLibrary
 Library    OperatingSystem
+Library    Collections
 Library    ../keywords/KeywordsTypofix.py
 Resource   ../variables/secret.robot
 Resource   ../variables/api_tested_keywords.robot
 
 *** Keywords ***
-
 Set All Predefined References
     [Documentation]   Set All Predefined References from tests/resources/test_data/references/_list.csv file
-    @{langs}=    Get Languages From Reference
+    @{langs}=    Get Column From Reference    column=language
         FOR    ${lang}    IN    @{langs}
             ${file_name}=    Get Field For Language From Reference    language=${lang}    field=file
             Set Predefined Preference    ${file_name}
         END
-
 
 Set Predefined Preference
     [Documentation]   Manage Stetic Predefind Preference Set defind at file in parameter
