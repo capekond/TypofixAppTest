@@ -3,7 +3,10 @@ import os
 import re
 import sys
 from datetime import datetime
+from shlex import split
+
 import pandas as pd
+from docutils.nodes import target
 from openpyxl import load_workbook
 from pathlib import Path
 
@@ -40,14 +43,24 @@ if __name__ == "__main__":
     print(f"Content of last list from {p.input} will be formatted and transferred to {p.output} ")
     print("For more info let try --help")
     if p.no_question or input('Do you like to proceed the task? [Y/n]  ') == "Y":
-        s, target = m.get_sheets(p.input, p.output)
+        s, t = m.get_sheets(p.input, p.output)
         rows = [  [{"name" : s.cell(i, 1).value + ". " + s.cell(i, 2).value },
                      {"before": s.cell(i, 3).value},
                      {"after": s.cell(i, 4).value},
                      {"lang": s.cell(i, 5).value},
                      ] for i in range(2, s.max_row + 1)]
+        rows_final = []
         for row in rows:
-            print(row)
+            langs = list(row[3].values())[0]
+            for lng in langs.split(","):
+                rows_final.append([list(row[0].values())[0],
+                                   lng,
+                                   list(row[1].values())[0],
+                                   list(row[2].values())[0]])
+        target_col_index = [0,3,4,5]
+        for row_final in rows_final:
+            for cell_final in row_final:
+                print(cell_final)
 
 
     else:
