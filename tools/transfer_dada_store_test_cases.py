@@ -7,6 +7,9 @@ import pandas as pd
 from openpyxl import load_workbook
 from pathlib import Path
 
+from sqlalchemy.sql.functions import concat
+
+
 class Helpers:
     def __init__(self):
         self.RESOURCES_DIR =  os.path.join(Path(__file__).parent.parent, "tests", "resources", "test_data")
@@ -21,29 +24,26 @@ class Helpers:
         generic.add_argument("-o", "--output", default=tc, help=f"Target Excel file. Implicit value {tc}")
         return parser.parse_args()
 
-    def last_in(self, file):
-        wb = load_workbook(file)
-        last = wb.worksheets[len(wb.worksheets)-1]
+    def get_sheets(self, source, target):
+        wbs = load_workbook(source)
+        last = wbs.worksheets[len(wbs.worksheets)-1]
         print(f"Selected source worksheet {last.title}")
-        return last
-
-    def first_out(self, file):
-        wb = load_workbook(file)
-        first = wb.copy_worksheet(wb[self.PATTERN])
+        wbt = load_workbook(target)
+        first = wbt.copy_worksheet(wbt[self.PATTERN])
         first.title = "tc_A"
-        print(len(wb.worksheets))
-        wb.move_sheet(first, offset=- (len(wb.worksheets)-1))
+        wbt.move_sheet(first, offset=- (len(wbt.worksheets)-1))
         print(f"Selected target worksheet {first.title}")
-        return first
+        return last, first
 if __name__ == "__main__":
     m = Helpers()
     p = m.get_args()
     print(f"Content of last list from {p.input} will be formatted and transferred to {p.output} ")
     print("For more info let try --help")
     if p.no_question or input('Do you like to proceed the task? [Y/n]  ') == "Y":
-        source = m.last_in(p.input)
-        target = m.first_out(p.output)
-        target.parent.save(p.output)
+        s, target = m.get_sheets(p.input, p.output)
+        values = [  {"name" : s.cell(i, 1).value + ". " + s.cell(i, 2).value } for i in range(2, s.max_row + 1)]
+        print(values)
+
     else:
         print("Disapproved by user ")
 
