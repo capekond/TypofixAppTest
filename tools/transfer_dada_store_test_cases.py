@@ -57,12 +57,12 @@ if __name__ == "__main__":
                                    lng,
                                    list(row[1].values())[0],
                                    list(row[2].values())[0]])
-        target_col_index = [0,3,4,5]
-        for row_final in rows_final:
-            for cell_final in row_final:
-                print(cell_final)
-
-
+        target_col_index = (1,4,5,6)
+        for r_i, row_final in enumerate(rows_final):
+            for c_prep, cell_prep in enumerate(row_final):
+                cell_final = (str(cell_prep)).strip() if cell_prep else ""
+                t.cell(r_i + 2, target_col_index[c_prep], cell_final)
+        t.parent.save(p.output)
     else:
         print("Disapproved by user ")
 
