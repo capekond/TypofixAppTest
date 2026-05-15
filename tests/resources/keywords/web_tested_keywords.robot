@@ -65,10 +65,9 @@ Correct Text For Correction By Click On Buttons
         Log To Console    Done, no more to correct
     END
 
-Add Count Fixes For Every TC
-    [Arguments]    ${overwrite}
+Get Count Fixes For Every TC
     Click Element    ${TYPOFIX}
     Wait Until Element Is Visible    ${REPLACE}
     Page Should Contain Element    locator=${REPLACEMENTS}
     ${count_fixes}=    Get Element Count    locator=${REPLACEMENTS}
-    Log To Console    Count fixes: ${count_fixes}
+    RETURN    ${count_fixes}

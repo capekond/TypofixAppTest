@@ -18,10 +18,12 @@ Add Count of fixes for TCs
 *** Keywords ***
 Change Excel Add Count of fixes for TCs
     [Documentation]    For excel file add expected fixes count
-    [Arguments]    ${language}    ${given}    ${expected}    ${fixes_count}
+    [Arguments]    ${language}    ${given}    ${expected}
     Login If Necessary
     Select Language    ${language}
     ${preference}=    Get Field For Language From Reference    language=${language}    field=name
     Select Reference Set    ${preference}
     Input Text for Corretion    input=${given}
-    Add Count Fixes For Every TC    overwrite=True
+    ${cnt}=     Get Count Fixes For Every TC
+    Write Value To TC By Test Name    test_name=${TEST_NAME}     field_name=fixes_count  value=${cnt}
+
