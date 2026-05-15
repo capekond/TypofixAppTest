@@ -8,8 +8,11 @@ Resource   ../variables/secret.robot
 *** Keywords ***
 
 Let Open Browser and Set All Preferences
-    [Documentation]    Opens a browser and provide email password to login
+    [Documentation]    Opens a browser and provide email password to login and refresh all preferences
     Set All Predefined References
+    Let Open Browser
+
+Let Open Browser
     Open Browser    ${TESTED_BASE_URL}    chrome
     Maximize Browser Window
 
@@ -61,3 +64,11 @@ Correct Text For Correction By Click On Buttons
     EXCEPT
         Log To Console    Done, no more to correct
     END
+
+Add Count Fixes For Every TC
+    [Arguments]    ${overwrite}
+    Click Element    ${TYPOFIX}
+    Wait Until Element Is Visible    ${REPLACE}
+    Page Should Contain Element    locator=${REPLACEMENTS}
+    ${count_fixes}=    Get Element Count    locator=${REPLACEMENTS}
+    Log To Console    Count fixes: ${count_fixes}

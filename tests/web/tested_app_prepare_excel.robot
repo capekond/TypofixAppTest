@@ -1,7 +1,5 @@
 *** Variables ***
-${CSV_DELIMITER}    |
 ${DATA_FILE}        TestCases.xlsx
-
 
 *** Settings ***
 Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UTF8
@@ -10,7 +8,7 @@ Resource    ../resources/keywords/web_tested_keywords.robot
 Library    SeleniumLibrary
 Library    ../keywords/KeywordsTypofix.py
 
-Suite Setup  Let Open Browser and Set All Preferences
+Suite Setup  Let Open Browser
 Suite Teardown      Close All Browsers
 Test Template     Change Excel Add Count of fixes for TCs
 
@@ -19,12 +17,11 @@ Add Count of fixes for TCs
 
 *** Keywords ***
 Change Excel Add Count of fixes for TCs
-    [Documentation]    Basic test
+    [Documentation]    For excel file add expected fixes count
     [Arguments]    ${language}    ${given}    ${expected}    ${fixes_count}
     Login If Necessary
     Select Language    ${language}
     ${preference}=    Get Field For Language From Reference    language=${language}    field=name
     Select Reference Set    ${preference}
     Input Text for Corretion    input=${given}
-    Correct Text For Correction By Click On Buttons    ${fixes_count}
-    Element Text Should Be    locator=${INPUT_INNER}    expected=${expected}
+    Add Count Fixes For Every TC    overwrite=True
