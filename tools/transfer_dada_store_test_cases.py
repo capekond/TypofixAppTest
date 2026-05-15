@@ -53,7 +53,7 @@ if __name__ == "__main__":
         for row in rows:
             langs = list(row[3].values())[0]
             for lng in langs.split(","):
-                rows_final.append([list(row[0].values())[0],
+                rows_final.append([ (list(row[0].values())[0]).strip() + " [" + lng.strip() + "]",
                                    lng,
                                    list(row[1].values())[0],
                                    list(row[2].values())[0]])
