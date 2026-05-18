@@ -7,7 +7,6 @@ from tests.resources.common import Common
 class Helpers(Common):
     def __init__(self):
         super().__init__()
-        self.PATTERN = "_pattern"
     def get_args(self):
         parser = argparse.ArgumentParser()
         generic = parser.add_argument_group('Basic arguments')

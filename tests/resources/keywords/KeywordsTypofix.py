@@ -9,11 +9,14 @@ from openpyxl.worksheet.worksheet import Worksheet
 
 class KeywordsTypofix(object):
     def __init__(self):
-
         self.RESOURCES_DIR = Path(__file__).parent.parent
+        self.DATA_STORE_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "DataStore.xlsx")
+        self.TEST_CASES_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx")
+        self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
-        data_store = load_workbook(os.path.join(self.RESOURCES_DIR, "test_data","DataStore.xlsx"))
-        self.data_store_list = data_store.copy_worksheet(data_store["_pattern"])
+        self.PATTERN = "_pattern"
+        data_store = load_workbook(self.DATA_STORE_FILE)
+        self.data_store_list = data_store.copy_worksheet(data_store[ self.PATTERN])
         self.data_store_list.title = datetime.now().strftime('%Y-%m-%d_%H_%M_%S')
         self.data_store_offset = 2
 
@@ -28,7 +31,7 @@ class KeywordsTypofix(object):
         self.data_store_offset = self.data_store_offset + 1 if new_line else self.data_store_offset
 
     def data_store_save(self):
-        self.data_store_list.parent.save(os.path.join(self.RESOURCES_DIR, "test_data", "DataStore.xlsx"))
+        self.data_store_list.parent.save(self.data_store_list.parent.path)
 
     def str_cleanup(self, v:str, cleaned, cleaning='', case_sensitive=True, html_pairs=True) -> str:
         for tag in cleaned:
@@ -45,22 +48,20 @@ class KeywordsTypofix(object):
         return json.load(open(json_file_path))
 
     def get_field_for_language_from_reference(self, language: str, field: str) -> str:
-        f_name = os.path.join(self.RESOURCES_DIR, 'test_data'  , 'references', '_list.csv')
-        df = pd.read_csv(f_name, sep=';').query(f"language == '{language}'")
+        df = pd.read_csv(self.LANGUAGES_FILE, sep=';').query(f"language == '{language}'")
         return df[field].values[0]
 
     def get_column_from_reference(self, column) -> list:
-        f_name = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
-        df = pd.read_csv(f_name, sep=';')
+        df = pd.read_csv(self.LANGUAGES_FILE,  sep=';')
         return df[column].values
 
     def write_value_to_TC_by_test_name(self, test_name: str, field_name: str, value, override=False) -> None:
-        wb = load_workbook(os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
+        wb = load_workbook(self.TEST_CASES_FILE)
         sh = wb.active
         r, c = self.get_position_by_name_and_value(sh, "Test Cases", test_name)
         c = self.get_column_by_name(sh, field_name)
         sh.cell(r, c).value = value
-        wb.save(os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
+        wb.save(self.TEST_CASES_FILE)
 
     def get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
         r = 0
