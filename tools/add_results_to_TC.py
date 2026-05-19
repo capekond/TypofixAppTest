@@ -24,8 +24,8 @@ if __name__ == "__main__":
     to_report = ET.parse(m.REPORT_FILE).getroot()
 
     test_name = '45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_'
-    s1 = "./suite/suite/suite/suite/test[@name='45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_']"
-    s2 = "./suite/suite/suite/suite/test[@name='45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_']/kw/kw[@name='Element Text Should Be']/msg"
+    s1 = f"./suite/suite/suite/suite/test[@name='{test_name}']"
+    s2 = f"./suite/suite/suite/suite/test[@name='{test_name}']/kw/kw[@name='Element Text Should Be']/msg"
     status = to_report.find(s1)
     print(status.find('status').attrib['status'])
     print(status.find('status').attrib['start'])
