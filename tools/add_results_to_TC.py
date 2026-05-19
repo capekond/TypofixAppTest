@@ -43,3 +43,11 @@ if __name__ == "__main__":
     print(b2tf.find('format').text)
     pass
 
+    print("---X-")
+    root = ET.parse(m.REPORT_FILE).getroot()
+    b2tf = root.find("./suite/suite/suite/suite/test[@name='44__Guns_N__RosesCzech__academic_rules_']")
+    print(b2tf.attrib)
+    # print(b2tf.find('format').attrib)
+    # print(b2tf.find('format').text)
+    pass
+
