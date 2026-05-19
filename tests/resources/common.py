@@ -13,7 +13,6 @@ class Common:
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
         self.REPORT_FILE = os.path.join(self.RESOURCES_DIR.parent.parent, 'results', 'output_backup.xml')
-        self.REPORT_FILE2 = os.path.join(self.RESOURCES_DIR.parent.parent, 'results', 'output.xml')
 
     def clean_up_text(self, txt: str) -> str:
         res = ""
