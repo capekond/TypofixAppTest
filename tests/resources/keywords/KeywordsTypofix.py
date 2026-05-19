@@ -82,9 +82,9 @@ class KeywordsTypofix(object):
                     break
         return c
 
-tp = KeywordsTypofix()
-wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
-ws = wb.active
-print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
-print(tp.get_position_by_name_and_value(ws,"Test Cases", "66. Correct form of et al. [Czech (academic rules)]" ))
-# print(tp.write_value_to_TC_by_test_name("66. Correct form of et al. [Czech (academic rules)]", "fixes_count", 10))
+# tp = KeywordsTypofix()
+# wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
+# ws = wb.active
+# print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
+# print(tp.get_position_by_name_and_value(ws,"Test Cases", "66. Correct form of et al. [Czech (academic rules)]" ))
+# # print(tp.write_value_to_TC_by_test_name("66. Correct form of et al. [Czech (academic rules)]", "fixes_count", 10))

@@ -25,6 +25,7 @@ class Helpers(Common):
         wbt.move_sheet(first, offset=- (len(wbt.worksheets)-1))
         print(f"Selected target worksheet {first.title}")
         return last, first
+
 if __name__ == "__main__":
     m = Helpers()
     p = m.get_args()
@@ -41,10 +42,11 @@ if __name__ == "__main__":
         for row in rows:
             langs = list(row[3].values())[0]
             for lng in langs.split(","):
-                rows_final.append([ (list(row[0].values())[0]).strip() + " [" + lng.strip() + "]",
-                                   lng,
-                                   list(row[1].values())[0],
-                                   list(row[2].values())[0]])
+                t_name = m.clean_up_text((list(row[0].values())[0]).strip() + lng.strip())
+                rows_final.append([ t_name,
+                                    lng,
+                                    list(row[1].values())[0],
+                                    list(row[2].values())[0]])
         target_col_index = (1,4,5,6)
         for r_i, row_final in enumerate(rows_final):
             for c_prep, cell_prep in enumerate(row_final):
@@ -53,4 +55,3 @@ if __name__ == "__main__":
         t.parent.save(p.output)
     else:
         print("Disapproved by user ")
-

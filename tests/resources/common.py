@@ -11,6 +11,15 @@ class Common:
         self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
+        self.CLEAN_CHAR = '_'
+        self.REPORT_FILE = os.path.join(self.RESOURCES_DIR.parent.parent, 'results', 'output_backup.xml')
+        self.REPORT_FILE2 = os.path.join(self.RESOURCES_DIR.parent.parent, 'results', 'output.xml')
+
+    def clean_up_text(self, txt: str) -> str:
+        res = ""
+        for t in txt:
+             res+= self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
+        return res
 
     def get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
         r = 0
@@ -30,3 +39,6 @@ class Common:
                     c = col
                     break
         return c
+
+# c = Common()
+# print(c.clean_up_text("154as.>:{]'\"Z*-+A"))
