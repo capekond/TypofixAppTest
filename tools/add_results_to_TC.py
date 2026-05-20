@@ -39,7 +39,7 @@ class Helpers(Common):
                 rs.append(status.find('status').attrib['start'])
                 xml_picture = f"{xlm_test_name}/kw/kw[@name='Capture Element Screenshot']/msg"
                 pic = to_report.findall(xml_picture)
-                name_pic = self.grep_xml_attribute(pic[0].text,'src', str(m.RESOURCES_DIR) + os.sep)
+                name_pic = self.grep_xml_attribute(pic[0].text,'src', str(m.REPORT_DIR) + os.sep)
                 rs.append(name_pic)
                 res.append(rs)
             except AttributeError as e:
@@ -69,7 +69,8 @@ class Helpers(Common):
         for rid, r in enumerate(t_results):
             for cid, c in enumerate(r[:-1]):
                 sh.cell(2 + rid, 9 + cid, c)
-            sh.cell(2  + rid, 9 + len(t_results),t_results[rid][3])
+            link = '=HYPERLINK("{}", "{}")'.format(t_results[rid][3], "LINK")
+            sh.cell(2  + rid, 8 + len(t_results),link)
         wb.save(p.update_file)
         wb.close()
 
