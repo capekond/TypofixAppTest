@@ -6,6 +6,7 @@ class Common:
 
         self.RESOURCES_DIR = Path(__file__).parent
         self.TEST_DATA_DIR = os.path.join(self.RESOURCES_DIR, "test_data")
+        self.PCX_DIR = os.path.join(self.TEST_DATA_DIR, "pcx_dir")
         self.REPORT_DIR = os.path.join(self.RESOURCES_DIR.parent.parent, 'results')
 
         self.DATA_STORE_FILE = os.path.join(self.TEST_DATA_DIR, "DataStore.xlsx")

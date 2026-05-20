@@ -1,4 +1,5 @@
 import os
+import shutil
 import xml.etree.ElementTree as Et
 
 import argparse
@@ -16,7 +17,8 @@ class Helpers(Common):
         parser.add_argument("-f", "--update_file", default=self.TEST_CASES_FILE, help=f"Changed Excel file. Implicit value {self.TEST_CASES_FILE}")
         return parser.parse_args()
 
-    def get_test_names_from_tc(self) -> list[str]:
+    @staticmethod
+    def get_test_names_from_tc() -> list[str]:
         df = pd.read_excel(p.update_file, sheet_name=0)
         return df['*** Test Cases ***'].tolist()
 
@@ -36,10 +38,12 @@ class Helpers(Common):
                     rs.append(' '.join(info.split()).replace("'//*[@role=\"textbox\"]'", ''))
                 else:
                     rs.append('')
-                rs.append(status.find('status').attrib['start'])
+                time_stamp = status.find('status').attrib['start']
+                rs.append(time_stamp)
                 xml_picture = f"{xlm_test_name}/kw/kw[@name='Capture Element Screenshot']/msg"
                 pic = to_report.findall(xml_picture)
-                name_pic = self.grep_xml_attribute(pic[0].text,'src', str(m.REPORT_DIR) + os.sep)
+                source_pic = self.grep_xml_attribute(pic[0].text,'src', str(m.REPORT_DIR) + os.sep)
+                name_pic = self.move_pictures_to_test_data(source_pic, test_name, time_stamp)
                 rs.append(name_pic)
                 res.append(rs)
             except AttributeError as e:
@@ -48,7 +52,8 @@ class Helpers(Common):
                 exit(1)
         return res
 
-    def grep_xml_attribute(self, source:str, att: str, prefix="") -> str:
+    @staticmethod
+    def grep_xml_attribute(source:str, att: str, prefix="") -> str:
         att = f'{att}="'
         try:
             source = source[source.index(att) + len(att):]
@@ -57,13 +62,22 @@ class Helpers(Common):
             print(f"Attribute {att} not found.\n{e}")
         return prefix  + source
 
+    def move_pictures_to_test_data(self,source_file, test_name: str, test_time: str ) -> str:
+        if not os.path.exists(self.PCX_DIR):
+            os.makedirs(self.PCX_DIR)
+        source  = os.path.join(self.REPORT_DIR, source_file )
+        target = os.path.join(self.PCX_DIR, test_name + self.clean_up_text(test_time) + ".png" )
+        shutil.copyfile(source, target)
+        return str(target)
+
     def clean_up_text(self, txt: str) -> str:
         res = ""
         for t in txt:
              res+= self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
         return res
 
-    def write_test_names_from_tc(self, t_results: list[list[str]]) -> None:
+    @staticmethod
+    def write_test_names_from_tc(t_results: list[list[str]]) -> None:
         wb = load_workbook(p.update_file)
         sh = wb.worksheets[0]
         for rid, r in enumerate(t_results):
