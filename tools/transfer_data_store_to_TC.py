@@ -1,30 +1,16 @@
 import argparse
-import os
-import re
-import sys
-from datetime import datetime
-from shlex import split
-
-import pandas as pd
-from docutils.nodes import target
 from openpyxl import load_workbook
-from pathlib import Path
-
-from sqlalchemy.sql.functions import concat
+from tests.resources.common import Common
 
 
-class Helpers:
+class Helpers(Common):
     def __init__(self):
-        self.RESOURCES_DIR =  os.path.join(Path(__file__).parent.parent, "tests", "resources", "test_data")
-        self.PATTERN = "_pattern"
+        super().__init__()
     def get_args(self):
         parser = argparse.ArgumentParser()
-        store = os.path.join(self.RESOURCES_DIR, "DataStore.xlsx")
-        tc = os.path.join(self.RESOURCES_DIR, "TestCases.xlsx")
-        generic = parser.add_argument_group('Basic arguments')
-        generic.add_argument("-n", "--no_question", action='store_true', help="Disable approval question")
-        generic.add_argument("-i", "--input", default=store, help=f"Source Excel file. Implicit value {store}")
-        generic.add_argument("-o", "--output", default=tc, help=f"Target Excel file. Implicit value {tc}")
+        parser.add_argument("-n", "--no_question", action='store_true', help="Disable approval question")
+        parser.add_argument("-i", "--input", default=self.DATA_STORE_FILE, help=f"Source Excel file. Implicit value {self.DATA_STORE_FILE}")
+        parser.add_argument("-o", "--output", default=self.TEST_CASES_FILE, help=f"Target Excel file. Implicit value {self.TEST_CASES_FILE}")
         return parser.parse_args()
 
     def get_sheets(self, source, target):
@@ -37,6 +23,7 @@ class Helpers:
         wbt.move_sheet(first, offset=- (len(wbt.worksheets)-1))
         print(f"Selected target worksheet {first.title}")
         return last, first
+
 if __name__ == "__main__":
     m = Helpers()
     p = m.get_args()
@@ -53,10 +40,11 @@ if __name__ == "__main__":
         for row in rows:
             langs = list(row[3].values())[0]
             for lng in langs.split(","):
-                rows_final.append([ (list(row[0].values())[0]).strip() + " [" + lng.strip() + "]",
-                                   lng,
-                                   list(row[1].values())[0],
-                                   list(row[2].values())[0]])
+                t_name = m.clean_up_text((list(row[0].values())[0]).strip() + lng.strip())
+                rows_final.append([ t_name,
+                                    lng,
+                                    list(row[1].values())[0],
+                                    list(row[2].values())[0]])
         target_col_index = (1,4,5,6)
         for r_i, row_final in enumerate(rows_final):
             for c_prep, cell_prep in enumerate(row_final):
@@ -65,4 +53,3 @@ if __name__ == "__main__":
         t.parent.save(p.output)
     else:
         print("Disapproved by user ")
-

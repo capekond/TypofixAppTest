@@ -32,6 +32,4 @@ Simple compare fixed entry with expected result
     Input Text for Corretion    input=${given}
     Correct Text For Correction By Click On Buttons    ${fixes_count}
     Capture Element Screenshot    locator=${OUTPUT_INNER}
-#    ${s}=    Get Text     locator=${OUTPUT_INNER}
-#    Log To Console      ${s}
     Element Text Should Be    locator=${OUTPUT_INNER}    expected=${expected}
