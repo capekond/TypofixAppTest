@@ -1,5 +1,4 @@
 import argparse
-import os
 from openpyxl import load_workbook
 from tests.resources.common import Common
 

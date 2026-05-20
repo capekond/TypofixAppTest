@@ -70,12 +70,6 @@ class Helpers(Common):
         shutil.copyfile(source, target)
         return str(target)
 
-    def clean_up_text(self, txt: str) -> str:
-        res = ""
-        for t in txt:
-             res+= self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
-        return res
-
     @staticmethod
     def write_test_names_from_tc(t_results: list[list[str]]) -> None:
         wb = load_workbook(p.update_file)

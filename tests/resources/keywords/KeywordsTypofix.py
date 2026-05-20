@@ -17,7 +17,7 @@ class KeywordsTypofix(object):
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         data_store = load_workbook(self.DATA_STORE_FILE)
-        self.data_store_list = data_store.copy_worksheet(data_store[ self.PATTERN])
+        self.data_store_list = data_store.copy_worksheet(data_store[self.PATTERN])
         self.data_store_list.title = datetime.now().strftime('%Y-%m-%d_%H_%M_%S')
         self.data_store_offset = 2
 
@@ -32,7 +32,7 @@ class KeywordsTypofix(object):
         self.data_store_offset = self.data_store_offset + 1 if new_line else self.data_store_offset
 
     def data_store_save(self):
-        self.data_store_list.parent.save(self.data_store_list.parent.path)
+        self.data_store_list.parent.save(self.DATA_STORE_FILE)
 
     def str_cleanup(self, v:str, cleaned, cleaning='', case_sensitive=True, html_pairs=True) -> str:
         for tag in cleaned:

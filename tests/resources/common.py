@@ -17,3 +17,9 @@ class Common:
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
+
+    def clean_up_text(self, txt: str) -> str:
+        res = ""
+        for t in txt:
+            res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
+        return res
