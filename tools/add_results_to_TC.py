@@ -67,8 +67,9 @@ class Helpers(Common):
         wb = load_workbook(p.update_file)
         sh = wb.worksheets[0]
         for rid, r in enumerate(t_results):
-            for cid, c in enumerate(r):
+            for cid, c in enumerate(r[:-1]):
                 sh.cell(2 + rid, 9 + cid, c)
+            sh.cell(2  + rid, 9 + len(t_results),t_results[rid][3])
         wb.save(p.update_file)
         wb.close()
 
