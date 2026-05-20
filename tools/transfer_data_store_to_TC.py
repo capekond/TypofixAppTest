@@ -9,10 +9,9 @@ class Helpers(Common):
         super().__init__()
     def get_args(self):
         parser = argparse.ArgumentParser()
-        generic = parser.add_argument_group('Basic arguments')
-        generic.add_argument("-n", "--no_question", action='store_true', help="Disable approval question")
-        generic.add_argument("-i", "--input", default=self.DATA_STORE_FILE, help=f"Source Excel file. Implicit value {self.DATA_STORE_FILE}")
-        generic.add_argument("-o", "--output", default=self.TEST_CASES_FILE, help=f"Target Excel file. Implicit value {self.TEST_CASES_FILE}")
+        parser.add_argument("-n", "--no_question", action='store_true', help="Disable approval question")
+        parser.add_argument("-i", "--input", default=self.DATA_STORE_FILE, help=f"Source Excel file. Implicit value {self.DATA_STORE_FILE}")
+        parser.add_argument("-o", "--output", default=self.TEST_CASES_FILE, help=f"Target Excel file. Implicit value {self.TEST_CASES_FILE}")
         return parser.parse_args()
 
     def get_sheets(self, source, target):

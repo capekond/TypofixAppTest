@@ -6,6 +6,7 @@ import pandas as pd
 from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.worksheet.worksheet import Worksheet
+# from tests.resources.common import Common
 
 class KeywordsTypofix(object):
     def __init__(self):
