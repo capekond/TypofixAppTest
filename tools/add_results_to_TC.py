@@ -1,3 +1,4 @@
+import os
 import xml.etree.ElementTree as Et
 
 import argparse
@@ -26,22 +27,35 @@ class Helpers(Common):
             try:
                 rs = []
                 xlm_test_name = f"./suite/suite/suite/suite/test[@name='{test_name}']"
-                xlm_error_msg = f"./suite/suite/suite/suite/test[@name='{test_name}']/kw/kw[@name='Element Text Should Be']/msg"
                 status = to_report.find(xlm_test_name)
                 rs.append(status.find('status').attrib['status'])
                 if rs[0] == 'FAIL':
+                    xlm_error_msg = f"{xlm_test_name}/kw/kw[@name='Element Text Should Be']/msg"
                     msg = to_report.findall(xlm_error_msg)
                     info = msg[3].text.strip().replace('\n', '')
                     rs.append(' '.join(info.split()).replace("'//*[@role=\"textbox\"]'", ''))
                 else:
                     rs.append('')
                 rs.append(status.find('status').attrib['start'])
+                xml_picture = f"{xlm_test_name}/kw/kw[@name='Capture Element Screenshot']/msg"
+                pic = to_report.findall(xml_picture)
+                name_pic = self.grep_xml_attribute(pic[0].text,'src', str(m.RESOURCES_DIR) + os.sep)
+                rs.append(name_pic)
                 res.append(rs)
             except AttributeError as e:
                 print(f"For test '{test_name}' missing data in {self.REPORT_FILE}")
                 print(e)
                 exit(1)
         return res
+
+    def grep_xml_attribute(self, source:str, att: str, prefix="") -> str:
+        att = f'{att}="'
+        try:
+            source = source[source.index(att) + len(att):]
+            source = source[:source.index('"')]
+        except ValueError as e:
+            print(f"Attribute {att} not found.\n{e}")
+        return prefix  + source
 
     def clean_up_text(self, txt: str) -> str:
         res = ""
