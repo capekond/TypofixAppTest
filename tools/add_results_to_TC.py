@@ -35,6 +35,12 @@ class Helpers(Common):
                 exit(1)
         return res
 
+    def clean_up_text(self, txt: str) -> str:
+        res = ""
+        for t in txt:
+             res+= self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
+        return res
+
     def write_test_names_from_tc(self, t_results: list[list[str]]) -> None:
         wb = load_workbook(self.TEST_CASES_FILE)
         sh = wb.worksheets[0]
