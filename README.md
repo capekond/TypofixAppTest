@@ -103,6 +103,7 @@ Log:     C:\Users\ocape\log.html
 Report:  C:\Users\ocape\report.html
 ```
 ## Execute tests 
+Execute test cases in first list of Excel TesCase file. Robot Framework report are created.  
 ```bash
 C:\Users\ocape>python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_execute_main_test.robot
 ```
@@ -141,7 +142,7 @@ Output:  C:\Users\ocape\output.xml
 Log:     C:\Users\ocape\log.html
 Report:  C:\Users\ocape\report.html
 ```
-Command
+The last run results from  Robot Framework XML report are added in test cases in first list of Excel TesCase file.
 ```bash
 C:\Users\theuser> python C:\Users\ocape\IdeaProjects\TypofixAppTest\tools\add_results_to_TC.py
 ```
@@ -156,6 +157,7 @@ Selected 4 test cases:
 45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_
 ```
 # TODO
+https://github.com/capekond/TypofixAppTest/issues
 - prove that special characters are correctly handled 
 - add doc for execution
   - CI/CD pipeline https://docs.robotframework.org/docs/using_rf_in_ci_systems/ci/github-actions
