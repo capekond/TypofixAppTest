@@ -1,6 +1,35 @@
 import argparse
 from openpyxl import load_workbook
-from tests.resources.common import Common
+from pathlib import Path
+import os
+
+class Common:
+    def __init__(self):
+
+        # !!!
+        dr = Path(__file__).parent.parent
+        self.RESOURCES_DIR = os.path.join(dr, 'tests', 'resources')
+
+        self.TEST_DATA_DIR = os.path.join(self.RESOURCES_DIR, "test_data")
+        self.PCX_DIR = os.path.join(self.TEST_DATA_DIR, "pcx_dir")
+
+        # !!!!
+        self.REPORT_DIR = os.path.join(dr, 'results')
+
+        self.DATA_STORE_FILE = os.path.join(self.TEST_DATA_DIR, "DataStore.xlsx")
+        self.TEST_CASES_FILE = os.path.join(self.TEST_DATA_DIR, "TestCases.xlsx")
+        self.LANGUAGES_FILE = os.path.join(self.TEST_DATA_DIR, 'references', '_list.csv')
+        self.REPORT_FILE = os.path.join(self.REPORT_DIR,'output.xml')
+
+        self.HTML_TAGS = ['<br>', '<p>', '<span>']
+        self.PATTERN = "_pattern"
+        self.CLEAN_CHAR = '_'
+
+    def clean_up_text(self, txt: str) -> str:
+        res = ""
+        for t in txt:
+            res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
+        return res
 
 
 class Helpers(Common):
