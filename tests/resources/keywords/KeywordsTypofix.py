@@ -1,3 +1,4 @@
+import io
 import json
 import os
 import re
@@ -46,7 +47,8 @@ class KeywordsTypofix(object):
         #todo delete
         file_name = file_name if file_name.endswith('.json') else file_name + '.json'
         json_file_path = os.path.join(self.RESOURCES_DIR, 'test_data' , 'references', file_name)
-        return json.load(open(json_file_path))
+        file = io.open(json_file_path, encoding="utf-8")
+        return json.load(file)
 
     def get_field_for_language_from_reference(self, language: str, field: str) -> str:
         df = pd.read_csv(self.LANGUAGES_FILE, sep=';').query(f"language == '{language}'")
