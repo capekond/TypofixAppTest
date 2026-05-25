@@ -41,6 +41,7 @@ Load defined examples to test cases
         Click Button    ${ADMIN_NEXT}
         Sleep    5s
     END
+    Save Test Case Excel
 
 *** Keywords ***
 

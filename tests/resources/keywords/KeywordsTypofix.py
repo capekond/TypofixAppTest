@@ -21,25 +21,29 @@ class KeywordsTypofix(object):
         first.title = "tc_A"
         self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
         print(f"Selected target worksheet {first.title}")
-        self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
         return first.title
 
     def add_new_test_cases_to_excel(self, excel_list: str, id: str | int, name: str, url_detail: str, languages: list[str], befores:list[str], afters: list[str]):
         ws = self.TEST_CASES_WB[excel_list]
         rows = ws.max_row
         for i, language in enumerate(languages):
-            ws.cell(row=rows + i, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language))
-            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=4),id + " - " + name)
-            ws.cell(row=rows + i, column=5, value= language)
-            ws.cell(row=rows + i, column=6, value=befores[i])
-            ws.cell(row=rows + i, column=7, value=afters[i])
+            ws.cell(row=rows + i, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
+            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=4),id + " - " + name.strip(), url_detail.strip())
+            ws.cell(row=rows + i, column=5, value= language.strip())
+            ws.cell(row=rows + i, column=6, value=befores[i].strip())
+            ws.cell(row=rows + i, column=7, value=afters[i].strip())
+
+    def save_test_case_excel(self) -> None:
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
+        self.TEST_CASES_WB.close()
+
 
     def _insert_excel_hyperlink(self, c: Cell, name: str, link: str):
         c.value = name
         c.hyperlink = self._customize_url(link)
 
-    def _customize_url(self, url: str, pattern_name='detail') -> str:
+    @staticmethod
+    def _customize_url(url: str, pattern_name='detail') -> str:
         if pattern_name == 'detail':
             url = url[:url.index('=')]
         return url

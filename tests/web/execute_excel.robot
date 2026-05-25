@@ -3,18 +3,21 @@ ${DATA_FILE}        TestCases.xlsx
 
 *** Settings ***
 Library    DataDriver    file=../resources/test_data/${DATA_FILE}    encoding=UTF8
-Resource    ../resources/keywords/api_tested_keywords.robot
-Resource    ../resources/keywords/web_tested_keywords.robot
 Library    SeleniumLibrary
 Library    ../resources/keywords/KeywordsTypofix.py
-
-Suite Setup  Let Open Browser
+Resource   ../resources/keywords/web_admin_keywords.robot
+Suite Setup  Admin Let Open Browser
 Suite Teardown      Close All Browsers
-Test Template     Change Excel Add Count of fixes for TCs
+Test Template     Exectute Test from Excel File
 
 *** Test Cases ***
-
+Execute test
 
 *** Keywords ***
-
+Exectute Test from Excel File
+    [Arguments]    ${link}    ${language}    ${before}    ${after}
+    Log    ${link}
+    Log    ${language}
+    Log    ${before}
+    Log    ${after}
 
