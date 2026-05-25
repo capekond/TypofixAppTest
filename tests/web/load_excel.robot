@@ -53,7 +53,8 @@ Get Link Detail
     @{after}=    Create List
     @{languages}=    Split String     ${langs_by_coma}    separator=,
     FOR    ${lang}        IN    @{languages}
-        Append To List        ${before}     Given for lang ${lang}
+        Log    TODO the correct reading of details
+        Append To List        ${before}    Given for lang ${lang}
         Append To List        ${after}     Expected for lang ${lang}
     END
     Click Element    ${ADMIN_GO_BACK}

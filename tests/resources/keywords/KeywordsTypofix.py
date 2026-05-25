@@ -4,7 +4,6 @@ import os
 
 from openpyxl import load_workbook
 from pathlib import Path
-from openpyxl.styles import Font, colors
 from openpyxl.cell.cell import Cell
 
 class KeywordsTypofix(object):
@@ -29,9 +28,8 @@ class KeywordsTypofix(object):
         ws = self.TEST_CASES_WB[excel_list]
         rows = ws.max_row
         for i, language in enumerate(languages):
-            test_name = self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language)
             ws.cell(row=rows + i, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language))
-            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=4),id + name,url_detail)
+            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=4),id + " - " + name)
             ws.cell(row=rows + i, column=5, value= language)
             ws.cell(row=rows + i, column=6, value=befores[i])
             ws.cell(row=rows + i, column=7, value=afters[i])
