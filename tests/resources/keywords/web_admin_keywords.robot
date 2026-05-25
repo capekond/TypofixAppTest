@@ -24,10 +24,13 @@ Admin Login If Necessary
     ELSE
         Log To Console  Reuse open session
     END
-    Wait Until Element Is Visible    //button[contains(text(),'Verify to continue')]
-    Click Button    //button[contains(text(),'Verify to continue')]
-    Input Text      id:SudoModePassword    ${WEB_PASSWORD}
-    Click Button    //button[contains(text(),'Verify')]
+    ${element_exists2} =    Run Keyword And Return Status    Page Should Contain Element    //button[contains(text(),'Verify to continue')]
+    IF    ${element_exists2}
+        Wait Until Element Is Visible    //button[contains(text(),'Verify to continue')]
+        Click Button    //button[contains(text(),'Verify to continue')]
+        Input Text      id:SudoModePassword    ${WEB_PASSWORD}
+        Click Button    //button[contains(text(),'Verify')]
+    END
 
 Admin Get All Text Replaces
     Go To    ${ADMIN_BASE_URL}/text-replace

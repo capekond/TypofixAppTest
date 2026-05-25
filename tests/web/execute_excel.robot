@@ -16,8 +16,16 @@ Execute test
 *** Keywords ***
 Exectute Test from Excel File
     [Arguments]    ${link}    ${language}    ${before}    ${after}
+    ${hyperlink}=    Get Hyperlink By Link Name    column_name=link    value=${link}
     Log    ${link}
     Log    ${language}
     Log    ${before}
     Log    ${after}
+    ${real}=    Get Real Result     ${hyperlink}    ${language}
+    Save Test Case Excel
 
+Get Real Result
+    [Arguments]     ${link}    ${language}
+    Admin Login If Necessary
+    Go To    ${link}
+    RETURN    Result for ${link} and ${language}

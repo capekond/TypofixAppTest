@@ -5,6 +5,8 @@ import os
 from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
+from openpyxl.worksheet.worksheet import Worksheet
+
 
 class KeywordsTypofix(object):
     def __init__(self):
@@ -15,6 +17,12 @@ class KeywordsTypofix(object):
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
+
+    def get_hyperlink_by_link_name(self, column_name: str,  value) -> str:
+        sh = self.TEST_CASES_WB.worksheets[0]
+        r, c = self._get_position_by_name_and_value(sh, column_name, value)
+        link = sh.cell(r, c).hyperlink
+        return str(link.target)
 
     def create_new_excel_list_in_excel(self) -> str:
         first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
@@ -37,6 +45,24 @@ class KeywordsTypofix(object):
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
         self.TEST_CASES_WB.close()
 
+    def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
+        r = 0
+        c = self._get_column_by_name(sh, field_name, contains_name)
+        for row in range(2, sh.max_row):
+            cv = sh.cell(row,c).value
+            if (contains_name and cv in field_value) or (not contains_name and cv == field_value):
+                    r = row
+                    break
+        return r, c
+
+    def _get_column_by_name(self, sh: Worksheet, field_name, contains_name=True) -> int:
+        c = 0
+        for col in range(1, sh.max_column+1):
+            cv = sh.cell(1,col).value
+            if (contains_name and field_name in cv) or (not contains_name and cv == field_name):
+                    c = col
+                    break
+        return c
 
     def _insert_excel_hyperlink(self, c: Cell, name: str, link: str):
         c.value = name
@@ -54,7 +80,11 @@ class KeywordsTypofix(object):
             res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
         return res
 
-
+tp = KeywordsTypofix()
+print(tp.get_hyperlink_by_link_name("link", "41 - rock ’n’ roll"))
+    # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
+    # ws = wb.active
+    # print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
 
 
 
@@ -95,28 +125,12 @@ class KeywordsTypofix(object):
     #     sh.cell(r, c).value = value
     #     wb.save(self.TEST_CASES_FILE)
     #
-    # def get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
-    #     r = 0
-    #     c = self.get_column_by_name(sh, field_name, contains_name)
-    #     for row in range(2, sh.max_row):
-    #         cv = sh.cell(row,c).value
-    #         if (contains_name and cv in field_value) or (not contains_name and cv == field_value):
-    #                 r = row
-    #                 break
-    #     return r, c
+
     #
-    # def get_column_by_name(self, sh: Worksheet, field_name, contains_name=True) -> int:
-    #     c = 0
-    #     for col in range(1, sh.max_column+1):
-    #         cv = sh.cell(1,col).value
-    #         if (contains_name and field_name in cv) or (not contains_name and cv == field_name):
-    #                 c = col
-    #                 break
-    #     return c
+
 
 # tp = KeywordsTypofix()
 # print(tp.customize_url('https://www.cnn.com/aaaaa=bbbbb'))
-
 # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
 # ws = wb.active
 # print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
