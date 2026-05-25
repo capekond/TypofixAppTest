@@ -55,7 +55,8 @@ class KeywordsTypofix(object):
                     break
         return r, c
 
-    def _get_column_by_name(self, sh: Worksheet, field_name, contains_name=True) -> int:
+    @staticmethod
+    def _get_column_by_name(sh: Worksheet, field_name, contains_name=True) -> int:
         c = 0
         for col in range(1, sh.max_column+1):
             cv = sh.cell(1,col).value
@@ -80,8 +81,9 @@ class KeywordsTypofix(object):
             res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
         return res
 
-tp = KeywordsTypofix()
-print(tp.get_hyperlink_by_link_name("link", "41 - rock ’n’ roll"))
+# tp = KeywordsTypofix()
+# print(tp.get_hyperlink_by_link_name("link", "41 - rock ’n’ roll"))
+
     # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
     # ws = wb.active
     # print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
@@ -127,12 +129,3 @@ print(tp.get_hyperlink_by_link_name("link", "41 - rock ’n’ roll"))
     #
 
     #
-
-
-# tp = KeywordsTypofix()
-# print(tp.customize_url('https://www.cnn.com/aaaaa=bbbbb'))
-# wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
-# ws = wb.active
-# print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
-# print(tp.get_position_by_name_and_value(ws,"Test Cases", "66. Correct form of et al. [Czech (academic rules)]" ))
-# # print(tp.write_value_to_TC_by_test_name("66. Correct form of et al. [Czech (academic rules)]", "fixes_count", 10))
