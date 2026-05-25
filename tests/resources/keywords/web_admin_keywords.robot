@@ -1,6 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
-Library    ../keywords/KeywordsTypofix.py
+Library    ./KeywordsTypofix.py
 Resource   ../variables/web_tested_variables.robot
 Resource   ../variables/api_tested_variables.robot
 Resource   ../variables/secret.robot
@@ -9,7 +9,7 @@ Resource   ../variables/secret.robot
 
 Admin Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
-    Open Browser    ${ADMIN_BASE_URL}    headlesschrome
+    Open Browser    ${ADMIN_BASE_URL}    chrome
     Maximize Browser Window
 
 Admin Login If Necessary
@@ -59,13 +59,3 @@ Admin Get All Text Replaces
         Sleep    5s
     END
 
-Admin Get Test Replaces Details
-    [Arguments]    ${click_id}
-    Click Element    ${click_id}
-    Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
-    Wait Until Element Is Enabled     ${ADMIN_BEFORE_TEXT_REPLACE}
-    ${txtBefore}=    Get Value        ${ADMIN_BEFORE_TEXT_REPLACE}
-    ${txtAfter}=    Get Value        ${ADMIN_AFTER_TEXT_REPLACE}
-    Data Store Add Item    text before    ${txtBefore}    html_tag_cleanup=True
-    Data Store Add Item    text after     ${txtAfter}     html_tag_cleanup=True   new_line=True
-    Click Element    ${ADMIN_GO_BACK}

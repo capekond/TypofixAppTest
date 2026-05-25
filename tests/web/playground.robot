@@ -1,20 +1,22 @@
 *** Settings ***
-Resource    ../resources/keywords/api_tested_keywords.robot
-Resource    ../resources/keywords/web_tested_keywords.robot
-Library    SeleniumLibrary
-Library    ../keywords/KeywordsTypofix.py
-
-Suite Setup  Let Open Browser and Set All Preferences
-Suite Teardown      Close All Browsers
-
+Library    String
+Library    Collections
 
 *** Test Cases ***
-Check correction data
-    Login If Necessary
-    Select Language    Czech (academic rules)
-    Select Reference Set    test-czech-academic-rules
-    Input Text for Corretion    input=Guns’N’Roses\nGuns n'Roses\nGuns ‘N’ Roses
-    Correct Text For Correction By Click On Buttons    1
-    ${s}=    Get Text    ${OUTPUT_INNER}
-    Log To Console    ${s}
-    Log To Console    ${s}
+Check Exemple
+    ${a}=    For Looop
+    Log    Prvni ${a}[0]
+    Log    Druhy ${a}[1]
+    Log    Treti ${a}[2]
+
+
+*** Keywords ***
+For Looop
+    VAR    ${list}=    a,b,c
+    @{COLUMNS}=    Split String    ${list}    separator=,
+    @{FIRST}=    Create List    AA    BB    CC
+    @{SECOND}=   Create List    AAA    BBB    CCC
+    FOR    ${a}    IN    @{COLUMNS}
+        Log To Console    ${a}
+    END
+    RETURN    ${list}    ${FIRST}    ${SECOND}
