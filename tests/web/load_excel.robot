@@ -1,6 +1,7 @@
 *** Settings ***
-Resource   ../resources/keywords/web_admin_keywords.robot
 Library    String
+Library    Collections
+Resource   ../resources/keywords/web_admin_keywords.robot
 Library    ../resources/keywords/KeywordsTypofix.py
 Suite Setup  Admin Let Open Browser
 Suite Teardown      Close All Browsers
@@ -26,15 +27,13 @@ Load defined examples to test cases
             ${id}=       Get Text    ${ids}[${a}]
             ${name}=     Get Text    ${names}[${a}]
             ${langs_by_coma}=     Get Text    ${langs}[${a}]
-            ${link}=    Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
-            Add New Test Case To Excel    ${excel_list}    ${id}    ${name}    ${langs_by_coma}    @{given}    @{expected}    ${link}
+            @{details}=    Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
+            Add New Test Cases To Excel    ${excel_list}    ${id}    ${name}    ${details}[0]    ${details}[1]    ${details}[2]    ${details}[3]
         END
         Wait Until Element Is Visible    ${ADMIN_NEXT}
         Click Button    ${ADMIN_NEXT}
         Sleep    5s
     END
-
-
 
 *** Keywords ***
 
@@ -42,23 +41,14 @@ Get Link Detail
     [Arguments]    ${click_id}    ${langs_by_coma}
     Click Element    ${click_id}
     Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
-    @{given}=    Create List
-    @{expected}=    Create List
-    FOR    ${lang}        IN    ${langs_by_coma}
-        Append To List        ${given}     Given for lang ${lang}
-        Append To List        ${expected}     Expected for lang ${lang}
+    ${link}=     Get Location
+    ${link_ur}=    Customize Url    ${link}
+    @{before}=    Create List
+    @{after}=    Create List
+    @{languages}=    Split String     ${langs_by_coma}    separator=,
+    FOR    ${lang}        IN    @{languages}
+        Append To List        ${before}     Given for lang ${lang}
+        Append To List        ${after}     Expected for lang ${lang}
+    END
     Click Element    ${ADMIN_GO_BACK}
-    RETURN    link        @{given}    @{expected}
-
-#Add Test Cases For Rule And Languages To Excel
-#    [Arguments]    ${excel_list}    ${id}    ${name}    ${langs_by_coma}    ${link}
-#    FOR    ${lang}        IN    ${langs_by_coma}
-#        VAR   ${given}     Given for lang ${lang}
-#        VAR   ${expected}           Expected for lang ${lang}
-#
-#    END
-
-
-
-
-
+    RETURN    ${link_ur}    ${languages}    ${before}    ${after}

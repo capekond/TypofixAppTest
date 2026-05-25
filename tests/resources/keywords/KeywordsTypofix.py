@@ -12,21 +12,35 @@ class KeywordsTypofix(object):
     def __init__(self):
         self.RESOURCES_DIR = Path(__file__).parent.parent
         self.TEST_CASES_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx")
+        self.TEST_CASES_WB = load_workbook(self.TEST_CASES_FILE)
         self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
 
     def create_new_excel_list_in_excel(self) -> str:
-        wb = load_workbook(self.TEST_CASES_FILE)
-        first = wb.copy_worksheet(wb[self.PATTERN])
+
+        first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
         first.title = "tc_A"
-        wb.move_sheet(first, offset=- (len(wb.worksheets) - 1))
+        self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
         print(f"Selected target worksheet {first.title}")
-        wb.save(self.TEST_CASES_FILE)
+        self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
         return first.title
 
-    def add_new_test_case_to_excel(self, excel_list: str, id: str | int, name: str, langs_by_coma: str, given:list[str], expected: list[str], link:str):
-        wb = load_workbook(self.TEST_CASES_FILE)
+
+    def add_new_test_cases_to_excel(self, excel_list: str, id: str | int, name: str, url_detail: str, languages: list[str], before:list[str], after: list[str]):
+        print("******")
+        print(excel_list)
+        print(id)
+        print(name)
+        print(url_detail)
+        print(languages)
+        print(before)
+        print(after)
+
+    def customize_url(self, url: str, pattern_name='detail') -> str:
+        if pattern_name == 'detail':
+            url = url[:url.index('=')]
+        return url
 
 
 
@@ -87,7 +101,9 @@ class KeywordsTypofix(object):
     #                 break
     #     return c
 
-# tp = KeywordsTypofix()
+tp = KeywordsTypofix()
+print(tp.customize_url('https://www.cnn.com/aaaaa=bbbbb'))
+
 # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
 # ws = wb.active
 # print(tp.get_position_by_name_and_value(ws, "Test Cases","44. Guns N’ Roses [Czech (academic rules)]" ))
