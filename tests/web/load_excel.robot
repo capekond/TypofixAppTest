@@ -28,7 +28,14 @@ Load defined examples to test cases
             ${name}=     Get Text    ${names}[${a}]
             ${langs_by_coma}=     Get Text    ${langs}[${a}]
             @{details}=    Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
-            Add New Test Cases To Excel    ${excel_list}    ${id}    ${name}    ${details}[0]    ${details}[1]    ${details}[2]    ${details}[3]
+            Add New Test Cases To Excel
+            ...     excel_list=${excel_list}
+            ...     id=${id}
+            ...     name=${name}
+            ...     url_detail=${details}[0]
+            ...     languages=${details}[1]
+            ...     befores=${details}[2]
+            ...     afters=${details}[3]
         END
         Wait Until Element Is Visible    ${ADMIN_NEXT}
         Click Button    ${ADMIN_NEXT}
@@ -42,7 +49,6 @@ Get Link Detail
     Click Element    ${click_id}
     Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
     ${link}=     Get Location
-    ${link_ur}=    Customize Url    ${link}
     @{before}=    Create List
     @{after}=    Create List
     @{languages}=    Split String     ${langs_by_coma}    separator=,
@@ -51,4 +57,4 @@ Get Link Detail
         Append To List        ${after}     Expected for lang ${lang}
     END
     Click Element    ${ADMIN_GO_BACK}
-    RETURN    ${link_ur}    ${languages}    ${before}    ${after}
+    RETURN    ${link}    ${languages}    ${before}    ${after}

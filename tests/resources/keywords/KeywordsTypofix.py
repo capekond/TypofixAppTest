@@ -1,12 +1,11 @@
 import io
 import json
 import os
-import re
-from datetime import datetime
-import pandas as pd
+
 from openpyxl import load_workbook
 from pathlib import Path
-from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.styles import Font, colors
+from openpyxl.cell.cell import Cell
 
 class KeywordsTypofix(object):
     def __init__(self):
@@ -16,9 +15,9 @@ class KeywordsTypofix(object):
         self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
+        self.CLEAN_CHAR = '_'
 
     def create_new_excel_list_in_excel(self) -> str:
-
         first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
         first.title = "tc_A"
         self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
@@ -26,21 +25,33 @@ class KeywordsTypofix(object):
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
         return first.title
 
+    def add_new_test_cases_to_excel(self, excel_list: str, id: str | int, name: str, url_detail: str, languages: list[str], befores:list[str], afters: list[str]):
+        ws = self.TEST_CASES_WB[excel_list]
+        rows = ws.max_row
+        for i, language in enumerate(languages):
+            test_name = self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language)
+            ws.cell(row=rows + i, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language))
+            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=4),id + name,url_detail)
+            ws.cell(row=rows + i, column=5, value= language)
+            ws.cell(row=rows + i, column=6, value=befores[i])
+            ws.cell(row=rows + i, column=7, value=afters[i])
+        self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
 
-    def add_new_test_cases_to_excel(self, excel_list: str, id: str | int, name: str, url_detail: str, languages: list[str], before:list[str], after: list[str]):
-        print("******")
-        print(excel_list)
-        print(id)
-        print(name)
-        print(url_detail)
-        print(languages)
-        print(before)
-        print(after)
+    def _insert_excel_hyperlink(self, c: Cell, name: str, link: str):
+        c.value = name
+        c.hyperlink = self._customize_url(link)
 
-    def customize_url(self, url: str, pattern_name='detail') -> str:
+    def _customize_url(self, url: str, pattern_name='detail') -> str:
         if pattern_name == 'detail':
             url = url[:url.index('=')]
         return url
+
+    def _clean_up_text(self, txt: str) -> str:
+        res = ""
+        for t in txt:
+            res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
+        return res
+
 
 
 
@@ -101,8 +112,8 @@ class KeywordsTypofix(object):
     #                 break
     #     return c
 
-tp = KeywordsTypofix()
-print(tp.customize_url('https://www.cnn.com/aaaaa=bbbbb'))
+# tp = KeywordsTypofix()
+# print(tp.customize_url('https://www.cnn.com/aaaaa=bbbbb'))
 
 # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
 # ws = wb.active
