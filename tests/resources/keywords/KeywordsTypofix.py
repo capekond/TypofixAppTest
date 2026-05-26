@@ -14,6 +14,7 @@ class KeywordsTypofix(object):
         self.TEST_CASES_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx")
         self.TEST_CASES_WB = load_workbook(self.TEST_CASES_FILE)
         self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
+        self.TEST_RESULTS_FIELDS = ("TEST_NAME", "TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP", "SCREENSHOT")
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
@@ -41,9 +42,22 @@ class KeywordsTypofix(object):
             ws.cell(row=rows + i, column=6, value=befores[i].strip())
             ws.cell(row=rows + i, column=7, value=afters[i].strip())
 
+    def add_results_to_excel(self, test_name: str, test_result: str, real: str, details: str, timestamp, screenshot: str):
+        sh = self.TEST_CASES_WB.worksheets[0]
+        r, x = self._get_position_by_name_and_value(sh,"Test Cases", test_name)
+        c1 = self._get_column_by_name(sh,"TEST_RESULT")
+        sh.cell(r, c1).value = test_result
+        c2 = self._get_column_by_name(sh,"REAL")
+        sh.cell(r, c2).value = real
+        c3 = self._get_column_by_name(sh,"DETAILS")
+        sh.cell(r, c3).value = details
+        c4 = self._get_column_by_name(sh,"TIMESTAMP")
+        sh.cell(r, c4).value = timestamp
+        c5 = self._get_column_by_name(sh,"SCREENSHOT")
+        sh.cell(r, c5).value = screenshot
+
     def save_test_case_excel(self) -> None:
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
-        self.TEST_CASES_WB.close()
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
         r = 0
@@ -81,8 +95,8 @@ class KeywordsTypofix(object):
             res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
         return res
 
-# tp = KeywordsTypofix()
-# print(tp.get_hyperlink_by_link_name("link", "41 - rock ’n’ roll"))
+tp = KeywordsTypofix()
+print(tp.add_results_to_excel("41_rock__n__roll_English", "A","B","C", "D", "E"))
 
     # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
     # ws = wb.active
