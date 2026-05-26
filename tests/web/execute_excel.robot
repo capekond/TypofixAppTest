@@ -24,7 +24,7 @@ Exectute Test from Excel File
     ${TIMESTAMP}=    Get Current Date
     Log    ${REAL} | ${hyperlink} | ${TEST_RESULT} | ${DETAILS} | ${SCREENSHOT} | ${TIMESTAMP}
     Add Results to Excel    ${TEST_NAME}    ${TEST_RESULT}    ${REAL}    ${DETAILS}    ${TIMESTAMP}    ${SCREENSHOT}
-#    Save Test Case Excel
+    Save Test Case Excel
 
 Get Real Result
     [Arguments]     ${link}    ${language}
