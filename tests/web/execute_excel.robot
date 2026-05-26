@@ -23,7 +23,7 @@ Exectute Test from Excel File
     ${TEST_RESULT}    ${DETAILS}    ${SCREENSHOT}    Assert Custom Typofix    ${after}    ${REAL}
     ${TIMESTAMP}=    Get Current Date
     Log    ${REAL} | ${hyperlink} | ${TEST_RESULT} | ${DETAILS} | ${SCREENSHOT} | ${TIMESTAMP}
-#    Add Results to Excel    ${TEST_NAME}    ${TEST_RESULT}    ${REAL}    ${DETAILS}    ${TIMESTAMP}    ${SCREENSHOT}
+    Add Results to Excel    ${TEST_NAME}    ${TEST_RESULT}    ${REAL}    ${DETAILS}    ${TIMESTAMP}    ${SCREENSHOT}
 #    Save Test Case Excel
 
 Get Real Result

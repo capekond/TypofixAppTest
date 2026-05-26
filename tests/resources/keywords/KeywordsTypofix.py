@@ -14,7 +14,7 @@ class KeywordsTypofix(object):
         self.TEST_CASES_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx")
         self.TEST_CASES_WB = load_workbook(self.TEST_CASES_FILE)
         self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
-        self.TEST_RESULTS_FIELDS = ("TEST_NAME", "TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP", "SCREENSHOT")
+        self.TEST_RESULTS_FIELDS = ("TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP", "SCREENSHOT")
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
@@ -42,26 +42,25 @@ class KeywordsTypofix(object):
             ws.cell(row=rows + i, column=6, value=befores[i].strip())
             ws.cell(row=rows + i, column=7, value=afters[i].strip())
 
-    def add_results_to_excel(self, test_name: str, test_result: str, real: str, details: str, timestamp, screenshot: str):
+    def add_results_to_excel(self, test_name, *f_values):
+        errors = ""
         sh = self.TEST_CASES_WB.worksheets[0]
-        r, x = self._get_position_by_name_and_value(sh,"Test Cases", test_name)
-        c1 = self._get_column_by_name(sh,"TEST_RESULT")
-        sh.cell(r, c1).value = test_result
-        c2 = self._get_column_by_name(sh,"REAL")
-        sh.cell(r, c2).value = real
-        c3 = self._get_column_by_name(sh,"DETAILS")
-        sh.cell(r, c3).value = details
-        c4 = self._get_column_by_name(sh,"TIMESTAMP")
-        sh.cell(r, c4).value = timestamp
-        c5 = self._get_column_by_name(sh,"SCREENSHOT")
-        sh.cell(r, c5).value = screenshot
+        row, x = self._get_position_by_name_and_value(sh, "Test Cases", test_name, False)
+        if row == 0:
+            errors = f"Test Case {test_name} not found"
+        else:
+            for i, field in enumerate(self.TEST_RESULTS_FIELDS):
+                print(self.TEST_RESULTS_FIELDS[i],  f_values[i])
+                col = self._get_column_by_name(sh,field)
+                sh.cell(row, col).value = f_values[i]
+        return errors
 
     def save_test_case_excel(self) -> None:
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
         r = 0
-        c = self._get_column_by_name(sh, field_name, contains_name)
+        c = self._get_column_by_name(sh, field_name, True)
         for row in range(2, sh.max_row):
             cv = sh.cell(row,c).value
             if (contains_name and cv in field_value) or (not contains_name and cv == field_value):
@@ -95,8 +94,13 @@ class KeywordsTypofix(object):
             res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
         return res
 
-tp = KeywordsTypofix()
-print(tp.add_results_to_excel("41_rock__n__roll_English", "A","B","C", "D", "E"))
+# tp = KeywordsTypofix()
+#
+# tcs= ("41_rock__n__roll_English", "41_rock__n__roll_English__UK_", "28_Use_precomposed_glyph_Ć_Slovenian", "28_Use_precomposed_glyph_Ć_Polish")
+# for i, tc in enumerate(tcs):
+#     print(tp.add_results_to_excel(tc,f"AA{i+1}",f"BB{i+1}",f"CC{i+1}", f"DD{i+1}", f"EE{i+1}"))
+#
+# tp.save_test_case_excel()
 
     # wb = load_workbook(os.path.join(tp.RESOURCES_DIR, "test_data", "TestCases.xlsx"))
     # ws = wb.active
