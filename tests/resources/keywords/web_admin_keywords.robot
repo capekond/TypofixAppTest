@@ -1,9 +1,28 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    ./KeywordsTypofix.py
-Resource   ../variables/web_tested_variables.robot
-Resource   ../variables/api_tested_variables.robot
 Resource   ../variables/secret.robot
+
+*** Variables ***
+${TESTED_BASE_URL}   https://www.typofix.org/application#testing
+${ADMIN_BASE_URL}    https://typofix.slonline.sk/admin/
+
+# Homepage Locators for tested
+${LANGUAGE}               id:language-select
+${REFERENCE_SET}          id:preference-set-select
+${INPUT_INNER}            //*[@role="textbox"]/p/span/span/span
+${OUTPUT_INNER}            //*[@role="textbox"]
+${TYPOFIX}                //*[@title="Run Typofix"]
+${REPLACE}                xpath://button[text()='Replace']
+${REPLACEMENTS}           class:replacements-item
+
+# Homepage Locators for admin
+${ADMIN_TABLE_TEXT_REPLACE}       //table[@class="table grid-field__table"]/tbody/tr
+${ADMIN_GO_BACK}                  //*[@id="Form_ItemEditForm"]/div[1]/div[1]/a
+${ADMIN_BEFORE_TEXT_REPLACE}      xpath://textarea[@name='ExampleBefore']
+${ADMIN_AFTER_TEXT_REPLACE}       xpath://textarea[@name='ExampleAfter']
+${ADMIN_NEXT}                     xpath://button[@value='Next']
+${ADMIM_PG_INFO}                  xpath://span[@class='pagination-page-number']
 
 *** Keywords ***
 
@@ -31,34 +50,3 @@ Admin Login If Necessary
         Input Text      id:SudoModePassword    ${WEB_PASSWORD}
         Click Button    //button[contains(text(),'Verify')]
     END
-
-Admin Get All Text Replaces
-    Go To    ${ADMIN_BASE_URL}/text-replace
-    ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
-    #TODO only one page limitation
-    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
-    #TODO end
-    ${pgs}    Set Variable    1
-    FOR    ${i}    IN RANGE    0     ${pgs}
-        ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-        FOR    ${a}    IN RANGE    0    ${rows}
-            Wait Until Element Is Enabled   //td[@class='col-ID']
-            @{ids}=      Get WebElements    //td[@class='col-ID']
-            @{names}=    Get WebElements    //td[@class='col-Name']
-            @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
-            ${id}=       Get Text    ${ids}[${a}]
-            ${name}=     Get Text    ${names}[${a}]
-            ${lang}=     Get Text    ${langs}[${a}]
-            Data Store Add Item    id          ${id}
-            Data Store Add Item    name        ${name}
-            Data Store Add Item    languages   ${lang}
-            Admin Get Test Replaces Details      ${ids}[${a}]
-            Log To Console    ${id}
-            Log To Console    ${name}
-            Log To Console    ${lang}
-        END
-        Wait Until Element Is Visible    ${ADMIN_NEXT}
-        Click Button    ${ADMIN_NEXT}
-        Sleep    5s
-    END
-
