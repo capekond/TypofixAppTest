@@ -1,164 +1,187 @@
-# Robot Framework Test Suites Documentation for Typofix application
+# Playwright Test Suites Documentation for Typofix Application
 
-There are test for https://www.typofix.org/application
+Tests for https://www.typofix.org/application
 
 ## Before Running Tests
 
-### General prerequisites 
-Check that python 3.14 (recommended version, 3.12 should be ok) is installed on your computer
-```bash
-C:\Users\theuser>python -V
-Python 3.14.3
-```
-If not install it from https://www.python.org/downloads/
+### General Prerequisites
 
-Clone repository from https://github.com/capekond/TypofixAppTest to to selected local project folder
-### Specific setup for project 
-1. execute requirements 
+Check that Python 3.12+ (3.14 recommended) is installed on your computer:
+
 ```bash
-cd <project folder>/TypofixAppTest/
-pip install  -r  requirements.txt
+python -V
+# Python 3.14.3
 ```
-2. decrypt file with credentials:
+
+If not installed, download from https://www.python.org/downloads/
+
+Clone the repository:
+
 ```bash
-cd <projects folder>/TypofixAppTest/tests/resources/variables/
+git clone https://github.com/capekond/TypofixAppTest.git
+cd TypofixAppTest
+```
+
+### Specific Setup for Project
+
+1. **Install dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+2. **Install Playwright browsers:**
+
+```bash
+playwright install chromium
+```
+
+3. **Decrypt credentials file:**
+
+```bash
+cd tests/resources/variables/
 mcrypt -d secret.robot.nc
 ```
-3. check robot framework version. In case of problem, here is detailed approach for  previous steps https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#installation-instructions
-```bash
-C:\Users\theuser>python -m robot --version
-Robot Framework 7.4.2 (Python 3.14.3 on win32)
-```
-# Running test
-## General information
-When run *.robot file C:\Users\theuser\report.html contains the HTML with test  results. Open it in local browser
-## Prepare the test scope
-Following command open page https://typofix.slonline.sk/admin/rule-sets and for every record put content of field Before and After  from detailed page to Excel file named DataStore. The data are stured at new list with name based on actual timestamp (i.e. 2026-05-21_09_24_48). New data list is the last in Excel, on the right.    
-Command:
-```bash
-C:\Users\theuser> python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\admin_application.robot
 
-````
-Possible output:
-```bash
-==============================================================================
-Admin Application
-==============================================================================
-Add defined examples to data store :: Build data store                Login, session created
-44
-Guns N’ Roses
-Czech (academic rules), Czech (traditional rules), English, English (UK), English (US), German (Germany), Spanish
-45
-Correct form of C. a K. in Czech
-Czech (academic rules), Czech (traditional rules)
-46
+4. **Verify Playwright installation:**
 
-Add defined examples to data store :: Build data store                | PASS |
-------------------------------------------------------------------------------
-Admin Application                                                     | PASS |
-1 test, 1 passed, 0 failed
-==============================================================================
-Output:  C:\Users\ocape\output.xml
-Log:     C:\Users\ocape\log.html
-Report:  C:\Users\ocape\report.html
-```
-Transfer data from DataStore Excel file to TestCase Excel file. The source file is last file on right in Excel Workbook. Newly created list is first on left in target Excel file. Based on incoming information unique anf safe test name is created (from id, name of the rule and language). 
 ```bash
-C:\Users\theuser> python C:\Users\ocape\IdeaProjects\TypofixAppTest\tools\transfer_data_store_to_TC.py
+playwright --version
+# Version 1.45.0
 ```
-Possible output:
-```bash
-Content of last list from C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\resources\test_data\DataStore.xlsx will be formatted and transferred to C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx
-For more info let try --help
-Do you like to proceed the task? [Y/n]  Y
-Selected source worksheet 2026-05-21_09_24_48
-Selected target worksheet tc_A5
-```
-Every test has as condition number of changes (count applied rules) that must be done to fix whole string. This script only calculate the counts and it them into appropriate column in Excel file. Feel to chack manually and change if wrong.
-```bash
-C:\Users\theuser> python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_prepare_excel.robot
-```
-Possible output:
-```bash
-==============================================================================
-Tested App Prepare Excel
-==============================================================================
-44__Guns_N__RosesCzech__academic_rules_                               Login, session created
-44__Guns_N__RosesCzech__academic_rules_                               | PASS |
-------------------------------------------------------------------------------
-44__Guns_N__RosesCzech__traditional_rules_                            Reuse open session
-44__Guns_N__RosesCzech__traditional_rules_                            | PASS |
-------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            Reuse open session
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            | PASS |
-------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         Reuse open session
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         | PASS |
-------------------------------------------------------------------------------
-Tested App Prepare Excel                                              | PASS |
-4 tests, 4 passed, 0 failed
-==============================================================================
-Output:  C:\Users\ocape\output.xml
-Log:     C:\Users\ocape\log.html
-Report:  C:\Users\ocape\report.html
-```
-## Execute tests 
-Execute test cases in first list of Excel TesCase file. Robot Framework report are created.  
-```bash
-C:\Users\ocape>python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_execute_main_test.robot
-```
-Possible output 
-```bash
-[ ERROR ] Error in file 'C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_execute_main_test.robot' on line 15: Library '..\keywords\KeywordsTypofix.py' does not exist.
-==============================================================================
-Tested App Execute Main Test
-==============================================================================
-44__Guns_N__RosesCzech__academic_rules_                               Login, session created
-Done, no more to correct
-44__Guns_N__RosesCzech__academic_rules_                               | PASS |
-------------------------------------------------------------------------------
-44__Guns_N__RosesCzech__traditional_rules_                            Reuse open session
-Done, no more to correct
-44__Guns_N__RosesCzech__traditional_rules_                            | PASS |
-------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            Reuse open session
-Done, no more to correct
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            | FAIL |
-The text of element '//*[@role="textbox"]' should have been 'C.&nbsp;a&nbsp;k.
-C.&nbsp;a&nbsp;k.' but it was 'C.a k.
-C. a k.'.
-------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         Reuse open session
-Done, no more to correct
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         | FAIL |
-The text of element '//*[@role="textbox"]' should have been 'C.&nbsp;a&nbsp;k.
-C.&nbsp;a&nbsp;k.' but it was 'C.a k.
-C. a k.'.
-------------------------------------------------------------------------------
-Tested App Execute Main Test                                          | FAIL |
-4 tests, 2 passed, 2 failed
-==============================================================================
-Output:  C:\Users\ocape\output.xml
-Log:     C:\Users\ocape\log.html
-Report:  C:\Users\ocape\report.html
-```
-The last run results from  Robot Framework XML report are added in test cases in first list of Excel TesCase file.
-```bash
-C:\Users\theuser> python C:\Users\ocape\IdeaProjects\TypofixAppTest\tools\add_results_to_TC.py
-```
-Possible output:
-```bash
-Results added to file C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx from C:\Users\ocape\IdeaProjects\TypofixAppTest\results\output.xml
 
-Selected 4 test cases:
-44__Guns_N__RosesCzech__academic_rules_
-44__Guns_N__RosesCzech__traditional_rules_
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_
+## Running Tests
+
+### General Information
+
+Playwright generates HTML reports automatically. Test results are saved in the `results/` directory.
+
+### Test Workflow
+
+#### 1. Load Examples from Admin Application
+
+Loads defined text-replace examples from the admin panel and builds Excel test cases:
+
+```bash
+pytest tests/web/test_load_excel.py -v
 ```
-# TODO
-https://github.com/capekond/TypofixAppTest/issues
-- prove that special characters are correctly handled 
-- add doc for execution
-  - CI/CD pipeline https://docs.robotframework.org/docs/using_rf_in_ci_systems/ci/github-actions
-  - run from container
+
+**Output includes:**
+- Excel file populated with rule IDs, names, languages, and expected transformations
+- Test data stored in `tests/resources/test_data/TestCases.xlsx`
+
+#### 2. Prepare Test Cases
+
+Transfers data from the DataStore Excel file to the TestCase Excel file:
+
+```bash
+python tools/transfer_data_store_to_TC.py
+```
+
+**Interactive prompt:**
+- Confirms source and target worksheets
+- Transfers and formats data
+
+#### 3. Execute Tests
+
+Runs all test cases from the Excel file against the Typofix application:
+
+```bash
+pytest tests/web/test_execute_excel.py -v
+```
+
+**Output includes:**
+- Detailed test results with assertions
+- Screenshots on failure
+- Results added back to Excel file
+- HTML report generated in `results/` directory
+
+### Example Command Sequence
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+playwright install chromium
+
+# Run load test
+pytest tests/web/test_load_excel.py -v
+
+# Prepare data
+python tools/transfer_data_store_to_TC.py
+
+# Execute main tests
+pytest tests/web/test_execute_excel.py -v
+
+# View results
+# Open results/report.html in your browser
+```
+
+## Project Structure
+
+```
+TypofixAppTest/
+├── tests/
+│   ├── web/
+│   │   ├── test_execute_excel.py    # Main test execution
+│   │   └── test_load_excel.py       # Load test data from admin
+│   └── resources/
+│       ├── fixtures/
+│       │   └── browser_fixtures.py  # Browser setup/teardown
+│       ├── helpers/
+│       │   └── typofix_helpers.py   # Utility functions for Excel and Typofix
+│       ├── test_data/
+│       │   └── TestCases.xlsx       # Test cases and results
+│       └── variables/
+│           └── secret.robot         # Credentials (encrypted)
+├── tools/
+│   ├── transfer_data_store_to_TC.py # Transfer DataStore to TestCases
+│   └── add_results_to_TC.py         # Update TestCases with results
+├── results/                          # Test reports and output
+├── requirements.txt
+└── README.md
+```
+
+## Key Features
+
+- **Data-Driven Testing:** Tests load parameters from Excel files
+- **Browser Automation:** Uses Playwright for reliable cross-browser testing
+- **Excel Integration:** Manages test data and results in Excel workbooks
+- **Admin Panel Integration:** Automatically loads rule definitions from admin interface
+- **Detailed Reporting:** Generates HTML reports with screenshots on failures
+- **Flexible Language Support:** Tests multiple language configurations
+
+## Troubleshooting
+
+### Browser Installation Issues
+
+```bash
+playwright install --with-deps chromium
+```
+
+### Permission Denied on Tools
+
+```bash
+chmod +x tools/*.py
+```
+
+### Excel File Locked
+
+Ensure no other processes have the Excel files open.
+
+### Test Data Not Loading
+
+Verify the `TestCases.xlsx` file exists and is properly formatted.
+
+## TODO
+
+- Add CI/CD pipeline integration (GitHub Actions)
+- Run tests in Docker containers
+- Enhanced error handling and logging
+- Performance optimization for large datasets
+- Support for additional browsers (Firefox, Safari)
+
+## Documentation Links
+
+- [Playwright Documentation](https://playwright.dev/python/)
+- [Pytest Documentation](https://docs.pytest.org/)
+- [GitHub Actions for Testing](https://docs.github.com/en/actions)
