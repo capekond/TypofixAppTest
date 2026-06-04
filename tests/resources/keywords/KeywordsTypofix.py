@@ -37,10 +37,11 @@ class KeywordsTypofix(object):
         rows = ws.max_row
         for i, language in enumerate(languages):
             ws.cell(row=rows + i, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
-            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=4),id + " - " + name.strip(), url_detail.strip())
-            ws.cell(row=rows + i, column=5, value= language.strip())
-            ws.cell(row=rows + i, column=6, value=befores[i].strip())
-            ws.cell(row=rows + i, column=7, value=afters[i].strip())
+            ws.cell(row=rows + i, column=4, value=id)
+            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=5),id + " - " + name.strip(), url_detail.strip())
+            ws.cell(row=rows + i, column=6, value= language.strip())
+            ws.cell(row=rows + i, column=7, value=befores[i].strip())
+            ws.cell(row=rows + i, column=8, value=afters[i].strip())
 
     def add_results_to_excel(self, test_name, *f_values):
         errors = ""

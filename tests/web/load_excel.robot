@@ -11,7 +11,7 @@ Load defined examples to test cases
     [Documentation]   Build excel test cases
     Admin Login If Necessary
     ${excel_list}=    Create New Excel List in Excel
-    Go To    ${ADMIN_BASE_URL}/text-replace
+    Go To    ${ADMIN_BASE_URL}/rules
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     #TODO only one page limitation
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
