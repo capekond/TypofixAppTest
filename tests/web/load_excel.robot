@@ -19,20 +19,26 @@ Load defined examples to test cases
     ${pgs}    Set Variable    1
     FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
+        #TODO not work for last row
         FOR    ${a}    IN RANGE    0    ${rows}
             Wait Until Element Is Enabled   //td[@class='col-ID']
-            @{ids}=      Get WebElements    //td[@class='col-ID']
-            @{names}=    Get WebElements    //td[@class='col-Name']
-            @{langs}=    Get WebElements    //td[@class='col-LanguagesNice']
-            ${id}=       Get Text    ${ids}[${a}]
-            ${name}=     Get Text    ${names}[${a}]
-            ${langs_by_coma}=     Get Text    ${langs}[${a}]
-            @{details}=    Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
+            @{ids}=             Get WebElements    //td[@class='col-ID']
+            @{descriptions}=    Get WebElements    //td[@class='col-Description']
+            @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
+            @{names}=           Get WebElements    //td[@class='col-Name']
+            @{langs}=           Get WebElements    //td[@class='col-LanguagesNice']
+            ${id}=               Get Text    ${ids}[${a}]
+            ${name}=             Get Text    ${names}[${a}]
+            ${description}=      Get Text    ${descriptions}[${a}]
+            ${tag}=              Get Text    ${tags}[${a}]
+            ${langs_by_coma}=    Get Text    ${langs}[${a}]
+            @{details}=          Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
             Add New Test Cases To Excel
             ...     excel_list=${excel_list}
             ...     id=${id}
             ...     name=${name}
-            ...     url_detail=${details}[0]
+            ...     description=${description}
+            ...     tag=${tag}
             ...     languages=${details}[1]
             ...     befores=${details}[2]
             ...     afters=${details}[3]

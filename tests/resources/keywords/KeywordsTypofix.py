@@ -18,6 +18,7 @@ class KeywordsTypofix(object):
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
+        self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
 
     def get_hyperlink_by_link_name(self, column_name: str,  value) -> str:
         sh = self.TEST_CASES_WB.worksheets[0]
@@ -32,16 +33,18 @@ class KeywordsTypofix(object):
         print(f"Selected target worksheet {first.title}")
         return first.title
 
-    def add_new_test_cases_to_excel(self, excel_list: str, id: str | int, name: str, url_detail: str, languages: list[str], befores:list[str], afters: list[str]):
+    def add_new_test_cases_to_excel(self, excel_list: str, id: str | int, name: str, description:str, tag:str, languages: list[str], befores:list[str], afters: list[str]):
         ws = self.TEST_CASES_WB[excel_list]
         rows = ws.max_row
         for i, language in enumerate(languages):
-            ws.cell(row=rows + i, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
-            ws.cell(row=rows + i, column=4, value=id)
-            self._insert_excel_hyperlink(ws.cell(row=rows + i, column=5),id + " - " + name.strip(), url_detail.strip())
-            ws.cell(row=rows + i, column=6, value= language.strip())
-            ws.cell(row=rows + i, column=7, value=befores[i].strip())
-            ws.cell(row=rows + i, column=8, value=afters[i].strip())
+            ws.cell(row=rows + i+1, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
+            ws.cell(row=rows + i+1, column=2, value=description)
+            ws.cell(row=rows + i+1, column=3, value= self._clean_up_text(tag))
+            ws.cell(row=rows + i+1, column=4, value=id)
+            self._insert_excel_hyperlink(ws.cell(row=rows + i+1, column=5),id + " - " + name.strip(), id=id)
+            ws.cell(row=rows + i+1, column=6, value= language.strip())
+            ws.cell(row=rows + i+1, column=7, value=befores[i].strip())
+            ws.cell(row=rows + i+1, column=8, value=afters[i].strip())
 
     def add_results_to_excel(self, test_name, *f_values):
         errors = ""
@@ -79,15 +82,9 @@ class KeywordsTypofix(object):
                     break
         return c
 
-    def _insert_excel_hyperlink(self, c: Cell, name: str, link: str):
+    def _insert_excel_hyperlink(self, c: Cell, name: str, id: str):
         c.value = name
-        c.hyperlink = self._customize_url(link)
-
-    @staticmethod
-    def _customize_url(url: str, pattern_name='detail') -> str:
-        if pattern_name == 'detail':
-            url = url[:url.index('=')]
-        return url
+        c.hyperlink = self.URL_DETAIL + id
 
     def _clean_up_text(self, txt: str) -> str:
         res = ""
