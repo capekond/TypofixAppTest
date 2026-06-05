@@ -65,6 +65,18 @@ class KeywordsTypofix(object):
     def get_detail_link(self,id:str) -> str:
         return self.URL_DETAIL + id
 
+    def split_before_after(self, data:list):
+        even=[]
+        odd=[]
+        for i, d in enumerate(data):
+            if (i+1) % 2 == 0:
+                odd.append(d)
+            else:
+                even.append(d)
+        return even, odd
+
+
+
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
         r = 0
         c = self._get_column_by_name(sh, field_name, True)
@@ -96,6 +108,9 @@ class KeywordsTypofix(object):
         return res
 
 # tp = KeywordsTypofix()
+# b, a = tp.split_before_after([1, 2, 3, 4, 5, 6, 7, 8])
+# print(b)
+# print(a)
 #
 # tcs= ("41_rock__n__roll_English", "41_rock__n__roll_English__UK_", "28_Use_precomposed_glyph_Ć_Slovenian", "28_Use_precomposed_glyph_Ć_Polish")
 # for i, tc in enumerate(tcs):

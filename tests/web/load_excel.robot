@@ -32,6 +32,7 @@ Load defined examples to test cases
             ${description}=      Get Text    ${descriptions}[${a}]
             ${tag}=              Get Text    ${tags}[${a}]
             ${langs_by_coma}=    Get Text    ${langs}[${a}]
+            #TODO change to Get Example Details
             @{details}=          Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
             Add New Test Cases To Excel
             ...     excel_list=${excel_list}
@@ -50,7 +51,10 @@ Load defined examples to test cases
     Save Test Case Excel
 
 TEST Get Example Details
-    Get Example Details     197
+
+    Admin Login If Necessary
+    ${a}    ${b}    ${c}     Get Example Details     197
+    Log    ${a}
 
 
 
@@ -60,9 +64,6 @@ Get Example Details
     [Arguments]    ${click_id}
     ${link}=    Get Detail Link    ${click_id}
     Go To    ${link}
-
-    Admin Login If Necessary
-
     Click Link    //*[@id="ui-id-2"]
     ${langs}=    Create List
     @{languages}=        Get WebElements    //p[contains(@id,'_Title')]
@@ -71,6 +72,7 @@ Get Example Details
         Append To List	    ${langs}    ${txt0}
     END
     ${editables}=    Create List
+    #TODO add dynamic calculation of 23
     FOR    ${i}    IN RANGE     1    23
         Select Frame     (//iframe[contains(@id,'Form_LanguageExamples_GridFieldEditableColumns')])[${i}]
         ${txt_count}=    Get Element Count    //p
@@ -82,10 +84,8 @@ Get Example Details
         Unselect Frame
         Append To List	    ${editables}    ${txt_list}
     END
-
-    ${befores}    Set Variable     Befores
-    ${afters}     Set Variable     Afters
-    RETURN    ${befores}    ${afters}
+    ${befores}    ${afters}    Split Before After    ${editables}
+    RETURN    ${langs}   ${befores}    ${afters}
 
 
 
