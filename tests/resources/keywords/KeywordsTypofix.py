@@ -62,6 +62,9 @@ class KeywordsTypofix(object):
     def save_test_case_excel(self) -> None:
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
 
+    def get_detail_link(self,id:str) -> str:
+        return self.URL_DETAIL + id
+
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> (int, int):
         r = 0
         c = self._get_column_by_name(sh, field_name, True)
@@ -84,7 +87,7 @@ class KeywordsTypofix(object):
 
     def _insert_excel_hyperlink(self, c: Cell, name: str, id: str):
         c.value = name
-        c.hyperlink = self.URL_DETAIL + id
+        c.hyperlink = self.get_detail_link(id)
 
     def _clean_up_text(self, txt: str) -> str:
         res = ""

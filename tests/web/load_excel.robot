@@ -49,20 +49,48 @@ Load defined examples to test cases
     END
     Save Test Case Excel
 
+TEST Get Example Details
+    Get Example Details     197
+
+
+
 *** Keywords ***
 
-Get Link Detail
-    [Arguments]    ${click_id}    ${langs_by_coma}
-    Click Element    ${click_id}
-    Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
-    ${link}=     Get Location
-    @{before}=    Create List
-    @{after}=    Create List
-    @{languages}=    Split String     ${langs_by_coma}    separator=,
-    FOR    ${lang}        IN    @{languages}
-        Log    TODO the correct reading of details
-        Append To List        ${before}    Given for lang ${lang}
-        Append To List        ${after}     Expected for lang ${lang}
+Get Example Details
+    [Arguments]    ${click_id}
+    ${link}=    Get Detail Link    ${click_id}
+    Go To    ${link}
+
+    Admin Login If Necessary
+
+    Click Link    //*[@id="ui-id-2"]
+
+    Select Frame     //iframe[@id='Form_LanguageExamples_GridFieldEditableColumns_12_ExampleBefore_ifr']
+    ${txt_count}=    Get Element Count    //p
+
+    FOR    ${i}    IN RANGE    ${txt_count}
+        ${txt}=    Get Text    //p[${i}+1]
+        Log    ${txt}
     END
-    Click Element    ${ADMIN_GO_BACK}
-    RETURN    ${link}    ${languages}    ${before}    ${after}
+
+
+    ${befores}    Set Variable     Befores
+    ${afters}     Set Variable     Afters
+    RETURN    ${befores}    ${afters}
+
+
+#Get Link Detail
+#    [Arguments]    ${click_id}    ${langs_by_coma}
+#    Click Element    ${click_id}
+#    Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
+#    ${link}=     Get Location
+#    @{before}=    Create List
+#    @{after}=    Create List
+#    @{languages}=    Split String     ${langs_by_coma}    separator=,
+#    FOR    ${lang}        IN    @{languages}
+#        Log    TODO the correct reading of details
+#        Append To List        ${before}    Given for lang ${lang}
+#        Append To List        ${after}     Expected for lang ${lang}
+#    END
+#    Click Element    ${ADMIN_GO_BACK}
+#    RETURN    ${link}    ${languages}    ${before}    ${after}
