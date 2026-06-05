@@ -65,14 +65,18 @@ Get Example Details
 
     Click Link    //*[@id="ui-id-2"]
 
-    Select Frame     //iframe[@id='Form_LanguageExamples_GridFieldEditableColumns_12_ExampleBefore_ifr']
-    ${txt_count}=    Get Element Count    //p
 
+
+
+    Select Frame     //iframe[@id='Form_LanguageExamples_GridFieldEditableColumns_1_ExampleBefore_ifr']
+    ${txt_count}=    Get Element Count    //p
+    ${txtl}=    Create List
     FOR    ${i}    IN RANGE    ${txt_count}
         ${txt}=    Get Text    //p[${i}+1]
-        Log    ${txt}
-    END
+        Append To List	    ${txtl}    ${txt}
 
+    END
+    Log    ${txtl}
 
     ${befores}    Set Variable     Befores
     ${afters}     Set Variable     Afters
