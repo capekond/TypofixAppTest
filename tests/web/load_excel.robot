@@ -64,23 +64,30 @@ Get Example Details
     Admin Login If Necessary
 
     Click Link    //*[@id="ui-id-2"]
-
-
-
-
-    Select Frame     //iframe[@id='Form_LanguageExamples_GridFieldEditableColumns_1_ExampleBefore_ifr']
-    ${txt_count}=    Get Element Count    //p
-    ${txtl}=    Create List
-    FOR    ${i}    IN RANGE    ${txt_count}
-        ${txt}=    Get Text    //p[${i}+1]
-        Append To List	    ${txtl}    ${txt}
-
+    ${langs}=    Create List
+    @{languages}=        Get WebElements    //p[contains(@id,'_Title')]
+    FOR    ${language}    IN    @{languages}
+        ${txt0}=    Get Text    ${language}
+        Append To List	    ${langs}    ${txt0}
     END
-    Log    ${txtl}
+    ${editables}=    Create List
+    FOR    ${i}    IN RANGE     1    23
+        Select Frame     (//iframe[contains(@id,'Form_LanguageExamples_GridFieldEditableColumns')])[${i}]
+        ${txt_count}=    Get Element Count    //p
+        ${txt_list}=    Create List
+        FOR    ${ii}    IN RANGE    ${txt_count}
+            ${txt1}=    Get Text    //p[${ii}+1]
+            Append To List	    ${txt_list}    ${txt1}
+        END
+        Unselect Frame
+        Append To List	    ${editables}    ${txt_list}
+    END
 
     ${befores}    Set Variable     Befores
     ${afters}     Set Variable     Afters
     RETURN    ${befores}    ${afters}
+
+
 
 
 #Get Link Detail
