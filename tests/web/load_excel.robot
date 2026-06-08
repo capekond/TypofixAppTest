@@ -32,17 +32,25 @@ Load defined examples to test cases
             ${description}=      Get Text    ${descriptions}[${a}]
             ${tag}=              Get Text    ${tags}[${a}]
             ${langs_by_coma}=    Get Text    ${langs}[${a}]
-            #TODO change to Get Example Details
-            @{details}=          Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
-            Add New Test Cases To Excel
-            ...     excel_list=${excel_list}
-            ...     id=${id}
-            ...     name=${name}
-            ...     description=${description}
-            ...     tag=${tag}
-            ...     languages=${details}[1]
-            ...     befores=${details}[2]
-            ...     afters=${details}[3]
+            ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
+            IF    ${has_examples}
+                Add New Test Cases To Excel
+                ...     excel_list=${excel_list}
+                ...     id=${id}
+                ...     name=${name}
+                ...     description=${description}
+                ...     tag=${tag}
+                ...     languages=${languages}
+                ...     befores=${befores}
+                ...     afters=${afters}
+            ELSE
+                Add Missing Examples To Excel
+                ...     id=${id}
+                ...     name=${name}
+                ...     description=${description}
+                ...     tag=${tag}
+                ...     languages=${languages}
+            END
         END
         Wait Until Element Is Visible    ${ADMIN_NEXT}
         Click Button    ${ADMIN_NEXT}
@@ -51,29 +59,40 @@ Load defined examples to test cases
     Save Test Case Excel
 
 TEST Get Example Details
-
     Admin Login If Necessary
-    ${a}    ${b}    ${c}     Get Example Details     197
-    Log    ${a}
+    ${present}    ${languages_names}   ${befores}    ${afters}    Get Link Detail    197    English (UK), German (Germany), Greek
+    ${present}    ${languages_names}   ${befores}    ${afters}    Get Link Detail    66     Latvian, Spanish
 
 
 
 *** Keywords ***
 
-Get Example Details
-    [Arguments]    ${click_id}
+Get Link Detail
+    [Arguments]    ${click_id}     ${langs_by_coma}
     ${link}=    Get Detail Link    ${click_id}
     Go To    ${link}
     Click Link    //*[@id="ui-id-2"]
-    ${langs}=    Create List
+    ${no_data}=     Run Keyword And Return Status    Page Should Contain Element     //td[text()="No items found"]
+    Log    ${langs_by_coma}
+    ${languages}=     Typofix Split String    ${langs_by_coma}
+    IF    ${no_data}
+        RETURN    False    ${languages}    None    None
+    ELSE
+        ${befores}    ${afters}    Get Examples Details    ${languages}
+        RETURN    True    ${languages}   ${befores}    ${afters}
+    END
+
+Get Examples Details
+    [Arguments]    ${expected_languages}
+    ${languages_names}=    Create List
     @{languages}=        Get WebElements    //p[contains(@id,'_Title')]
     FOR    ${language}    IN    @{languages}
-        ${txt0}=    Get Text    ${language}
-        Append To List	    ${langs}    ${txt0}
+        ${language}=    Get Text    ${language}
+        Append To List	    ${languages_names}    ${language}
     END
     ${editables}=    Create List
-    #TODO add dynamic calculation of 23
-    FOR    ${i}    IN RANGE     1    23
+    ${cnt_lines}=    Get length     ${languages}
+    FOR    ${i}    IN RANGE     1    ${cnt_lines}*2+1
         Select Frame     (//iframe[contains(@id,'Form_LanguageExamples_GridFieldEditableColumns')])[${i}]
         ${txt_count}=    Get Element Count    //p
         ${txt_list}=    Create List
@@ -84,24 +103,8 @@ Get Example Details
         Unselect Frame
         Append To List	    ${editables}    ${txt_list}
     END
-    ${befores}    ${afters}    Split Before After    ${editables}
-    RETURN    ${langs}   ${befores}    ${afters}
-
-
-
-
-#Get Link Detail
-#    [Arguments]    ${click_id}    ${langs_by_coma}
-#    Click Element    ${click_id}
-#    Wait Until Element Is Enabled     ${ADMIN_GO_BACK}
-#    ${link}=     Get Location
-#    @{before}=    Create List
-#    @{after}=    Create List
-#    @{languages}=    Split String     ${langs_by_coma}    separator=,
-#    FOR    ${lang}        IN    @{languages}
-#        Log    TODO the correct reading of details
-#        Append To List        ${before}    Given for lang ${lang}
-#        Append To List        ${after}     Expected for lang ${lang}
-#    END
-#    Click Element    ${ADMIN_GO_BACK}
-#    RETURN    ${link}    ${languages}    ${before}    ${after}
+    ${befores}    ${afters}    Split Before After
+    ...    data=${editables}
+    ...    languages=${languages_names}
+    ...    expected_languages=${expected_languages}
+    RETURN      ${befores}    ${afters}
