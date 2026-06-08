@@ -32,8 +32,8 @@ Load defined examples to test cases
             ${description}=      Get Text    ${descriptions}[${a}]
             ${tag}=              Get Text    ${tags}[${a}]
             ${langs_by_coma}=    Get Text    ${langs}[${a}]
-            ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${ids}[${a}]    ${langs_by_coma}
-            IF    ${has_examples}
+            ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${id}    ${langs_by_coma}
+            IF    ${has_examples} == 'True'
                 Add New Test Cases To Excel
                 ...     excel_list=${excel_list}
                 ...     id=${id}
@@ -71,14 +71,14 @@ Get Link Detail
     [Arguments]    ${click_id}     ${langs_by_coma}
     ${link}=    Get Detail Link    ${click_id}
     Go To    ${link}
-    Click Link    //*[@id="ui-id-2"]
     ${no_data}=     Run Keyword And Return Status    Page Should Contain Element     //td[text()="No items found"]
-    Log    ${langs_by_coma}
     ${languages}=     Typofix Split String    ${langs_by_coma}
     IF    ${no_data}
+        Click Element    ${ADMIN_GO_BACK}
         RETURN    False    ${languages}    None    None
     ELSE
         ${befores}    ${afters}    Get Examples Details    ${languages}
+        Click Element    ${ADMIN_GO_BACK}
         RETURN    True    ${languages}   ${befores}    ${afters}
     END
 
@@ -103,8 +103,5 @@ Get Examples Details
         Unselect Frame
         Append To List	    ${editables}    ${txt_list}
     END
-    ${befores}    ${afters}    Split Before After
-    ...    data=${editables}
-    ...    languages=${languages_names}
-    ...    expected_languages=${expected_languages}
+    ${befores}    ${afters}    Split Before After    ${editables}    ${languages_names}    ${expected_languages}
     RETURN      ${befores}    ${afters}

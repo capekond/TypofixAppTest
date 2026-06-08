@@ -8,6 +8,21 @@ from openpyxl.cell.cell import Cell
 from openpyxl.worksheet.worksheet import Worksheet
 
 
+def split_before_after(data: list, languages: list[str], expected_languages: list[str]):
+    even = []
+    odd = []
+    before = []
+    after = []
+    for i in range(0, len(data), 2):
+        odd.append(data[i])
+        even.append(data[i + 1])
+    for i, language in enumerate(languages):
+        if language in expected_languages:
+            before.append(odd[i])
+            after.append(even[i])
+    return before, after
+
+
 class KeywordsTypofix(object):
     def __init__(self):
         self.RESOURCES_DIR = Path(__file__).parent.parent
@@ -17,7 +32,7 @@ class KeywordsTypofix(object):
         self.TEST_RESULTS_FIELDS = ("TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP", "SCREENSHOT")
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
-        self.WS_NO_EXAMPLES = "ws_no_examples"
+        self.WS_NO_EXAMPLES = "tc_no_examples"
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
 
@@ -31,7 +46,10 @@ class KeywordsTypofix(object):
         first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
         first.title = "tc_A"
         self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
-        print(f"Selected target worksheet {first.title}")
+
+        for row in self.TEST_CASES_WB[self.WS_NO_EXAMPLES]['A2:B100']:
+            for cell in row:
+                cell.value = None
         return first.title
 
     def add_missing_examples_to_excel(self, id: str, name: str, description: str, tag: str, languages: list[str]):
@@ -78,21 +96,7 @@ class KeywordsTypofix(object):
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
 
     def get_detail_link(self, id: str) -> str:
-        return self.URL_DETAIL + id
-
-    def split_before_after(self, data: list, languages: list[str], expected_languages: list[str]):
-        even = []
-        odd = []
-        before = []
-        after = []
-        for i in range(0, len(data), 2):
-            odd.append(data[i])
-            even.append(data[i + 1])
-        for i, language in enumerate(languages):
-            if language in expected_languages:
-                before.append(odd[i])
-                after.append(even[i])
-        return before, after
+        return self.URL_DETAIL + id + "/edit?Root_LanguageExamples#Root_LanguageExamples"
 
     @staticmethod
     def typofix_split_string(s:str) -> list[str]:
@@ -129,12 +133,12 @@ class KeywordsTypofix(object):
         return res
 
 
-l = ['Czech (academic rules)', 'Danish', 'Dutch', 'English (UK)', 'German (Germany)', 'Greek', 'Hungarian', 'Polish',
-     'Slovak', 'Slovenian', 'Spanish']
-d = [['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['(f. 1805, d. 1875)'], ['(f. 1805, d. 1875)'], ['Comenius [geb. 1592]'], ['Comenius [geb. 1592]'], ['b. 1974'], ['b. 1974'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['Comenius – szül. 1592'], ['Comenius – szül. 1592'], ['ur. 1974', 'ur. 2 listopada 1974'], ['ur. 1974', 'ur. 2 listopada 1974'], ['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['roj. 1987, umr. 2000'], ['roj. 1987, umr. 2000'], ['Juan Pérez (n. 1980)'], ['Juan Pérez (n. 1980)']]
-
-tp = KeywordsTypofix()
-b, a = tp.split_before_after(d, l, ["English (UK)", "German (Germany)", "Greek"])
-
-print(b)
-print(a)
+# l = ['Czech (academic rules)', 'Danish', 'Dutch', 'English (UK)', 'German (Germany)', 'Greek', 'Hungarian', 'Polish',
+#      'Slovak', 'Slovenian', 'Spanish']
+# d = [['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['(f. 1805, d. 1875)'], ['(f. 1805, d. 1875)'], ['Comenius [geb. 1592]'], ['Comenius [geb. 1592]'], ['b. 1974'], ['b. 1974'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['Comenius – szül. 1592'], ['Comenius – szül. 1592'], ['ur. 1974', 'ur. 2 listopada 1974'], ['ur. 1974', 'ur. 2 listopada 1974'], ['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['roj. 1987, umr. 2000'], ['roj. 1987, umr. 2000'], ['Juan Pérez (n. 1980)'], ['Juan Pérez (n. 1980)']]
+#
+# tp = KeywordsTypofix()
+# b, a = tp.split_before_after(d, l, ["English (UK)", "German (Germany)", "Greek"])
+#
+# print(b)
+# print(a)
