@@ -1,4 +1,6 @@
 import os
+from dataclasses import replace
+
 from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
@@ -124,7 +126,9 @@ class KeywordsTypofix(object):
     def _clean_up_text(self, txt: str) -> str:
         res = ""
         for t in txt:
-            res += self.CLEAN_CHAR if t.isspace() or not (t.isalnum()) else t
+            res += ' ' if  not (t.isalnum()) else t
+        res = ' '.join(res.split())
+        res = res.replace(' ', self.CLEAN_CHAR)
         return res
 
 
@@ -137,7 +141,7 @@ tp = KeywordsTypofix()
 #
 # print(b)
 # print(a)
-tp.create_new_excel_list_in_excel()
+#tp.create_new_excel_list_in_excel()
 # tp.add_missing_examples_to_excel("7","My example 1","My example description  1", "My example tag 1", ['Czech','Latin'])
 # tp.add_missing_examples_to_excel("7","My example 2","My example description  2", "My example tag 2", ['Czech','Latin', 'UK'])
-tp.save_test_case_excel()
+#tp.save_test_case_excel()
