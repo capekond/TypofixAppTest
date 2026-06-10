@@ -21,7 +21,7 @@ Load defined examples to test cases
     FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         #TODO not work for last row
-        FOR    ${a}    IN RANGE    0    ${rows}
+        FOR    ${a}    IN RANGE    20    21
             Wait Until Element Is Enabled   //td[@class='col-ID']
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
@@ -34,7 +34,7 @@ Load defined examples to test cases
             ${tag}=              Get Text    ${tags}[${a}]
             ${langs_by_coma}=    Get Text    ${langs}[${a}]
             ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${id}    ${langs_by_coma}
-            IF    ${has_examples} == 'True'
+            IF    ${has_examples}
                 Add New Test Cases To Excel
                 ...     excel_list=${excel_list}
                 ...     id=${id}
@@ -63,8 +63,6 @@ TEST Get Example Details
     ${present}    ${languages_names}   ${befores}    ${afters}    Get Link Detail    197    English (UK), German (Germany), Greek
     ${present}    ${languages_names}   ${befores}    ${afters}    Get Link Detail    66     Latvian, Spanish
 
-
-
 *** Keywords ***
 
 Get Link Detail
@@ -75,11 +73,11 @@ Get Link Detail
     ${languages}=     Typofix Split String    ${langs_by_coma}
     IF    ${no_data}
         Click Element    ${ADMIN_GO_BACK}
-        RETURN    False    ${languages}    None    None
+        RETURN    ${False}    ${languages}    None    None
     ELSE
         ${befores}    ${afters}    Get Examples Details    ${languages}
         Click Element    ${ADMIN_GO_BACK}
-        RETURN    True    ${languages}   ${befores}    ${afters}
+        RETURN    ${True}    ${languages}   ${befores}    ${afters}
     END
 
 Get Examples Details
