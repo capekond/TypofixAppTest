@@ -126,7 +126,7 @@ class KeywordsTypofix(object):
     def _clean_up_text(self, txt: str) -> str:
         res = ""
         for t in txt:
-            res += ' ' if  not (t.isalnum()) else t
+            res += t if t.isalnum() else ' '
         res = ' '.join(res.split())
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
