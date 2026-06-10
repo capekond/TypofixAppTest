@@ -25,6 +25,7 @@ class KeywordsTypofix(object):
         odd = []
         before = []
         after = []
+        final_languages = []
         for i in range(0, len(data), 2):
             odd.append(data[i])
             even.append(data[i + 1])
@@ -32,7 +33,8 @@ class KeywordsTypofix(object):
             if language in expected_languages:
                 before.append(odd[i])
                 after.append(even[i])
-        return before, after
+                final_languages.append(language)
+        return final_languages, before, after
 
     def get_hyperlink_by_link_name(self, column_name: str, value) -> str:
         sh = self.TEST_CASES_WB.worksheets[0]

@@ -21,7 +21,8 @@ Load defined examples to test cases
     FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         #TODO not work for last row
-        FOR    ${a}    IN RANGE    20    21
+        FOR    ${a}    IN RANGE    0    ${rows}
+#        FOR    ${a}    IN RANGE    20    21
             Wait Until Element Is Enabled   //td[@class='col-ID']
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
@@ -75,9 +76,9 @@ Get Link Detail
         Click Element    ${ADMIN_GO_BACK}
         RETURN    ${False}    ${languages}    None    None
     ELSE
-        ${befores}    ${afters}    Get Examples Details    ${languages}
+        ${final_languages}     ${befores}    ${afters}    Get Examples Details    ${languages}
         Click Element    ${ADMIN_GO_BACK}
-        RETURN    ${True}    ${languages}   ${befores}    ${afters}
+        RETURN    ${True}    ${final_languages}    ${befores}    ${afters}
     END
 
 Get Examples Details
@@ -101,8 +102,8 @@ Get Examples Details
         Unselect Frame
         Append To List	    ${editables}    ${txt_list}
     END
-    ${befores}    ${afters}    Build Before After For Languages    ${editables}    ${languages_names}    ${expected_languages}
-    RETURN      ${befores}    ${afters}
+    ${final_languages}    ${befores}    ${afters}    Build Before After For Languages    ${editables}    ${languages_names}    ${expected_languages}
+    RETURN    ${final_languages}      ${befores}    ${afters}
 
 
 
