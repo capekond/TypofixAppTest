@@ -8,20 +8,6 @@ from openpyxl.cell.cell import Cell
 from openpyxl.worksheet.worksheet import Worksheet
 
 
-def split_before_after(data: list, languages: list[str], expected_languages: list[str]):
-    even = []
-    odd = []
-    before = []
-    after = []
-    for i in range(0, len(data), 2):
-        odd.append(data[i])
-        even.append(data[i + 1])
-    for i, language in enumerate(languages):
-        if language in expected_languages:
-            before.append(odd[i])
-            after.append(even[i])
-    return before, after
-
 
 class KeywordsTypofix(object):
     def __init__(self):
@@ -36,6 +22,21 @@ class KeywordsTypofix(object):
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
 
+
+    def build_before_after_for_languages(self,  data: list, languages: list[str], expected_languages: list[str]):
+        even = []
+        odd = []
+        before = []
+        after = []
+        for i in range(0, len(data), 2):
+            odd.append(data[i])
+            even.append(data[i + 1])
+        for i, language in enumerate(languages):
+            if language in expected_languages:
+                before.append(odd[i])
+                after.append(even[i])
+        return before, after
+
     def get_hyperlink_by_link_name(self, column_name: str, value) -> str:
         sh = self.TEST_CASES_WB.worksheets[0]
         r, c = self._get_position_by_name_and_value(sh, column_name, value)
@@ -44,7 +45,6 @@ class KeywordsTypofix(object):
 
     def create_new_excel_list_in_excel(self) -> str:
         first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
-        first.title = "tc_A"
         self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
 
         for row in self.TEST_CASES_WB[self.WS_NO_EXAMPLES]['A2:B100']:
@@ -56,16 +56,14 @@ class KeywordsTypofix(object):
         ws = self.TEST_CASES_WB[self.WS_NO_EXAMPLES]
         rows = ws.max_row
         for i, language in enumerate(languages):
-            ws.cell(row=rows + i + 1, column=1,
-                    value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
+            ws.cell(row=rows + i + 1, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
             ws.cell(row=rows + i + 1, column=2, value=description)
             ws.cell(row=rows + i + 1, column=3, value=self._clean_up_text(tag))
             ws.cell(row=rows + i + 1, column=4, value=id)
             self._insert_excel_hyperlink(ws.cell(row=rows + i + 1, column=5), id + " - " + name.strip(), id=id)
             ws.cell(row=rows + i + 1, column=6, value=language.strip())
 
-    def add_new_test_cases_to_excel(self, excel_list: str, id: str, name: str, description: str, tag: str,
-                                    languages: list[str], befores: list[str], afters: list[str]):
+    def add_new_test_cases_to_excel(self, excel_list: str, id: str, name: str, description: str, tag: str,languages: list[str], befores: list[str], afters: list[str]):
         ws = self.TEST_CASES_WB[excel_list]
         rows = ws.max_row
         for i, language in enumerate(languages):
@@ -137,8 +135,12 @@ class KeywordsTypofix(object):
 #      'Slovak', 'Slovenian', 'Spanish']
 # d = [['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['(f. 1805, d. 1875)'], ['(f. 1805, d. 1875)'], ['Comenius [geb. 1592]'], ['Comenius [geb. 1592]'], ['b. 1974'], ['b. 1974'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['Comenius – szül. 1592'], ['Comenius – szül. 1592'], ['ur. 1974', 'ur. 2 listopada 1974'], ['ur. 1974', 'ur. 2 listopada 1974'], ['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['roj. 1987, umr. 2000'], ['roj. 1987, umr. 2000'], ['Juan Pérez (n. 1980)'], ['Juan Pérez (n. 1980)']]
 #
-# tp = KeywordsTypofix()
+tp = KeywordsTypofix()
 # b, a = tp.split_before_after(d, l, ["English (UK)", "German (Germany)", "Greek"])
 #
 # print(b)
 # print(a)
+tp.create_new_excel_list_in_excel()
+tp.add_missing_examples_to_excel("7","My example 1","My example description  1", "My example tag 1", ['Czech','Latin'])
+tp.add_missing_examples_to_excel("7","My example 2","My example description  2", "My example tag 2", ['Czech','Latin', 'UK'])
+tp.save_test_case_excel()

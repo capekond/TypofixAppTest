@@ -4,6 +4,7 @@ Library    Collections
 Resource   ../resources/keywords/web_admin_keywords.robot
 Library    ../resources/keywords/KeywordsTypofix.py
 Suite Setup  Admin Let Open Browser
+Test Teardown    Save Test Case Excel
 Suite Teardown      Close All Browsers
 
 *** Test Cases ***
@@ -56,7 +57,6 @@ Load defined examples to test cases
         Click Button    ${ADMIN_NEXT}
         Sleep    5s
     END
-    Save Test Case Excel
 
 TEST Get Example Details
     Admin Login If Necessary
@@ -103,5 +103,8 @@ Get Examples Details
         Unselect Frame
         Append To List	    ${editables}    ${txt_list}
     END
-    ${befores}    ${afters}    Split Before After    ${editables}    ${languages_names}    ${expected_languages}
+    ${befores}    ${afters}    Build Before After For Languages    ${editables}    ${languages_names}    ${expected_languages}
     RETURN      ${befores}    ${afters}
+
+
+
