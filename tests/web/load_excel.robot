@@ -59,11 +59,6 @@ Load defined examples to test cases
         Sleep    5s
     END
 
-TEST Get Example Details
-    Admin Login If Necessary
-    ${present}    ${languages_names}   ${befores}    ${afters}    Get Link Detail    197    English (UK), German (Germany), Greek
-    ${present}    ${languages_names}   ${befores}    ${afters}    Get Link Detail    66     Latvian, Spanish
-
 *** Keywords ***
 
 Get Link Detail

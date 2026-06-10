@@ -21,8 +21,8 @@ class KeywordsTypofix(object):
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
 
-
-    def build_before_after_for_languages(self,  data: list, languages: list[str], expected_languages: list[str]):
+    @staticmethod
+    def build_before_after_for_languages(data: list, languages: list[str], expected_languages: list[str]):
         even = []
         odd = []
         before = []
@@ -63,7 +63,7 @@ class KeywordsTypofix(object):
             self.TEST_CASES_MISSING.cell(row=self.MISSING_LL, column=6, value=language.strip())
             self.MISSING_LL += 1
 
-    def add_new_test_cases_to_excel(self, excel_list: str, id: str, name: str, description: str, tag: str,languages: list[str], befores: list[str], afters: list[str]):
+    def add_new_test_cases_to_excel(self, excel_list: str, id: str, name: str, description: str, tag: str,languages: list[str], befores: list, afters: list):
         ws = self.TEST_CASES_WB[excel_list]
         for i, language in enumerate(languages):
             ws.cell(row=self.LL, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
@@ -72,8 +72,8 @@ class KeywordsTypofix(object):
             ws.cell(row=self.LL, column=4, value=id)
             self._insert_excel_hyperlink(ws.cell(row=self.LL, column=5), id + " - " + name.strip(), id=id)
             ws.cell(row=self.LL, column=6, value=language.strip())
-            ws.cell(row=self.LL, column=7, value=befores[i].strip())
-            ws.cell(row=self.LL, column=8, value=afters[i].strip())
+            ws.cell(row=self.LL, column=7, value=self._modify_examples(befores[i]))
+            ws.cell(row=self.LL, column=8, value=self._modify_examples(afters[i]))
             self.LL += 1
 
     def add_results_to_excel(self, test_name, *f_values):
@@ -98,6 +98,10 @@ class KeywordsTypofix(object):
     @staticmethod
     def typofix_split_string(s:str) -> list[str]:
         return [ss.strip() for ss in s.split(",")]
+
+    @staticmethod
+    def _modify_examples(example: list[str]) -> str:
+        return "\n".join(example)
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True):
         r = 0
