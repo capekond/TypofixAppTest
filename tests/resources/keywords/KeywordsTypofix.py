@@ -3,6 +3,8 @@ from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
 from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.comments import Comment
+import datetime
 
 class KeywordsTypofix(object):
     def __init__(self):
@@ -22,7 +24,6 @@ class KeywordsTypofix(object):
 
     @staticmethod
     def get_columns_from_data(data: list ):
-        #     ${id}    ${name}    ${description}    ${tag}    ${languages}
         ids  = [data_item[0]  for data_item  in  data]
         names = [data_item[1]  for data_item  in  data]
         descriptions = [data_item[2]  for data_item  in  data]
@@ -37,6 +38,11 @@ class KeywordsTypofix(object):
         if line != "":
             with open(self.FILE_LOG, 'a') as file:
                 file.write(line + "\n")
+
+    def put_note_to_excel(self, cnt_ok: int, cnt_nok: int, ws_name="tc_no_examples"):
+        note = f"Last execution at {datetime.datetime.now()}. Reported records: {cnt_ok}. Not reported {cnt_nok}. Total count: {cnt_ok + cnt_nok}"
+        ws = self.TEST_CASES_WB[ws_name]
+        ws["A1"].comment = Comment(note, "TypeFix test automation")
 
     @staticmethod
     def build_before_after_for_languages(data: list, languages: list[str], expected_languages: list[str]):
@@ -61,17 +67,16 @@ class KeywordsTypofix(object):
         link = sh.cell(r, c).hyperlink
         return str(link.target)
 
-    def create_new_excel_list_in_excel(self, add_data_placeholder=True):
-        list_title= None
-        if add_data_placeholder:
-            first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
-            self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
-            first.title = "tc_A"
-            list_title = first.title
+    def create_new_excel_list_in_excel(self) -> str:
+        first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
+        self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
+        first.title = "tc_A"
+        return first.title
+
+    def clean_missing_excel_list(self):
         for row in self.TEST_CASES_MISSING['A2:Z9000']:
             for cell in row:
                 cell.value = None
-        return list_title
 
     def add_missing_examples_to_excel(self, id: str, name: str, description: str, tag: str, languages: list[str]):
         for language in languages:

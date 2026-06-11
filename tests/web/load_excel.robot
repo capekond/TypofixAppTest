@@ -8,71 +8,50 @@ Test Teardown    Save Test Case Excel
 Suite Teardown      Close All Browsers
 
 *** Test Cases ***
-# TODO OLD
+
 Load defined examples to test cases
     [Documentation]   Build excel test cases
-    Admin Login If Necessary
     ${excel_list}=    Create New Excel List in Excel
-    Go To    ${ADMIN_BASE_URL}/rules
-    ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
-    #TODO only one page limitation
-    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
-    #TODO end
-    ${pgs}    Set Variable    1
-    FOR    ${i}    IN RANGE    0     ${pgs}
-        ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-        #TODO not work for last row
-        FOR    ${a}    IN RANGE    0    ${rows}
-#        FOR    ${a}    IN RANGE    20    21
-            Wait Until Element Is Enabled   //td[@class='col-ID']
-            @{ids}=             Get WebElements    //td[@class='col-ID']
-            @{descriptions}=    Get WebElements    //td[@class='col-Description']
-            @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
-            @{names}=           Get WebElements    //td[@class='col-Name']
-            @{langs}=           Get WebElements    //td[@class='col-LanguagesNice']
-            ${id}=               Get Text    ${ids}[${a}]
-            ${name}=             Get Text    ${names}[${a}]
-            ${description}=      Get Text    ${descriptions}[${a}]
-            ${tag}=              Get Text    ${tags}[${a}]
-            ${langs_by_coma}=    Get Text    ${langs}[${a}]
-            ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${id}    ${langs_by_coma}
-            IF    ${has_examples}
-                Add New Test Cases To Excel
-                ...     excel_list=${excel_list}
-                ...     id=${id}
-                ...     name=${name}
-                ...     description=${description}
-                ...     tag=${tag}
-                ...     languages=${languages}
-                ...     befores=${befores}
-                ...     afters=${afters}
-            ELSE
-                Add Missing Examples To Excel
-                ...     id=${id}
-                ...     name=${name}
-                ...     description=${description}
-                ...     tag=${tag}
-                ...     languages=${languages}
-            END
-        END
-        Wait Until Element Is Visible    ${ADMIN_NEXT}
-        Click Button    ${ADMIN_NEXT}
-        Sleep    5s
-    END
-
-Report rules with missing examples
-    [Documentation]   Only report rules with missing examples no test examples created
     Typofix File Log    is_new=${True}
-    Create New Excel List in Excel    ${False}
     ${data}=    Get Main Data
     ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}     Get Columns From Data    ${data}
     ${cnt}=  Get length   ${ids}
     FOR    ${i}    IN RANGE   ${cnt}
+       Typofix File Log     ${ids}[${i}]
+       ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      {ids}[${i}]    ${languages}
+       IF    ${has_examples}
+          Add New Test Cases To Excel
+                ...     excel_list=${excel_list}
+                ...     id=${ids}[${i}]
+                ...     name=${names}[${i}]
+                ...     description=${descriptions}[${i}]
+                ...     tag=${tags}[${i}]
+                ...     languages=${languages}
+                ...     befores=${befores}
+                ...     afters=${afters}
+       ELSE
+          Log    ${ids}[${i}] ${names}[${i}]  has no examples
+       END
+    END
+    Save Test Case Excel
+
+Report rules with missing examples
+    [Documentation]   Only report rules with missing examples no test examples created
+    Typofix File Log    is_new=${True}
+    Clean Missing Excel List
+    ${data}=    Get Main Data
+    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}     Get Columns From Data    ${data}
+    ${cnt}=  Get length   ${ids}
+    VAR    ${ok}        0
+    VAR    ${nok}       0
+    FOR    ${i}    IN RANGE   ${cnt}
+       Typofix File Log    ${ids}[${i}]
        ${has_examples}=     Check if Link Detail has examples    ${ids}[${i}]
        IF    ${has_examples}
-          Log    ${ids}[${i}] has examples
+          ${nok}=    Evaluate    ${nok} + 1
+          Log    ${ids}[${i}] ${names}[${i}] has examples
        ELSE
-           Typofix File Log    ${ids}[${i}]
+           ${ok}=    Evaluate    ${ok} + 1
            Add Missing Examples To Excel
                 ...     id=${ids}[${i}]
                 ...     name=${names}[${i}]
@@ -81,6 +60,7 @@ Report rules with missing examples
                 ...     languages=${languages}[${i}]
        END
     END
+    Put Note To Excel    cnt_ok=${ok}    cnt_nok=${nok}
     Save Test Case Excel
 
 *** Keywords ***
@@ -93,10 +73,10 @@ Get Main Data
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
     # TODO                           ${pgs}
-    FOR    ${i}    IN RANGE    0     ${pgs}
+    FOR    ${i}    IN RANGE    0     1
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         # TODO                          ${rows}
-        FOR    ${a}    IN RANGE    0    ${rows}
+        FOR    ${a}    IN RANGE    0    10
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
             @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
@@ -126,6 +106,16 @@ Move Next Page
         Sleep    0.2s
     END
 
+Get Link Detail
+    [Arguments]    ${click_id}     ${languages}
+    ${has_examples}=     Check if Link Detail has examples    ${click_id}
+    IF    ${has_examples}
+        ${final_languages}     ${befores}    ${afters}    Get Examples Details    ${languages}
+        RETURN    ${True}    ${final_languages}    ${befores}    ${afters}
+    ELSE
+        RETURN    ${False}  None    None    None
+    END
+
 Check if Link Detail has examples
     [Arguments]    ${click_id}
     ${link}=    Get Detail Link    ${click_id}
@@ -133,21 +123,6 @@ Check if Link Detail has examples
     Wait Until Element Is Visible    //h2[text()="Language examples"]
     ${has_examples}=     Run Keyword And Return Status    Page Should Not Contain Element     //td[text()="No items found"]
     RETURN    ${has_examples}
-
-Get Link Detail
-    [Arguments]    ${click_id}     ${langs_by_coma}
-    ${link}=    Get Detail Link    ${click_id}
-    Go To    ${link}
-    ${no_data}=     Run Keyword And Return Status    Page Should Contain Element     //td[text()="No items found"]
-    ${languages}=     Typofix Split String    ${langs_by_coma}
-    IF    ${no_data}
-        Click Element    ${ADMIN_GO_BACK}
-        RETURN    ${False}    ${languages}    None    None
-    ELSE
-        ${final_languages}     ${befores}    ${afters}    Get Examples Details    ${languages}
-        Click Element    ${ADMIN_GO_BACK}
-        RETURN    ${True}    ${final_languages}    ${befores}    ${afters}
-    END
 
 Get Examples Details
     [Arguments]    ${expected_languages}
@@ -174,4 +149,55 @@ Get Examples Details
     RETURN    ${final_languages}      ${befores}    ${afters}
 
 
+# TODO OLD
+#Load defined examples to test cases ODL
+#    [Documentation]   Build excel test cases
+#    Admin Login If Necessary
+#    ${excel_list}=    Create New Excel List in Excel
+#    Go To    ${ADMIN_BASE_URL}/rules
+#    ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
+#    #TODO only one page limitation
+#    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
+#    #TODO end
+#    ${pgs}    Set Variable    1
+#    FOR    ${i}    IN RANGE    0     ${pgs}
+#        ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
+#        #TODO not work for last row
+#        FOR    ${a}    IN RANGE    0    ${rows}
+##        FOR    ${a}    IN RANGE    20    21
+#            Wait Until Element Is Enabled   //td[@class='col-ID']
+#            @{ids}=             Get WebElements    //td[@class='col-ID']
+#            @{descriptions}=    Get WebElements    //td[@class='col-Description']
+#            @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
+#            @{names}=           Get WebElements    //td[@class='col-Name']
+#            @{langs}=           Get WebElements    //td[@class='col-LanguagesNice']
+#            ${id}=               Get Text    ${ids}[${a}]
+#            ${name}=             Get Text    ${names}[${a}]
+#            ${description}=      Get Text    ${descriptions}[${a}]
+#            ${tag}=              Get Text    ${tags}[${a}]
+#            ${langs_by_coma}=    Get Text    ${langs}[${a}]
+#            ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${id}    ${langs_by_coma}
+#            IF    ${has_examples}
+#                Add New Test Cases To Excel
+#                ...     excel_list=${excel_list}
+#                ...     id=${id}
+#                ...     name=${name}
+#                ...     description=${description}
+#                ...     tag=${tag}
+#                ...     languages=${languages}
+#                ...     befores=${befores}
+#                ...     afters=${afters}
+#            ELSE
+#                Add Missing Examples To Excel
+#                ...     id=${id}
+#                ...     name=${name}
+#                ...     description=${description}
+#                ...     tag=${tag}
+#                ...     languages=${languages}
+#            END
+#        END
+#        Wait Until Element Is Visible    ${ADMIN_NEXT}
+#        Click Button    ${ADMIN_NEXT}
+#        Sleep    5s
+#    END
 
