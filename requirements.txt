@@ -1,6 +1,6 @@
 robotframework-httplibrary==0.4.2
 robotframework==7.4.2
-robotframework-seleniumlibrary==6.8.0
+robotframework-seleniumlibrary
 robotframework-requests==0.9.7
 selenium==4.44.0
 robotframework-datadriver[XLS]
