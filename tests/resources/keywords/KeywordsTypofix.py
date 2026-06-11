@@ -20,6 +20,10 @@ class KeywordsTypofix(object):
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
 
+    @staticmethod
+    def get_ids_from_data(data: list ) -> list:
+        return   [data_item[0]  for data_item  in  data]
+
     def typofix_file_log(self, line = "", is_new=False):
         if is_new:
             open(self.FILE_LOG, 'w').close()

@@ -8,6 +8,7 @@ Test Teardown    Save Test Case Excel
 Suite Teardown      Close All Browsers
 
 *** Test Cases ***
+# TODO OLD
 Load defined examples to test cases
     [Documentation]   Build excel test cases
     Admin Login If Necessary
@@ -59,6 +60,7 @@ Load defined examples to test cases
         Sleep    5s
     END
 
+# TODO OLD
 Report rules with missing examples
     [Documentation]   Only report rules with missing examples no test examples created
     Typofix File Log    is_new=${True}
@@ -101,7 +103,15 @@ Report rules with missing examples
     END
 
 New approach
+    ${data}=    Get Main Data
+    ${ids}=    Get Ids From Data    ${data}
+    FOR    ${id}    IN    @{ids}
+        Log    ${id}
+    END
 
+
+
+*** Keywords ***
 
 Get Main Data
     [Documentation]   Get main Data to local data
@@ -111,10 +121,12 @@ Get Main Data
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
     Typofix File Log     Pages count ${pgs}    ${True}
-    FOR    ${i}    IN RANGE    0     ${pgs}
+    # TODO                           ${pgs}
+    FOR    ${i}    IN RANGE    0     1
         Typofix File Log     ------Page: ${i}+1
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-        FOR    ${a}    IN RANGE    0    ${rows}
+        # TODO                          ${rows}
+        FOR    ${a}    IN RANGE    0    10
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
             @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
@@ -128,11 +140,10 @@ Get Main Data
             @{data_item}=    Create List    ${id}    ${name}    ${description}    ${tag}    ${langs_by_coma}
             Append To List    ${data}    ${data_item}
         END
-        Move Next Page    50    //td[@class='col-ID']
+#  TODO ENABLE
+#        Move Next Page    50    //td[@class='col-ID']
     END
-    Log    ${data}
-
-*** Keywords ***
+    RETURN    ${data}
 
 Move Next Page
     [Arguments]    ${page_len}    ${element_to_check}

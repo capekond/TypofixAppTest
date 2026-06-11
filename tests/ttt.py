@@ -1,4 +1,4 @@
-a = [['2', 'Keep date and month name together (2 May)', 'Insert a nonbreaking space in dates in this format: # Month',
+data = [['2', 'Keep date and month name together (2 May)', 'Insert a nonbreaking space in dates in this format: # Month',
       'Date and Time > Date Formats',
       'Bulgarian, Dutch, English (UK), English (US), French, Greek, Irish, Italian, Maltese, Polish, Romanian, Spanish, Swedish'],
      ['379', 'Replace colon in time values by period after time related prepositions',
@@ -1381,4 +1381,5 @@ a = [['2', 'Keep date and month name together (2 May)', 'Insert a nonbreaking sp
       'Czech (academic rules), Czech (traditional rules), Bulgarian, Croatian, Danish, Dutch, English (UK), English (US), Estonian, Finnish, French, German (Germany), Greek, Hungarian, Irish, Latvian, Lithuanian, Maltese, Polish, Portuguese, Romanian, Slovak, Slovenian, Spanish, Swedish']]
 
 
-print(len(a))
+ids = [data_item[0]  for data_item  in  data]
+print(ids)
