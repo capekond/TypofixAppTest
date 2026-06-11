@@ -21,8 +21,15 @@ class KeywordsTypofix(object):
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
 
     @staticmethod
-    def get_ids_from_data(data: list ) -> list:
-        return   [data_item[0]  for data_item  in  data]
+    def get_columns_from_data(data: list ):
+        #     ${id}    ${name}    ${description}    ${tag}    ${languages}
+        ids  = [data_item[0]  for data_item  in  data]
+        names = [data_item[1]  for data_item  in  data]
+        descriptions = [data_item[2]  for data_item  in  data]
+        tags  = [data_item[3]  for data_item  in  data]
+        langs = [data_item[4]  for data_item  in  data]
+        languages  = [ langs_by_comma.split(",")  for langs_by_comma  in  langs]
+        return ids, names,  descriptions, tags, languages
 
     def typofix_file_log(self, line = "", is_new=False):
         if is_new:

@@ -104,9 +104,14 @@ Report rules with missing examples
 
 New approach
     ${data}=    Get Main Data
-    ${ids}=    Get Ids From Data    ${data}
+        ${ids}    ${name}    ${description}    ${tag}    ${languages}     Get Columns From Data    ${data}
     FOR    ${id}    IN    @{ids}
-        Log    ${id}
+       ${has_examples}=     Check if Link Detail has examples    ${id}
+       IF    ${has_examples}
+                Log    ${id} has examples
+       ELSE
+               Log    ${id} NO examples
+       END
     END
 
 
