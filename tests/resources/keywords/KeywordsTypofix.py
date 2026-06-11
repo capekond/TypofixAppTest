@@ -1,6 +1,4 @@
 import os
-from dataclasses import replace
-
 from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
@@ -20,6 +18,14 @@ class KeywordsTypofix(object):
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
+        self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
+
+    def typofix_file_log(self, line = "", is_new=False):
+        if is_new:
+            open(self.FILE_LOG, 'w').close()
+        if line != "":
+            with open(self.FILE_LOG, 'a') as file:
+                file.write(line + "\n")
 
     @staticmethod
     def build_before_after_for_languages(data: list, languages: list[str], expected_languages: list[str]):
