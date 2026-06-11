@@ -60,7 +60,7 @@ Load defined examples to test cases
     END
 
 TEST long table
-    [Documentation]   Build excel test cases
+    [Documentation]   TESTING
     Admin Login If Necessary
     Go To    ${ADMIN_BASE_URL}/rules
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
@@ -70,23 +70,26 @@ TEST long table
         Typofix File Log     ------Page: ${i}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         FOR    ${a}    IN RANGE    0    ${rows}
-            Wait Until Element Is Enabled   //td[@class='col-ID']
             @{ids}=             Get WebElements    //td[@class='col-ID']
             ${id}=               Get Text    ${ids}[${a}]
             Typofix File Log     ${id}
         END
-        Wait Until Element Is Enabled    ${ADMIN_NEXT}
-        Click Button    ${ADMIN_NEXT}
-        Wait Until Element Is Visible    //td[@class='col-ID']
-        FOR    ${i}    IN RANGE    50
-           ${cnt}=    Get Element Count    //td[@class='col-ID']
-           Exit For Loop If    ${cnt} == 50
-           Sleep    0.2s
-        END
-#        Sleep    3s
+        Move Next Page    50    //td[@class='col-ID']
     END
 
 *** Keywords ***
+
+Move Next Page
+    [Arguments]    ${page_len}    ${element_to_check}
+    ${next}=     Run Keyword And Return Status    Element Should Be Enabled    ${ADMIN_NEXT}
+    Return From Keyword If     ${next} is ${False}
+    Click Button    ${ADMIN_NEXT}
+    Wait Until Element Is Visible    ${element_to_check}
+    FOR    ${i}    IN RANGE    50
+        ${cnt}=    Get Element Count    ${element_to_check}
+        Exit For Loop If    ${cnt} == ${page_len}
+        Sleep    0.2s
+    END
 
 Get Link Detail
     [Arguments]    ${click_id}     ${langs_by_coma}
