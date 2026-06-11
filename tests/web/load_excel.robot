@@ -100,8 +100,12 @@ Report rules with missing examples
         Typofix File Log   ----next page
     END
 
-TEST long table
-    [Documentation]   TESTING
+New approach
+
+
+Get Main Data
+    [Documentation]   Get main Data to local data
+    @{data}=    Create List
     Admin Login If Necessary
     Go To    ${ADMIN_BASE_URL}/rules
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
@@ -112,11 +116,21 @@ TEST long table
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         FOR    ${a}    IN RANGE    0    ${rows}
             @{ids}=             Get WebElements    //td[@class='col-ID']
+            @{descriptions}=    Get WebElements    //td[@class='col-Description']
+            @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
+            @{names}=           Get WebElements    //td[@class='col-Name']
+            @{langs}=           Get WebElements    //td[@class='col-LanguagesNice']
             ${id}=               Get Text    ${ids}[${a}]
-            Typofix File Log     ${id}
+            ${name}=             Get Text    ${names}[${a}]
+            ${description}=      Get Text    ${descriptions}[${a}]
+            ${tag}=              Get Text    ${tags}[${a}]
+            ${langs_by_coma}=    Get Text    ${langs}[${a}]
+            @{data_item}=    Create List    ${id}    ${name}    ${description}    ${tag}    ${langs_by_coma}
+            Append To List    ${data}    ${data_item}
         END
         Move Next Page    50    //td[@class='col-ID']
     END
+    Log    ${data}
 
 *** Keywords ***
 
