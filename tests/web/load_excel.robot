@@ -60,61 +60,28 @@ Load defined examples to test cases
         Sleep    5s
     END
 
-# TODO OLD
 Report rules with missing examples
     [Documentation]   Only report rules with missing examples no test examples created
     Typofix File Log    is_new=${True}
-    Admin Login If Necessary
-    ${excel_list}=    Create New Excel List in Excel
-    Go To    ${ADMIN_BASE_URL}/rules
-    ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
-    ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
-    FOR    ${i}    IN RANGE    0     ${pgs}
-        ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-        FOR    ${a}    IN RANGE    0    ${rows}
-            @{ids}=             Get WebElements    //td[@class='col-ID']
-            @{descriptions}=    Get WebElements    //td[@class='col-Description']
-            @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
-            @{names}=           Get WebElements    //td[@class='col-Name']
-            @{langs}=           Get WebElements    //td[@class='col-LanguagesNice']
-            ${id}=               Get Text    ${ids}[${a}]
-            ${name}=             Get Text    ${names}[${a}]
-            ${description}=      Get Text    ${descriptions}[${a}]
-            ${tag}=              Get Text    ${tags}[${a}]
-            ${langs_by_coma}=    Get Text    ${langs}[${a}]
-            ${has_examples}    Check if Link Detail has examples      ${id}
-            IF    ${has_examples}
-                Log    ${names} has examples
-            ELSE
-                @{languages}    Split String    ${langs_by_coma}    ,
-                Add Missing Examples To Excel
-                ...     id=${id}
-                ...     name=${name}
-                ...     description=${description}
-                ...     tag=${tag}
-                ...     languages=${languages}
-            END
-            Click Element    ${ADMIN_GO_BACK}
-            Typofix File Log   ${id}
-        END
-
-        Move Next Page    50    //td[@class='col-ID']
-        Typofix File Log   ----next page
-    END
-
-New approach
+    Create New Excel List in Excel    ${False}
     ${data}=    Get Main Data
-        ${ids}    ${name}    ${description}    ${tag}    ${languages}     Get Columns From Data    ${data}
-    FOR    ${id}    IN    @{ids}
-       ${has_examples}=     Check if Link Detail has examples    ${id}
+    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}     Get Columns From Data    ${data}
+    ${cnt}=  Get length   ${ids}
+    FOR    ${i}    IN RANGE   ${cnt}
+       ${has_examples}=     Check if Link Detail has examples    ${ids}[${i}]
        IF    ${has_examples}
-                Log    ${id} has examples
+          Log    ${ids}[${i}] has examples
        ELSE
-               Log    ${id} NO examples
+           Typofix File Log    ${ids}[${i}]
+           Add Missing Examples To Excel
+                ...     id=${ids}[${i}]
+                ...     name=${names}[${i}]
+                ...     description=${descriptions}[${i}]
+                ...     tag=${tags}[${i}]
+                ...     languages=${languages}[${i}]
        END
     END
-
-
+    Save Test Case Excel
 
 *** Keywords ***
 
@@ -125,13 +92,11 @@ Get Main Data
     Go To    ${ADMIN_BASE_URL}/rules
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
-    Typofix File Log     Pages count ${pgs}    ${True}
     # TODO                           ${pgs}
-    FOR    ${i}    IN RANGE    0     1
-        Typofix File Log     ------Page: ${i}+1
+    FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         # TODO                          ${rows}
-        FOR    ${a}    IN RANGE    0    10
+        FOR    ${a}    IN RANGE    0    ${rows}
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
             @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
@@ -145,8 +110,7 @@ Get Main Data
             @{data_item}=    Create List    ${id}    ${name}    ${description}    ${tag}    ${langs_by_coma}
             Append To List    ${data}    ${data_item}
         END
-#  TODO ENABLE
-#        Move Next Page    50    //td[@class='col-ID']
+        Move Next Page    50    //td[@class='col-ID']
     END
     RETURN    ${data}
 

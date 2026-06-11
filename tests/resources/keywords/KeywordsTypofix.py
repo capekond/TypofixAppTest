@@ -61,14 +61,17 @@ class KeywordsTypofix(object):
         link = sh.cell(r, c).hyperlink
         return str(link.target)
 
-    def create_new_excel_list_in_excel(self) -> str:
-        first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
-        self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
-        first.title = "tc_A"
+    def create_new_excel_list_in_excel(self, add_data_placeholder=True):
+        list_title= None
+        if add_data_placeholder:
+            first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
+            self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
+            first.title = "tc_A"
+            list_title = first.title
         for row in self.TEST_CASES_MISSING['A2:Z9000']:
             for cell in row:
                 cell.value = None
-        return first.title
+        return list_title
 
     def add_missing_examples_to_excel(self, id: str, name: str, description: str, tag: str, languages: list[str]):
         for language in languages:
