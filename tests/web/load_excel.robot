@@ -18,7 +18,7 @@ Load defined examples to test cases
     VAR    ${nok}       0
     FOR    ${i}    IN RANGE   ${cnt}
        Typofix File Log     ${ids}[${i}]
-       ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      {ids}[${i}]    ${languages}
+       ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      ${ids}[${i}]    ${languages}
        IF    ${has_examples}
           Add New Test Cases To Excel
                 ...     excel_list=${excel_list}
@@ -29,11 +29,13 @@ Load defined examples to test cases
                 ...     languages=${languages}
                 ...     befores=${befores}
                 ...     afters=${afters}
+          ${ok}=    Evaluate    ${ok} + 1
        ELSE
-          Log    ${ids}[${i}] ${names}[${i}]  has no examples
+          Log    ${ids}[${i}] ${names}[${i}] has no examples
+          ${nok}=    Evaluate    ${nok} + 1
        END
     END
-    Put Note To Excel    cnt_ok=${ok}    cnt_nok=${nok}
+    Put Note To Excel    cnt_ok=${ok}    cnt_nok=${nok}    ws_name=${excel_list}
     Save Test Case Excel
 
 Report rules with missing examples
@@ -74,8 +76,8 @@ Get Main Data
     # TODO                           ${pgs}
     FOR    ${i}    IN RANGE    0     1
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-        # TODO                          ${rows}
-        FOR    ${a}    IN RANGE    0    4
+        # TODO                     0     ${rows}
+        FOR    ${a}    IN RANGE    20    21
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
             @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
