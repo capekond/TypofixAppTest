@@ -28,8 +28,7 @@ class KeywordsTypofix(object):
         names = [data_item[1]  for data_item  in  data]
         descriptions = [data_item[2]  for data_item  in  data]
         tags  = [data_item[3]  for data_item  in  data]
-        langs = [data_item[4]  for data_item  in  data]
-        expected_languages: list  = langs[0].split(",")
+        expected_languages = [data_item[4]  for data_item  in  data]
         return ids, names,  descriptions, tags, expected_languages
 
     def typofix_file_log(self, line = "", is_new=False):
@@ -45,17 +44,18 @@ class KeywordsTypofix(object):
         ws["A1"].comment = Comment(note, "TypeFix test automation")
 
     @staticmethod
-    def build_before_after_for_languages(data: list, languages_examples: list[str], expected_languages: list[str]):
+    def build_before_after_for_languages(data: list, languages_examples: list[str], expected_languages: str):
         even = []
         odd = []
         before = []
         after = []
         final_languages = []
+        expected_languages_list = expected_languages.split(", ")
         for i in range(0, len(data), 2):
             odd.append(data[i])
             even.append(data[i + 1])
         for i, language_example in enumerate(languages_examples):
-            if language_example in expected_languages:
+            if language_example in expected_languages_list:
                 before.append(odd[i])
                 after.append(even[i])
                 final_languages.append(language_example)
@@ -159,10 +159,3 @@ class KeywordsTypofix(object):
         res = ' '.join(res.split())
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
-
-tp = KeywordsTypofix()
-final_languages, before, after = tp.build_before_after_for_languages(['cz-a', 'cz-b','en-a', 'en-b'],['CZ', 'EN'],["DE", "EN"])
-
-print(final_languages, before, after)
-final = ['Czech (academic rules)'],
-expected = [['Czech (academic rules)', ' Czech (traditional rules)', ' Bulgarian', ' Slovak']]

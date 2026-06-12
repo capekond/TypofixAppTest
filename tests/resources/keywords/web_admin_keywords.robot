@@ -30,7 +30,7 @@ Admin Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
 #     headlesschrome
     Typofix File Log    is_new=${True}
-    Open Browser    ${ADMIN_BASE_URL}    chrome
+    Open Browser    ${ADMIN_BASE_URL}    headlesschrome
     Maximize Browser Window
 
 Admin Login If Necessary
