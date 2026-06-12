@@ -12,10 +12,10 @@ Suite Teardown      Close All Browsers
 Load defined examples to test cases
     [Documentation]   Build excel test cases
     ${excel_list}=    Create New Excel List in Excel
-    Typofix File Log    is_new=${True}
-    ${data}=    Get Main Data
-    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}     Get Columns From Data    ${data}
+    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}    Get Main Data
     ${cnt}=  Get length   ${ids}
+    VAR    ${ok}        0
+    VAR    ${nok}       0
     FOR    ${i}    IN RANGE   ${cnt}
        Typofix File Log     ${ids}[${i}]
        ${has_examples}    ${languages}   ${befores}    ${afters}    Get Link Detail      {ids}[${i}]    ${languages}
@@ -33,14 +33,13 @@ Load defined examples to test cases
           Log    ${ids}[${i}] ${names}[${i}]  has no examples
        END
     END
+    Put Note To Excel    cnt_ok=${ok}    cnt_nok=${nok}
     Save Test Case Excel
 
 Report rules with missing examples
     [Documentation]   Only report rules with missing examples no test examples created
-    Typofix File Log    is_new=${True}
     Clean Missing Excel List
-    ${data}=    Get Main Data
-    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}     Get Columns From Data    ${data}
+    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}    Get Main Data
     ${cnt}=  Get length   ${ids}
     VAR    ${ok}        0
     VAR    ${nok}       0
@@ -76,7 +75,7 @@ Get Main Data
     FOR    ${i}    IN RANGE    0     1
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         # TODO                          ${rows}
-        FOR    ${a}    IN RANGE    0    10
+        FOR    ${a}    IN RANGE    0    4
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
             @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
@@ -92,7 +91,8 @@ Get Main Data
         END
         Move Next Page    50    //td[@class='col-ID']
     END
-    RETURN    ${data}
+    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}     Get Columns From Data    ${data}
+    RETURN    ${ids}    ${names}    ${descriptions}    ${tags}    ${languages}
 
 Move Next Page
     [Arguments]    ${page_len}    ${element_to_check}
