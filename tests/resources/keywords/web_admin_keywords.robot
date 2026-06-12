@@ -28,7 +28,9 @@ ${ADMIM_PG_INFO}                  xpath://span[@class='pagination-page-number']
 
 Admin Let Open Browser
     [Documentation]    Opens a browser and provide email password to login
-    Open Browser    ${ADMIN_BASE_URL}    chrome
+#     headlesschrome
+    Typofix File Log    is_new=${True}
+    Open Browser    ${ADMIN_BASE_URL}    headlesschrome
     Maximize Browser Window
 
 Admin Login If Necessary

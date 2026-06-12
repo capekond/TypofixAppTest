@@ -1,10 +1,10 @@
 import os
-from dataclasses import replace
-
 from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
 from openpyxl.worksheet.worksheet import Worksheet
+from openpyxl.comments import Comment
+import datetime
 
 class KeywordsTypofix(object):
     def __init__(self):
@@ -20,22 +20,45 @@ class KeywordsTypofix(object):
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
+        self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
 
     @staticmethod
-    def build_before_after_for_languages(data: list, languages: list[str], expected_languages: list[str]):
+    def get_columns_from_data(data: list ):
+        ids  = [data_item[0]  for data_item  in  data]
+        names = [data_item[1]  for data_item  in  data]
+        descriptions = [data_item[2]  for data_item  in  data]
+        tags  = [data_item[3]  for data_item  in  data]
+        expected_languages = [data_item[4]  for data_item  in  data]
+        return ids, names,  descriptions, tags, expected_languages
+
+    def typofix_file_log(self, line = "", is_new=False):
+        if is_new:
+            open(self.FILE_LOG, 'w').close()
+        if line != "":
+            with open(self.FILE_LOG, 'a') as file:
+                file.write(line + "\n")
+
+    def put_note_to_excel(self, cnt_ok: int, cnt_nok: int, ws_name="tc_no_examples"):
+        note = f"Last execution at {datetime.datetime.now()}. Reported records: {cnt_ok}. Not reported {cnt_nok}. Total count: {cnt_ok + cnt_nok}"
+        ws = self.TEST_CASES_WB[ws_name]
+        ws["A1"].comment = Comment(note, "TypeFix test automation")
+
+    @staticmethod
+    def build_before_after_for_languages(data: list, languages_examples: list[str], expected_languages: str):
         even = []
         odd = []
         before = []
         after = []
         final_languages = []
+        expected_languages_list = expected_languages.split(", ")
         for i in range(0, len(data), 2):
             odd.append(data[i])
             even.append(data[i + 1])
-        for i, language in enumerate(languages):
-            if language in expected_languages:
+        for i, language_example in enumerate(languages_examples):
+            if language_example in expected_languages_list:
                 before.append(odd[i])
                 after.append(even[i])
-                final_languages.append(language)
+                final_languages.append(language_example)
         return final_languages, before, after
 
     def get_hyperlink_by_link_name(self, column_name: str, value) -> str:
@@ -48,10 +71,12 @@ class KeywordsTypofix(object):
         first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
         self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
         first.title = "tc_A"
+        return first.title
+
+    def clean_missing_excel_list(self):
         for row in self.TEST_CASES_MISSING['A2:Z9000']:
             for cell in row:
                 cell.value = None
-        return first.title
 
     def add_missing_examples_to_excel(self, id: str, name: str, description: str, tag: str, languages: list[str]):
         for language in languages:
@@ -134,18 +159,3 @@ class KeywordsTypofix(object):
         res = ' '.join(res.split())
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
-
-
-# l = ['Czech (academic rules)', 'Danish', 'Dutch', 'English (UK)', 'German (Germany)', 'Greek', 'Hungarian', 'Polish',
-#      'Slovak', 'Slovenian', 'Spanish']
-# d = [['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['(f. 1805, d. 1875)'], ['(f. 1805, d. 1875)'], ['Comenius [geb. 1592]'], ['Comenius [geb. 1592]'], ['b. 1974'], ['b. 1974'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['Comenius – szül. 1592'], ['Comenius – szül. 1592'], ['ur. 1974', 'ur. 2 listopada 1974'], ['ur. 1974', 'ur. 2 listopada 1974'], ['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['roj. 1987, umr. 2000'], ['roj. 1987, umr. 2000'], ['Juan Pérez (n. 1980)'], ['Juan Pérez (n. 1980)']]
-#
-tp = KeywordsTypofix()
-# b, a = tp.split_before_after(d, l, ["English (UK)", "German (Germany)", "Greek"])
-#
-# print(b)
-# print(a)
-#tp.create_new_excel_list_in_excel()
-# tp.add_missing_examples_to_excel("7","My example 1","My example description  1", "My example tag 1", ['Czech','Latin'])
-# tp.add_missing_examples_to_excel("7","My example 2","My example description  2", "My example tag 2", ['Czech','Latin', 'UK'])
-#tp.save_test_case_excel()
