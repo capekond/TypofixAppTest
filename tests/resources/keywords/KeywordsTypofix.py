@@ -29,8 +29,8 @@ class KeywordsTypofix(object):
         descriptions = [data_item[2]  for data_item  in  data]
         tags  = [data_item[3]  for data_item  in  data]
         langs = [data_item[4]  for data_item  in  data]
-        languages  = [ langs_by_comma.split(",")  for langs_by_comma  in  langs]
-        return ids, names,  descriptions, tags, languages
+        expected_languages: list  = langs[0].split(",")
+        return ids, names,  descriptions, tags, expected_languages
 
     def typofix_file_log(self, line = "", is_new=False):
         if is_new:
@@ -45,7 +45,7 @@ class KeywordsTypofix(object):
         ws["A1"].comment = Comment(note, "TypeFix test automation")
 
     @staticmethod
-    def build_before_after_for_languages(data: list, languages: list[str], expected_languages: list[str]):
+    def build_before_after_for_languages(data: list, languages_examples: list[str], expected_languages: list[str]):
         even = []
         odd = []
         before = []
@@ -54,11 +54,11 @@ class KeywordsTypofix(object):
         for i in range(0, len(data), 2):
             odd.append(data[i])
             even.append(data[i + 1])
-        for i, language in enumerate(languages):
-            if language in expected_languages:
+        for i, language_example in enumerate(languages_examples):
+            if language_example in expected_languages:
                 before.append(odd[i])
                 after.append(even[i])
-                final_languages.append(language)
+                final_languages.append(language_example)
         return final_languages, before, after
 
     def get_hyperlink_by_link_name(self, column_name: str, value) -> str:
@@ -160,17 +160,9 @@ class KeywordsTypofix(object):
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
 
-
-# l = ['Czech (academic rules)', 'Danish', 'Dutch', 'English (UK)', 'German (Germany)', 'Greek', 'Hungarian', 'Polish',
-#      'Slovak', 'Slovenian', 'Spanish']
-# d = [['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['(f. 1805, d. 1875)'], ['(f. 1805, d. 1875)'], ['Comenius [geb. 1592]'], ['Comenius [geb. 1592]'], ['b. 1974'], ['b. 1974'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['geb. 1974, gest. 2000', 'Comenius [geb. 1592]'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['γ. 1456 / γεν. 1456 / θ. 1512 / θαν. 1512'], ['Comenius – szül. 1592'], ['Comenius – szül. 1592'], ['ur. 1974', 'ur. 2 listopada 1974'], ['ur. 1974', 'ur. 2 listopada 1974'], ['nar. 12. 1. 2001'], ['nar. 12. 1. 2001'], ['roj. 1987, umr. 2000'], ['roj. 1987, umr. 2000'], ['Juan Pérez (n. 1980)'], ['Juan Pérez (n. 1980)']]
-#
 tp = KeywordsTypofix()
-# b, a = tp.split_before_after(d, l, ["English (UK)", "German (Germany)", "Greek"])
-#
-# print(b)
-# print(a)
-#tp.create_new_excel_list_in_excel()
-# tp.add_missing_examples_to_excel("7","My example 1","My example description  1", "My example tag 1", ['Czech','Latin'])
-# tp.add_missing_examples_to_excel("7","My example 2","My example description  2", "My example tag 2", ['Czech','Latin', 'UK'])
-#tp.save_test_case_excel()
+final_languages, before, after = tp.build_before_after_for_languages(['cz-a', 'cz-b','en-a', 'en-b'],['CZ', 'EN'],["DE", "EN"])
+
+print(final_languages, before, after)
+final = ['Czech (academic rules)'],
+expected = [['Czech (academic rules)', ' Czech (traditional rules)', ' Bulgarian', ' Slovak']]
