@@ -86,3 +86,15 @@ Check if Link Detail has examples
     Wait Until Element Is Visible    //h2[text()="Language examples"]
     ${has_examples}=     Run Keyword And Return Status    Page Should Not Contain Element     //td[text()="No items found"]
     RETURN    ${has_examples}
+
+Get Real Result
+    [Arguments]     ${link}    ${language}
+    Admin Login If Necessary
+    Go To    ${link}
+    RETURN    dummy Real
+
+Assert Custom Typofix
+    [Arguments]    ${after}    ${real}
+    VAR    ${TR}     DUMMY_FAIL
+    VAR    ${DET}    '${after}' is not equal '${real}'
+    RETURN    ${TR}    ${DET}
