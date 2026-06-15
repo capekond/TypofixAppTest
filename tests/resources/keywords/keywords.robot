@@ -91,6 +91,18 @@ Get Real Result
     [Arguments]     ${link}    ${language}
     Admin Login If Necessary
     Go To    ${link}
+    Click Link    //a[text()='Examples']
+    @{languages_elements}=        Get WebElements    //p[contains(@id,'_Title')]
+    VAR    ${i}=    1
+    FOR    ${language_element}    IN    @{languages_elements}
+        ${language_example}=    Get Text    ${language_element}
+        IF  "${language_example}" == "${language}"
+            BREAK
+        END
+        ${i}=    Evaluate  ${i}+1
+    END
+    Log    ${i}
+
     RETURN    dummy Real
 
 Assert Custom Typofix

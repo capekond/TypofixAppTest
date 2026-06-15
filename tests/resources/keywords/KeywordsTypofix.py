@@ -15,7 +15,7 @@ class KeywordsTypofix(object):
         self.MISSING_LL = 2
         self.LL = 2
         self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
-        self.TEST_RESULTS_FIELDS = ("TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP", "SCREENSHOT")
+        self.TEST_RESULTS_FIELDS = ("TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP")
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
         self.CLEAN_CHAR = '_'
@@ -132,7 +132,7 @@ class KeywordsTypofix(object):
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True):
         r = 0
         c = self._get_column_by_name(sh, field_name, True)
-        for row in range(2, sh.max_row):
+        for row in range(2, sh.max_row + 1):
             cv = sh.cell(row, c).value
             if (contains_name and cv in field_value) or (not contains_name and cv == field_value):
                 r = row
@@ -160,3 +160,7 @@ class KeywordsTypofix(object):
         res = ' '.join(res.split())
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
+
+# tp = KeywordsTypofix()
+# str = tp.get_hyperlink_by_link_name(column_name="link",value="444 - Remove extra comma before spase dash space")
+# print(str)

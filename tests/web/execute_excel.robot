@@ -15,10 +15,11 @@ Execute test New version
 *** Keywords ***
 Exectute Test from Excel File
     [Arguments]    ${link}    ${language}    ${before}    ${after}
-    Log        ${link} ${language} ${before} ${after}
-    ${hyperlink}=    Get Hyperlink By Link Name    column_name=link    value=${link}}
+    Log        ${link}
+    ${hyperlink}=    Get Hyperlink By Link Name    column_name=link    value=${link}
     ${REAL}=    Get Real Result     ${hyperlink}    ${language}
-    ${TEST_RESULT}    ${DETAILS}    Assert Custom Typofix    ${after}    ${REAL}
-    ${TIMESTAMP}=    Get Current Date
-    Log    ${REAL} | ${hyperlink} | ${TEST_RESULT} | ${DETAILS} | ${TIMESTAMP}
-#    Add Results to Excel    ${TEST_NAME}    ${TEST_RESULT}    ${REAL}    ${DETAILS}    ${TIMESTAMP}
+    ${TEST_RESULT}    ${details}    Assert Custom Typofix    ${after}    ${REAL}
+    ${timestamp}=    Get Current Date
+    Log    ${REAL} | ${hyperlink} | ${TEST_RESULT} | ${details} | ${timestamp}
+    Add Results to Excel    ${TEST_NAME}    ${TEST_RESULT}    ${REAL}    ${details}    ${timestamp}
+    Save Test Case Excel
