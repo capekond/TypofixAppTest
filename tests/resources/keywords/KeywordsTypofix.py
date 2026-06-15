@@ -78,7 +78,8 @@ class KeywordsTypofix(object):
             for cell in row:
                 cell.value = None
 
-    def add_missing_examples_to_excel(self, id: str, name: str, description: str, tag: str, languages: list[str]):
+    def add_missing_examples_to_excel(self, id: str, name: str, description: str, tag: str, expected_languages: str):
+        languages = expected_languages.split(", ")
         for language in languages:
             self.TEST_CASES_MISSING.cell(row=self.MISSING_LL, column=1, value=self._clean_up_text(id + self.CLEAN_CHAR + name + self.CLEAN_CHAR + language.strip()))
             self.TEST_CASES_MISSING.cell(row=self.MISSING_LL, column=2, value=description)
