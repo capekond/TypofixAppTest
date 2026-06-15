@@ -93,20 +93,15 @@ Get Real Result
     Go To    ${link}
     Click Link    //a[text()='Examples']
     @{languages_elements}=        Get WebElements    //p[contains(@id,'_Title')]
-    VAR    ${i}=    1
+    VAR    ${i}=    0
     FOR    ${language_element}    IN    @{languages_elements}
+        ${i}=    Evaluate  ${i}+1
         ${language_example}=    Get Text    ${language_element}
         IF  "${language_example}" == "${language}"
             BREAK
         END
-        ${i}=    Evaluate  ${i}+1
     END
     Log    ${i}
-
-    RETURN    dummy Real
-
-Assert Custom Typofix
-    [Arguments]    ${after}    ${real}
-    VAR    ${TR}     DUMMY_FAIL
-    VAR    ${DET}    '${after}' is not equal '${real}'
-    RETURN    ${TR}    ${DET}
+    @{real_emelent}=  Get WebElements    //pre[@class='ecma-validation__result']
+    ${real}=   Get Text     ${real_emelent}[${i-1}]
+    RETURN    ${real}

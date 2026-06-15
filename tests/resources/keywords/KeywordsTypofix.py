@@ -161,6 +161,11 @@ class KeywordsTypofix(object):
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
 
+    @staticmethod
+    def assert_custom_typofix (after: str, real: str ):
+        result = "PASSED" if after == real  else "FAILED"
+        details = "" if after == real  else f"'{after}' is not equal to '{real}'"
+        return  result,  details
 # tp = KeywordsTypofix()
 # str = tp.get_hyperlink_by_link_name(column_name="link",value="444 - Remove extra comma before spase dash space")
 # print(str)
