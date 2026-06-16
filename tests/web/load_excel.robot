@@ -68,11 +68,13 @@ Report rules with missing examples
 Load particular example To Excel
     Admin Login If Necessary
     ${True}    ${final_langs}    ${before_ex}    ${after_ex}  Get Link Detail    197    Czech (academic rules), Danish, German (Germany)
-    Create New Excel List In Excel    TestSample    ${False}
-    ${cnt}=  Get length   ${final_langs}
-    FOR    ${i}    IN RANGE   ${cnt}
-        Log    ${final_langs}[${i}] | ${before_ex}[${i}] | ${after_ex}[${i}]
-    END
-    Add Table To Excel    ${final_langs}    ${before_ex}    ${after_ex}
-    Save Test Case Excel
+    Log    ${after_ex}
+    ${after_ex}    Format nbspace Character    ${after_ex}
+#    Create New Excel List In Excel    TestSample    ${False}
+#    ${cnt}=  Get length   ${final_langs}
+#    FOR    ${i}    IN RANGE   ${cnt}
+#        Log    ${final_langs}[${i}] | ${before_ex}[${i}] | ${after_ex}[${i}]
+#    END
+#    Add Table To Excel    ${final_langs}    ${before_ex}    ${after_ex}
+#    Save Test Case Excel
 

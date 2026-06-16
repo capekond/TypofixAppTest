@@ -140,6 +140,13 @@ class KeywordsTypofix(object):
     def _modify_examples(example: list[str]) -> str:
         return "\n".join(example)
 
+    @staticmethod
+    def format_nbspace_character (txt: list[list[str]]) -> list:
+        for tl in txt:
+            for t in tl:
+                print(t.find(chr(160)))
+        return  txt
+
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True):
         r = 0
         c = self._get_column_by_name(sh, field_name, True)
