@@ -74,7 +74,8 @@ Get Link Detail
                 Append To List	    ${examples}    ${txt_list}
             END
             ${final_languages}    ${before_examples}    ${after_examples}    Build Before After For Languages    ${examples}    ${languages_examples}    ${expected_languages_per_id}
-        RETURN    ${True}    ${final_languages}    ${before_examples}    ${after_examples}
+            ${after_ex_nbspace}    Format nbspace Character    ${after_examples}
+        RETURN    ${True}    ${final_languages}    ${before_examples}    ${after_ex_nbspace}
     ELSE
         RETURN    ${False}  None    None    None
     END

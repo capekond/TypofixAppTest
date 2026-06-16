@@ -141,11 +141,20 @@ class KeywordsTypofix(object):
     def _modify_examples(example: list[str]) -> str:
         return "\n".join(example)
 
-    def format_nbspace_character (self, txt: list[list[str]]) -> list:
-        for tl in txt:
-            for t in tl:
-                print(t.find(chr(160)))
-        txt_out = [[t.replace(chr(160),self.NB_SPACE) for t in tl ] for tl in txt]
+    def format_nbspace_character (self, txt) -> list:
+
+        def switch(tt: str) -> str:
+            tt0 = tt.replace(chr(160),  self.NB_SPACE)
+            return tt0.replace("\u2009",  self.NB_SPACE)
+
+        if isinstance(txt, str):
+            txt_out = switch(txt)
+        else:
+            t0 = txt[0]
+            if isinstance(t0, str):
+                txt_out = [switch(t) for t  in txt]
+            else:
+                txt_out = [[switch(t) for t in tl] for tl in txt]
         return  txt_out
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True):
@@ -182,9 +191,22 @@ class KeywordsTypofix(object):
 
     @staticmethod
     def assert_custom_typofix (after: str, real: str ):
+        if  after.strip() == "":
+            return "SKIPPED", "Empty AFTER field"
         result = "PASSED" if after == real  else "FAILED"
         details = "" if after == real  else f"'{after}' is not equal to '{real}'"
         return  result,  details
+
 # tp = KeywordsTypofix()
-# str = tp.get_hyperlink_by_link_name(column_name="link",value="444 - Remove extra comma before spase dash space")
-# print(str)
+# s = [['nar.\xa012. 1. 2001'], ['(f.\xa01805, d.\xa01875)'], ['geb.\xa01974, gest.\xa02000', 'Comenius [geb.\xa01592]']]
+# st = tp.format_nbspace_character(s)
+# print(st)
+# s = ['nar.\xa012. 1. 2001', '(f.\xa01805, d.\xa01875)']
+# st = tp.format_nbspace_character(s)
+# print(st)
+# s = 'nar.\u200912. 1. 2001'
+# st = tp.format_nbspace_character(s)
+# print(st)
+# s = 'nar.\xa012. 1. 2001'
+# st = tp.format_nbspace_character(s)
+# print(st)
