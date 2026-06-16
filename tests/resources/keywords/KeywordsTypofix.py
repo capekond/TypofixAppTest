@@ -18,6 +18,7 @@ class KeywordsTypofix(object):
         self.TEST_RESULTS_FIELDS = ("TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP")
         self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
+        self.SHEET_NAME = "TC"
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
@@ -67,10 +68,13 @@ class KeywordsTypofix(object):
         link = sh.cell(r, c).hyperlink
         return str(link.target)
 
-    def create_new_excel_list_in_excel(self) -> str:
-        first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
-        self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
-        first.title = "tc_A"
+    def create_new_excel_list_in_excel(self, title= None, use_pattern= True) -> str:
+        if use_pattern:
+            first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
+            self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
+        else:
+            first = self.TEST_CASES_WB.create_sheet(title,0)
+        first.title = self.SHEET_NAME if title is None else title
         return first.title
 
     def clean_missing_excel_list(self):
@@ -101,6 +105,13 @@ class KeywordsTypofix(object):
             ws.cell(row=self.LL, column=7, value=self._modify_examples(befores[i]))
             ws.cell(row=self.LL, column=8, value=self._modify_examples(afters[i]))
             self.LL += 1
+
+    def add_table_to_excel(self, *f_values):
+        sh = self.TEST_CASES_WB.worksheets[0]
+        for r_id, row in  enumerate(f_values):
+            for c_id, vx in enumerate(row):
+                v =  "\n".join(vx) if isinstance(vx, list) else str(vx)
+                sh.cell(row=r_id + 1, column=c_id + 1, value=v)
 
     def add_results_to_excel(self, test_name, *f_values):
         errors = ""

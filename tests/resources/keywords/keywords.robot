@@ -16,10 +16,10 @@ Get Main Data
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
     # TODO                           ${pgs}
-    FOR    ${i}    IN RANGE    0     2
+    FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
         # TODO                     0     ${rows}
-        FOR    ${a}    IN RANGE     0    4
+        FOR    ${a}    IN RANGE     0    ${rows}
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
             @{tags}=            Get WebElements    //td[@class='col-Category-getBreadcrumbs']
@@ -67,7 +67,7 @@ Get Link Detail
                 ${txt_count}=    Get Element Count    //p
                 ${txt_list}=    Create List
                 FOR    ${ii}    IN RANGE    ${txt_count}
-                    ${txt1}=    Get Text    //p[${ii}+1]
+                    ${txt1}=    Get Element Attribute    //p[${ii}+1]    textContent
                     Append To List	    ${txt_list}    ${txt1}
                 END
                 Unselect Frame
