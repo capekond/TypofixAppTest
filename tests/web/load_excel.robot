@@ -69,12 +69,13 @@ Load particular example To Excel
     Admin Login If Necessary
     ${True}    ${final_langs}    ${before_ex}    ${after_ex}  Get Link Detail    197    Czech (academic rules), Danish, German (Germany)
     Log    ${after_ex}
-    ${after_ex}    Format nbspace Character    ${after_ex}
-#    Create New Excel List In Excel    TestSample    ${False}
-#    ${cnt}=  Get length   ${final_langs}
-#    FOR    ${i}    IN RANGE   ${cnt}
-#        Log    ${final_langs}[${i}] | ${before_ex}[${i}] | ${after_ex}[${i}]
-#    END
-#    Add Table To Excel    ${final_langs}    ${before_ex}    ${after_ex}
-#    Save Test Case Excel
+    ${after_ex_nbspace}=    Format nbspace Character    ${after_ex}
+    Log    ${after_ex_nbspace}
+    Create New Excel List In Excel    TestSample    ${False}
+    ${cnt}=  Get length   ${final_langs}
+    FOR    ${i}    IN RANGE   ${cnt}
+        Log    ${final_langs}[${i}] | ${before_ex}[${i}] | ${after_ex_nbspace}[${i}]
+    END
+    Add Table To Excel    ${final_langs}    ${before_ex}    ${after_ex_nbspace}
+    Save Test Case Excel
 

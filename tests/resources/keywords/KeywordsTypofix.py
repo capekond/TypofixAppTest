@@ -22,6 +22,7 @@ class KeywordsTypofix(object):
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
+        self.NB_SPACE = "&nbspace;"
 
     @staticmethod
     def get_columns_from_data(data: list ):
@@ -140,12 +141,12 @@ class KeywordsTypofix(object):
     def _modify_examples(example: list[str]) -> str:
         return "\n".join(example)
 
-    @staticmethod
-    def format_nbspace_character (txt: list[list[str]]) -> list:
+    def format_nbspace_character (self, txt: list[list[str]]) -> list:
         for tl in txt:
             for t in tl:
                 print(t.find(chr(160)))
-        return  txt
+        txt_out = [[t.replace(chr(160),self.NB_SPACE) for t in tl ] for tl in txt]
+        return  txt_out
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True):
         r = 0
