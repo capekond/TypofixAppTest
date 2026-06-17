@@ -10,3 +10,13 @@ t = t0.replace("&nbsp;", "\u2009")
 print(t)
 print(t == t1)
 print(t == t2)
+
+
+
+import openpyxl
+from openpyxl.cell.text import InlineFont
+from openpyxl.cell.rich_text import TextBlock, CellRichText
+
+red = InlineFont(color='00FF0000')
+green = InlineFont(color='00008000')
+print(red == green)

@@ -3,7 +3,11 @@ from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
 from openpyxl.cell.rich_text import CellRichText, TextBlock
+from openpyxl.cell.rich_text import CellRichText,TextBlock
+from openpyxl import Workbook
 from openpyxl.cell.text import InlineFont
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl.styles.colors import ColorDescriptor
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.comments import Comment
 import datetime
@@ -202,7 +206,7 @@ class KeywordsTypofix(object):
         return  result,  details
 
     @staticmethod
-    def color_cell_text(cell, after: str, real: str):
+    def color_cell_text(cell: Cell, after: str, real: str):
         ix = 0
         new_real = ""
         for ix, e_char in enumerate(list(after)):
@@ -210,20 +214,19 @@ class KeywordsTypofix(object):
                 break
             else:
                 new_real += e_char
-        print (new_real)
-        print (real[ix:])
-        # if new_real == real:
-        #     cell.value = real
-        # else:
-        #     green = InlineFont(color='00008000')
-        #     red = InlineFont(color='00FF0000')
-        #     rich_text_cell = CellRichText()
-        #     rich_text_cell.append(TextBlock(green, new_real))
-        #     rich_text_cell.append(TextBlock(red, real[-ix]))
-        #     cell.value = rich_text_cell
+        if new_real == real:
+             cell.value = real
+        else:
+             green = InlineFont(color='00008000')
+             red = InlineFont(color='00FF0000')
+             rich_text_cell = CellRichText([TextBlock(green, new_real), TextBlock(red,real[ix:])])
+             cell.value = rich_text_cell
 
 tp = KeywordsTypofix()
-tp.color_cell_text(None,"ABCDEF", ".ABCxDEF")
+sh_name = tp.create_new_excel_list_in_excel("TEST", False)
+cll = tp.TEST_CASES_WB[sh_name]["A1"]
+tp.color_cell_text(cll,"ABCDEF", "ABCxDEF")
+tp.save_test_case_excel()
 # s = [['nar.\xa012. 1. 2001'], ['(f.\xa01805, d.\xa01875)'], ['geb.\xa01974, gest.\xa02000', 'Comenius [geb.\xa01592]']]
 # st = tp.format_nbspace_character(s)
 # print(st)
