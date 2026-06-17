@@ -2,6 +2,8 @@ import os
 from openpyxl import load_workbook
 from pathlib import Path
 from openpyxl.cell.cell import Cell
+from openpyxl.cell.rich_text import CellRichText, TextBlock
+from openpyxl.cell.text import InlineFont
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.comments import Comment
 import datetime
@@ -114,7 +116,7 @@ class KeywordsTypofix(object):
                 v =  "\n".join(vx) if isinstance(vx, list) else str(vx)
                 sh.cell(row=r_id + 1, column=c_id + 1, value=v)
 
-    def add_results_to_excel(self, test_name, *f_values):
+    def add_results_to_excel(self, after:str, test_name:str, *f_values):
         errors = ""
         sh = self.TEST_CASES_WB.worksheets[0]
         row, x = self._get_position_by_name_and_value(sh, "Test Cases", test_name, False)
@@ -122,9 +124,11 @@ class KeywordsTypofix(object):
             errors = f"Test Case {test_name} not found"
         else:
             for i, field in enumerate(self.TEST_RESULTS_FIELDS):
-                print(self.TEST_RESULTS_FIELDS[i], f_values[i])
                 col = self._get_column_by_name(sh, field)
-                sh.cell(row, col).value = f_values[i]
+                if field == "REAL":
+                    self._color_cell_text(sh.cell(row, col), after, f_values[i])
+                else:
+                    sh.cell(row, col).value = f_values[i]
         return errors
 
     def save_test_case_excel(self) -> None:
@@ -197,7 +201,29 @@ class KeywordsTypofix(object):
         details = "" if after == real  else f"'{after}' is not equal to '{real}'"
         return  result,  details
 
-# tp = KeywordsTypofix()
+    @staticmethod
+    def color_cell_text(cell, after: str, real: str):
+        ix = 0
+        new_real = ""
+        for ix, e_char in enumerate(list(after)):
+            if e_char != (list(real))[ix]:
+                break
+            else:
+                new_real += e_char
+        print (new_real)
+        print (real[ix:])
+        # if new_real == real:
+        #     cell.value = real
+        # else:
+        #     green = InlineFont(color='00008000')
+        #     red = InlineFont(color='00FF0000')
+        #     rich_text_cell = CellRichText()
+        #     rich_text_cell.append(TextBlock(green, new_real))
+        #     rich_text_cell.append(TextBlock(red, real[-ix]))
+        #     cell.value = rich_text_cell
+
+tp = KeywordsTypofix()
+tp.color_cell_text(None,"ABCDEF", ".ABCxDEF")
 # s = [['nar.\xa012. 1. 2001'], ['(f.\xa01805, d.\xa01875)'], ['geb.\xa01974, gest.\xa02000', 'Comenius [geb.\xa01592]']]
 # st = tp.format_nbspace_character(s)
 # print(st)

@@ -17,8 +17,8 @@ Exectute Test from Excel File
     [Arguments]    ${link}    ${language}    ${before}    ${after}
     ${hyperlink}=    Get Hyperlink By Link Name    column_name=link    value=${link}
     ${REAL}=    Get Real Result     ${hyperlink}    ${language}
-    ${REAL_NBSPACE} =     Format nbspace Character    ${REAL}
-    ${TEST_RESULT}    ${details}    Assert Custom Typofix    ${after}    ${REAL_NBSPACE}
+    ${real_nbspace} =     Format nbspace Character    ${REAL}
+    ${test_result}    ${details}    Assert Custom Typofix    ${after}    ${real_nbspace}
     ${timestamp}=    Get Current Date
-    Add Results to Excel    ${TEST_NAME}    ${TEST_RESULT}    ${REAL_NBSPACE}    ${details}    ${timestamp}
+    Add Results to Excel    ${after}    ${TEST_NAME}    ${test_result}    ${real_nbspace}    ${details}    ${timestamp}
     Save Test Case Excel
