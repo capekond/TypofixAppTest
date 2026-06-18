@@ -1,5 +1,6 @@
 import os
 import datetime
+from enum import Enum
 from pathlib import Path
 from openpyxl import load_workbook
 from openpyxl.cell.cell import Cell
@@ -9,7 +10,15 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.comments import Comment
 
 class KeywordsTypofix(object):
+
     def __init__(self):
+        self.XLS_GREEN = InlineFont(color='00008000')
+        self.XLS_RED = InlineFont(color='00FF0000')
+        class TResult(Enum):
+            SKIPPED = "SKIPPED"
+            PASSED = "PASSED"
+            FAILED = "FAILED"
+        self.TR = TResult
         self.RESOURCES_DIR = Path(__file__).parent.parent
         self.TEST_CASES_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx")
         self.TEST_CASES_WB = load_workbook(self.TEST_CASES_FILE)
@@ -45,8 +54,8 @@ class KeywordsTypofix(object):
             with open(self.FILE_LOG, 'a') as file:
                 file.write(line + "\n")
 
-    def put_note_to_excel(self, cnt_ok: int, cnt_nok: int, ws_name="tc_no_examples"):
-        note = f"Last execution at {datetime.datetime.now()}. Reported records: {cnt_ok}. Not reported {cnt_nok}. Total count: {cnt_ok + cnt_nok}"
+    def put_note_to_excel(self, cnt_ok: int, cnt_total: int, ws_name="tc_no_examples") -> None:
+        note = f"Last execution at {datetime.datetime.now()}. Reported records: {cnt_ok}.  Total count: {cnt_total}"
         ws = self.TEST_CASES_WB[ws_name]
         ws["A1"].comment = Comment(note, "TypeFix test automation")
 
@@ -149,7 +158,7 @@ class KeywordsTypofix(object):
         return "\n".join(example)
 
     def format_nbspace_character (self, txt) -> list:
-
+        if not txt: return []
         def switch(tt: str) -> str:
             tt0 = tt.replace(chr(160),  self.NB_SPACE)
             return tt0.replace("\u2009",  self.NB_SPACE)
@@ -164,7 +173,7 @@ class KeywordsTypofix(object):
                 txt_out = [[switch(t) for t in tl] for tl in txt]
         return  txt_out
 
-    def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True):
+    def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> tuple[int, int]:
         r = 0
         c = self._get_column_by_name(sh, field_name, True)
         for row in range(2, sh.max_row + 1):
@@ -184,7 +193,7 @@ class KeywordsTypofix(object):
                 break
         return c
 
-    def _insert_excel_hyperlink(self, c: Cell, name: str, id: str):
+    def _insert_excel_hyperlink(self, c: Cell, name: str, id: str) -> None:
         c.value = name
         c.hyperlink = self.get_detail_link(id)
 
@@ -196,16 +205,15 @@ class KeywordsTypofix(object):
         res = res.replace(' ', self.CLEAN_CHAR)
         return res
 
-    @staticmethod
-    def assert_custom_typofix (after: str, real: str ):
-        if  after.strip() == "":
-            return "SKIPPED", "Empty AFTER field"
-        result = "PASSED" if after == real  else "FAILED"
+    def assert_custom_typofix (self, after: str, real: str ):
+        if  after.strip() == "": return  self.TR.SKIPPED.value, "Empty AFTER field"
+        result = self.TR.PASSED.value if after == real  else self.TR.FAILED.value
         details = "" if after == real  else f"'{after}' is not equal to '{real}'"
         return  result,  details
 
-    def color_cell_text(self, cell: Cell, after: str, real: str):
+    def _color_cell_text(self, cell: Cell, after: str, real: str) -> None:
         new_real = ""
+        ix = 0
         for ix, e_char in enumerate(list(after)):
             if e_char != (list(real))[ix]:  break
             new_real += e_char

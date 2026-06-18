@@ -104,5 +104,5 @@ Get Real Result
     END
     Log    ${i}
     @{real_emelent}=  Get WebElements    //pre[@class='ecma-validation__result']
-    ${real}=   Get Text     ${real_emelent}[${i-1}]
+    ${real}=   Get Element Attribute     ${real_emelent}[${i-1}]    textContent
     RETURN    ${real}
