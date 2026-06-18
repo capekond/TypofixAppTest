@@ -1,16 +1,12 @@
 import os
-from openpyxl import load_workbook
+import datetime
 from pathlib import Path
+from openpyxl import load_workbook
 from openpyxl.cell.cell import Cell
-from openpyxl.cell.rich_text import CellRichText, TextBlock
 from openpyxl.cell.rich_text import CellRichText,TextBlock
-from openpyxl import Workbook
 from openpyxl.cell.text import InlineFont
-from openpyxl.utils.dataframe import dataframe_to_rows
-from openpyxl.styles.colors import ColorDescriptor
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.comments import Comment
-import datetime
 
 class KeywordsTypofix(object):
     def __init__(self):
@@ -29,6 +25,9 @@ class KeywordsTypofix(object):
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
         self.NB_SPACE = "&nbspace;"
+        self.XLS_GREEN = InlineFont(color='00008000')
+        self.XLS_RED = InlineFont(color='00FF0000')
+
 
     @staticmethod
     def get_columns_from_data(data: list ):
@@ -205,37 +204,17 @@ class KeywordsTypofix(object):
         details = "" if after == real  else f"'{after}' is not equal to '{real}'"
         return  result,  details
 
-    @staticmethod
-    def color_cell_text(cell: Cell, after: str, real: str):
-        ix = 0
+    def color_cell_text(self, cell: Cell, after: str, real: str):
         new_real = ""
         for ix, e_char in enumerate(list(after)):
-            if e_char != (list(real))[ix]:
-                break
-            else:
-                new_real += e_char
-        if new_real == real:
-             cell.value = real
-        else:
-             green = InlineFont(color='00008000')
-             red = InlineFont(color='00FF0000')
-             rich_text_cell = CellRichText([TextBlock(green, new_real), TextBlock(red,real[ix:])])
-             cell.value = rich_text_cell
+            if e_char != (list(real))[ix]:  break
+            new_real += e_char
+        cell.value = real if new_real == real else CellRichText([TextBlock(self.XLS_GREEN, new_real), TextBlock(self.XLS_RED,real[ix:])])
 
-tp = KeywordsTypofix()
-sh_name = tp.create_new_excel_list_in_excel("TEST", False)
-cll = tp.TEST_CASES_WB[sh_name]["A1"]
-tp.color_cell_text(cll,"ABCDEF", "ABCxDEF")
-tp.save_test_case_excel()
-# s = [['nar.\xa012. 1. 2001'], ['(f.\xa01805, d.\xa01875)'], ['geb.\xa01974, gest.\xa02000', 'Comenius [geb.\xa01592]']]
-# st = tp.format_nbspace_character(s)
-# print(st)
-# s = ['nar.\xa012. 1. 2001', '(f.\xa01805, d.\xa01875)']
-# st = tp.format_nbspace_character(s)
-# print(st)
-# s = 'nar.\u200912. 1. 2001'
-# st = tp.format_nbspace_character(s)
-# print(st)
-# s = 'nar.\xa012. 1. 2001'
-# st = tp.format_nbspace_character(s)
-# print(st)
+# tp = KeywordsTypofix()
+# sh_name = tp.create_new_excel_list_in_excel("TEST", False)
+# cll = tp.TEST_CASES_WB[sh_name]["A1"]
+# tp.color_cell_text(cll,"ABCDEF", "ABCxDEF")
+# cll = tp.TEST_CASES_WB[sh_name]["A2"]
+# tp.color_cell_text(cll,"ABCDEF", "ABCDEF")
+# tp.save_test_case_excel()
