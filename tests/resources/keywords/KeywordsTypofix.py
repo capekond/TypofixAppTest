@@ -33,7 +33,6 @@ class KeywordsTypofix(object):
         self.CLEAN_CHAR = '_'
         self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
-        self.NB_SPACE = "&nbspace;"
         self.XLS_GREEN = InlineFont(color='00008000')
         self.XLS_RED = InlineFont(color='00FF0000')
 
@@ -68,6 +67,8 @@ class KeywordsTypofix(object):
         final_languages = []
         expected_languages_list = expected_languages.split(", ")
         for i in range(0, len(data), 2):
+            data[i] = "\n".join(data[i])
+            data[i + 1] = "\n".join(data[i+1])
             odd.append(data[i])
             even.append(data[i + 1])
         for i, language_example in enumerate(languages_examples):
@@ -117,8 +118,8 @@ class KeywordsTypofix(object):
             ws.cell(row=self.LL, column=4, value=id)
             self._insert_excel_hyperlink(ws.cell(row=self.LL, column=5), id + " - " + name.strip(), id=id)
             ws.cell(row=self.LL, column=6, value=language.strip())
-            ws.cell(row=self.LL, column=7, value=self._modify_examples(befores[i]))
-            ws.cell(row=self.LL, column=8, value=self._modify_examples(afters[i]))
+            ws.cell(row=self.LL, column=7, value=befores[i])
+            ws.cell(row=self.LL, column=8, value=self.format_nbspace_character(afters[i]))
             self.LL += 1
 
     def add_table_to_excel(self, *f_values):
@@ -153,25 +154,16 @@ class KeywordsTypofix(object):
     def typofix_split_string(s:str) -> list[str]:
         return [ss.strip() for ss in s.split(",")]
 
-    @staticmethod
-    def _modify_examples(example: list[str]) -> str:
-        return "\n".join(example)
+    def format_nbspace_character_for_list (self, txt_list: list) -> list:
+        return [self.format_nbspace_character(txt) for txt in txt_list]
 
-    def format_nbspace_character (self, txt) -> list:
-        if not txt: return []
-        def switch(tt: str) -> str:
-            tt0 = tt.replace(chr(160),  self.NB_SPACE)
-            return tt0.replace("\u2009",  self.NB_SPACE)
 
-        if isinstance(txt, str):
-            txt_out = switch(txt)
-        else:
-            t0 = txt[0]
-            if isinstance(t0, str):
-                txt_out = [switch(t) for t  in txt]
-            else:
-                txt_out = [[switch(t) for t in tl] for tl in txt]
-        return  txt_out
+    def format_nbspace_character (self, txt: str) -> str:
+        if not txt: return ""
+        pairs = {chr(160): "&nbSpace;", "\u2009": "&nbSpace;", "\n": "&endLine;", "\t": "&tab;"}
+        for pk in pairs.keys():
+            txt = txt.replace(pk, pairs[pk])
+        return  txt
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> tuple[int, int]:
         r = 0

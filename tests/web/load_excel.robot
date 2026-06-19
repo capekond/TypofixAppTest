@@ -104,7 +104,7 @@ Report rules with missing examples
     Put Note To Excel    cnt_ok=${ok}    cnt_total=${ok_total}
     Save Test Case Excel
 
-Load particular example To Excel
+ONLY FOR TEST PURPOSES Load particular example To Excel
     Admin Login If Necessary
     ${True}    ${final_langs}    ${before_ex}    ${after_ex}  Get Link Detail    197    Czech (academic rules), Danish, German (Germany)
     Log    ${after_ex}
