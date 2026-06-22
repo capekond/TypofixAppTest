@@ -209,7 +209,16 @@ class KeywordsTypofix(object):
         for ix, e_char in enumerate(list(after)):
             if e_char != (list(real))[ix]:  break
             new_real += e_char
+        # print(new_real)
+        # print(real[ix:])
+        # print(cell.value)
         cell.value = real if new_real == real else CellRichText([TextBlock(self.XLS_GREEN, new_real), TextBlock(self.XLS_RED,real[ix:])])
+        # print(cell.value)
+
+# ---------------------------------
+    def add_string_to_excel(self, after:str, real:str ) -> None:
+        sh = self.TEST_CASES_WB.worksheets[0]
+        self._color_cell_text(sh.cell(2, 2), after, real)
 
 # tp = KeywordsTypofix()
 # sh_name = tp.create_new_excel_list_in_excel("TEST", False)
