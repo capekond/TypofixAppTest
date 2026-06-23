@@ -84,13 +84,13 @@ class KeywordsTypofix(object):
         link = sh.cell(r, c).hyperlink
         return str(link.target)
 
-    def create_new_excel_list_in_excel(self, title= None, use_pattern= True) -> str:
+    def create_new_excel_list_in_excel(self, title=None, use_pattern=True) -> str:
+        first: Worksheet
         if use_pattern:
             first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
             self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
         else:
             first = self.TEST_CASES_WB.create_sheet(title,0)
-        first.title = self.SHEET_NAME if title is None else title
         return first.title
 
     def clean_missing_excel_list(self):
@@ -203,22 +203,22 @@ class KeywordsTypofix(object):
         details = "" if after == real  else f"'{after}' is not equal to '{real}'"
         return  result,  details
 
-    def _color_cell_text(self, cell: Cell, after: str, real: str) -> None:
+    def _color_cell_text(self, cell: Cell, after: str, real: str) -> tuple[str, str]:
+        #todo fix
         new_real = ""
         ix = 0
         for ix, e_char in enumerate(list(after)):
             if e_char != (list(real))[ix]:  break
             new_real += e_char
-        # print(new_real)
-        # print(real[ix:])
-        # print(cell.value)
-        cell.value = real if new_real == real else CellRichText([TextBlock(self.XLS_GREEN, new_real), TextBlock(self.XLS_RED,real[ix:])])
-        # print(cell.value)
+        old_real = real[ix:]
+        cell.value = real if new_real == real else CellRichText([TextBlock(self.XLS_GREEN, new_real), TextBlock(self.XLS_RED,old_real)])
+        return new_real, old_real
 
 # ---------------------------------
-    def add_string_to_excel(self, after:str, real:str ) -> None:
-        sh = self.TEST_CASES_WB.worksheets[0]
-        self._color_cell_text(sh.cell(2, 2), after, real)
+    def add_string_to_excel(self, sheet_name: str, after:str, real:str ) -> tuple[str, str]:
+        sh = self.TEST_CASES_WB[sheet_name]
+        new, old = self._color_cell_text(sh.cell(2, 2), after, real)
+        return new, old
 
 # tp = KeywordsTypofix()
 # sh_name = tp.create_new_excel_list_in_excel("TEST", False)
