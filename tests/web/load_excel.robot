@@ -11,8 +11,10 @@ Suite Teardown      Close All Browsers
 *** Test Cases ***
 
 Load defined examples to test cases and report rules with missing examples
+    [Tags]    complete
     [Documentation]   Build excel test cases report rules with missing examples
     ${excel_list}=    Create New Excel List in Excel
+    Log To Console    Test Case load starting
     ${ids}    ${names}    ${descriptions}    ${tags}    ${expecteds_languages}    Get Main Data
     ${cnt}=  Get length   ${ids}
     VAR    ${ok_tc}        0
@@ -20,7 +22,7 @@ Load defined examples to test cases and report rules with missing examples
     FOR    ${i}    IN RANGE   ${cnt}
        Typofix File Log     ${ids}[${i}]
        ${has_examples}    ${final_languages}   ${befores}    ${afters}    Get Link Detail      ${ids}[${i}]    ${expecteds_languages}[${i}]
-       Log    ${i}/${cnt} "test info: ${names}[${i}] Has examples: ${has_examples} Languages: ${final_languages} Before: ${befores} After: ${afters}
+       Log To Console    ${i}/${cnt} "test info: ${names}[${i}] Has examples: ${has_examples} Languages: ${final_languages} Before: ${befores} After: ${afters}
        IF    ${has_examples}
           ${ok_tc}=    Evaluate    ${ok_tc} + 1
           Add New Test Cases To Excel
@@ -48,6 +50,7 @@ Load defined examples to test cases and report rules with missing examples
     Save Test Case Excel
 
 Load defined examples to test cases
+    [Tags]    tc
     [Documentation]   Build excel test cases
     ${excel_list}=    Create New Excel List in Excel
     ${ids}    ${names}    ${descriptions}    ${tags}    ${expecteds_languages}    Get Main Data
@@ -78,6 +81,7 @@ Load defined examples to test cases
     Save Test Case Excel
 
 Report rules with missing examples
+    [Tags]    missing
     [Documentation]   Only report rules with missing examples
     Clean Missing Excel List
     ${ids}    ${names}    ${descriptions}    ${tags}    ${expecteds_languages}    Get Main Data

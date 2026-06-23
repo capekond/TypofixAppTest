@@ -12,7 +12,7 @@ Python 3.14.3
 ```
 If not install it from https://www.python.org/downloads/
 
-Clone repository from https://github.com/capekond/TypofixAppTest to to selected local project folder
+Clone repository from https://github.com/capekond/TypofixAppTest to to selected local project folder. C:\Users\theuser\IdeaProjects\ is used for this documentation
 ### Specific setup for project 
 1. execute requirements 
 ```bash
@@ -33,34 +33,28 @@ Robot Framework 7.4.2 (Python 3.14.3 on win32)
 ## General information
 When run *.robot file C:\Users\theuser\report.html contains the HTML with test  results. Open it in local browser
 ## Prepare the test scope
-Following command open page https://typofix.slonline.sk/admin/rule-sets and for every record put content of field Before and After  from detailed page to Excel file named DataStore. The data are stured at new list with name based on actual timestamp (i.e. 2026-05-21_09_24_48). New data list is the last in Excel, on the right.    
-Command:
 ```bash
-C:\Users\theuser> python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\admin_application.robot
+C:\Users\theuser> python -m robot --include complete C:\Users\theuser\IdeaProjects\TypofixAppTest\tests\web\load_excel.robot 
 
 ````
-Possible output:
+New worksheet at left of test cases is added to file C:\Users\theuser\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx    
+Possible output in cmd line:
 ```bash
 ==============================================================================
-Admin Application
+Load Excel
 ==============================================================================
-Add defined examples to data store :: Build data store                Login, session created
-44
-Guns N’ Roses
-Czech (academic rules), Czech (traditional rules), English, English (UK), English (US), German (Germany), Spanish
-45
-Correct form of C. a K. in Czech
-Czech (academic rules), Czech (traditional rules)
-46
+Load defined examples to test cases and report rules with missing ... .Test Case load starting
+.Login, session created
+Add Test Case 2 Keep date and month name together (2 May) Bulgarian, Dutch, English (UK), English (US), French, Greek, Irish, Italian, Maltese, Polish, Romanian, Spanish, Swedish
+Add Test Case 379 Replace colon in time values by period after time related prepositions (around 10:00 → around 10.00) Czech (academic rules), Czech (traditional rules), Slovenian
+Add Test Case 380 Replace colon in time values by period when followed by word “hour” (10:00 hod. to 10.00 hod.) Czech (academic rules), Czech (traditional rules), Hungarian, Slovenian
+Add Test Case 381 Replace colon in time values by period in time ranges (10:00–11:00 → 10:00–11:00) Czech (academic rules), Czech (traditional rules), Hungarian, Slovenian
+Add Test Case 398 Replace colon in time values by period when followed by certain suffixes; replace hyphen by nonbreaking one (13.00-kor) Hungarian
+Add Test Case 410 Keep short words with the next word Czech (academic rules), Czech (traditional rules), French
+Add Test Case 451 Change suffix -én into -jén in Hungarian Hungarian
+...
+...
 
-Add defined examples to data store :: Build data store                | PASS |
-------------------------------------------------------------------------------
-Admin Application                                                     | PASS |
-1 test, 1 passed, 0 failed
-==============================================================================
-Output:  C:\Users\ocape\output.xml
-Log:     C:\Users\ocape\log.html
-Report:  C:\Users\ocape\report.html
 ```
 Transfer data from DataStore Excel file to TestCase Excel file. The source file is last file on right in Excel Workbook. Newly created list is first on left in target Excel file. Based on incoming information unique anf safe test name is created (from id, name of the rule and language). 
 ```bash
