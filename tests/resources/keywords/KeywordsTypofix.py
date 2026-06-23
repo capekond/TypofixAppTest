@@ -12,8 +12,6 @@ from openpyxl.comments import Comment
 class KeywordsTypofix(object):
 
     def __init__(self):
-        self.XLS_GREEN = InlineFont(color='00008000')
-        self.XLS_RED = InlineFont(color='00FF0000')
         class TResult(Enum):
             SKIPPED = "SKIPPED"
             PASSED = "PASSED"
@@ -22,20 +20,22 @@ class KeywordsTypofix(object):
         self.RESOURCES_DIR = Path(__file__).parent.parent
         self.TEST_CASES_FILE = os.path.join(self.RESOURCES_DIR, "test_data", "TestCases.xlsx")
         self.TEST_CASES_WB = load_workbook(self.TEST_CASES_FILE)
-        self.TEST_CASES_MISSING = self.TEST_CASES_WB["tc_no_examples"]
+        self.TEST_CASES_WB_IMPLICIT_SHEET_NAME = "TC"
+        self.XLS_MISSING_SHEET = "tc_no_examples"
+        self.TEST_CASES_MISSING = self.TEST_CASES_WB[self.XLS_MISSING_SHEET]
         self.MISSING_LL = 2
         self.LL = 2
-        self.LANGUAGES_FILE = os.path.join(self.RESOURCES_DIR, 'test_data', 'references', '_list.csv')
         self.TEST_RESULTS_FIELDS = ("TEST_RESULT", "REAL", "DETAILS", "TIMESTAMP")
-        self.HTML_TAGS = ['<br>', '<p>', '<span>']
         self.PATTERN = "_pattern"
-        self.SHEET_NAME = "TC"
         self.CLEAN_CHAR = '_'
-        self.URL_DETAIL = 'https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/'
+        self.URL_DETAIL = "https://typofix.slonline.sk/admin/rules/SLONline-Typofix-Model-Rule/EditForm/field/SLONline-Typofix-Model-Rule/item/{ID}/edit?Root_LanguageExamples#Root_LanguageExamples"
         self.FILE_LOG = os.path.join(self.RESOURCES_DIR, 'log.txt')
-        self.XLS_GREEN = InlineFont(color='00008000')
-        self.XLS_RED = InlineFont(color='00FF0000')
-
+        self.SKIPPED_TEXT =  "Empty AFTER field"
+        self.CHANGE_CHARS = {chr(160): "&nbSpace;", "\u2009": "&nbSpace;", "\n": "&endLine;", "\t": "&tab;"}
+        self.XLS_GREEN = InlineFont(color='00008000') #NOT IN USE NOW
+        self.XLS_RED = InlineFont(color='00FF0000') #NOT IN USE NOW
+        self.XLS_NOTE_AUTHOR = "TypeFix test automation"
+        self.XLS_NOTE_TEXT = "Last execution at {dt_now}. Reported records: {cnt_ok}.  Total count: {cnt_total}"
 
     @staticmethod
     def get_columns_from_data(data: list ):
@@ -53,10 +53,10 @@ class KeywordsTypofix(object):
             with open(self.FILE_LOG, 'a') as file:
                 file.write(line + "\n")
 
-    def put_note_to_excel(self, cnt_ok: int, cnt_total: int, ws_name="tc_no_examples") -> None:
-        note = f"Last execution at {datetime.datetime.now()}. Reported records: {cnt_ok}.  Total count: {cnt_total}"
-        ws = self.TEST_CASES_WB[ws_name]
-        ws["A1"].comment = Comment(note, "TypeFix test automation")
+    def put_note_to_excel(self, cnt_ok: int, cnt_total: int, ws_name=None) -> None:
+        ws = self.TEST_CASES_WB[ws_name if ws_name else self.XLS_MISSING_SHEET]
+        dtn = datetime.datetime.now()
+        ws["A1"].comment = Comment(self.XLS_NOTE_TEXT.format(dt_now=dtn, cnt_ok=cnt_ok, cnt_total=cnt_total), self.XLS_NOTE_AUTHOR)
 
     @staticmethod
     def build_before_after_for_languages(data: list, languages_examples: list[str], expected_languages: str):
@@ -85,12 +85,14 @@ class KeywordsTypofix(object):
         return str(link.target)
 
     def create_new_excel_list_in_excel(self, title=None, use_pattern=True) -> str:
+        title_final = title if title else self.TEST_CASES_WB_IMPLICIT_SHEET_NAME
         first: Worksheet
         if use_pattern:
             first = self.TEST_CASES_WB.copy_worksheet(self.TEST_CASES_WB[self.PATTERN])
             self.TEST_CASES_WB.move_sheet(first, offset=- (len(self.TEST_CASES_WB.worksheets) - 1))
         else:
-            first = self.TEST_CASES_WB.create_sheet(title,0)
+            first = self.TEST_CASES_WB.create_sheet(title_final,0)
+        first.title = title_final
         return first.title
 
     def clean_missing_excel_list(self):
@@ -148,7 +150,7 @@ class KeywordsTypofix(object):
         self.TEST_CASES_WB.save(self.TEST_CASES_FILE)
 
     def get_detail_link(self, id: str) -> str:
-        return self.URL_DETAIL + id + "/edit?Root_LanguageExamples#Root_LanguageExamples"
+        return self.URL_DETAIL.format(ID=id)
 
     @staticmethod
     def typofix_split_string(s:str) -> list[str]:
@@ -157,12 +159,10 @@ class KeywordsTypofix(object):
     def format_nbspace_character_for_list (self, txt_list: list) -> list:
         return [self.format_nbspace_character(txt) for txt in txt_list]
 
-
     def format_nbspace_character (self, txt: str) -> str:
         if not txt: return ""
-        pairs = {chr(160): "&nbSpace;", "\u2009": "&nbSpace;", "\n": "&endLine;", "\t": "&tab;"}
-        for pk in pairs.keys():
-            txt = txt.replace(pk, pairs[pk])
+        for pk in self.CHANGE_CHARS.keys():
+            txt = txt.replace(pk, self.CHANGE_CHARS[pk])
         return  txt
 
     def _get_position_by_name_and_value(self, sh: Worksheet, field_name: str, field_value: str, contains_name=True) -> tuple[int, int]:
@@ -198,7 +198,7 @@ class KeywordsTypofix(object):
         return res
 
     def assert_custom_typofix (self, after: str, real: str ):
-        if  after.strip() == "": return  self.TR.SKIPPED.value, "Empty AFTER field"
+        if  after.strip() == "": return  self.TR.SKIPPED.value, self.SKIPPED_TEXT
         result = self.TR.PASSED.value if after == real  else self.TR.FAILED.value
         details = "" if after == real  else f"'{after}' is not equal to '{real}'"
         return  result,  details
@@ -214,16 +214,8 @@ class KeywordsTypofix(object):
         cell.value = real if new_real == real else CellRichText([TextBlock(self.XLS_GREEN, new_real), TextBlock(self.XLS_RED,old_real)])
         return new_real, old_real
 
-# ---------------------------------
+# FOR TESTING PURPOSES
     def add_string_to_excel(self, sheet_name: str, after:str, real:str, row:int) -> tuple[str, str]:
         sh = self.TEST_CASES_WB[sheet_name]
         new, old = self._color_cell_text(sh.cell(row, 2), after, real)
         return new, old
-
-# tp = KeywordsTypofix()
-# sh_name = tp.create_new_excel_list_in_excel("TEST", False)
-# cll = tp.TEST_CASES_WB[sh_name]["A1"]
-# tp.color_cell_text(cll,"ABCDEF", "ABCxDEF")
-# cll = tp.TEST_CASES_WB[sh_name]["A2"]
-# tp.color_cell_text(cll,"ABCDEF", "ABCDEF")
-# tp.save_test_case_excel()

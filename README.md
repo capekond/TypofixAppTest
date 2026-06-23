@@ -1,18 +1,16 @@
 # Robot Framework Test Suites Documentation for Typofix application
 
-There are test for https://www.typofix.org/application
-
 ## Before Running Tests
 
 ### General prerequisites 
-Check that python 3.14 (recommended version, 3.12 should be ok) is installed on your computer
+Check that python 3.14  is installed on your computer
 ```bash
 C:\Users\theuser>python -V
 Python 3.14.3
 ```
 If not install it from https://www.python.org/downloads/
 
-Clone repository from https://github.com/capekond/TypofixAppTest to to selected local project folder
+Clone repository from https://github.com/capekond/TypofixAppTest to to selected local project folder. C:\Users\theuser\IdeaProjects\ is used for this documentation
 ### Specific setup for project 
 1. execute requirements 
 ```bash
@@ -33,132 +31,76 @@ Robot Framework 7.4.2 (Python 3.14.3 on win32)
 ## General information
 When run *.robot file C:\Users\theuser\report.html contains the HTML with test  results. Open it in local browser
 ## Prepare the test scope
-Following command open page https://typofix.slonline.sk/admin/rule-sets and for every record put content of field Before and After  from detailed page to Excel file named DataStore. The data are stured at new list with name based on actual timestamp (i.e. 2026-05-21_09_24_48). New data list is the last in Excel, on the right.    
-Command:
 ```bash
-C:\Users\theuser> python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\admin_application.robot
+C:\Users\theuser> python -m robot --include complete C:\Users\theuser\IdeaProjects\TypofixAppTest\tests\web\load_excel.robot 
 
 ````
-Possible output:
+File C:\Users\theuser\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx
+- new worksheet at left of test cases is added
+- updated   
+
+Possible output in cmd line:
 ```bash
 ==============================================================================
-Admin Application
+Load Excel
 ==============================================================================
-Add defined examples to data store :: Build data store                Login, session created
-44
-Guns N’ Roses
-Czech (academic rules), Czech (traditional rules), English, English (UK), English (US), German (Germany), Spanish
-45
-Correct form of C. a K. in Czech
-Czech (academic rules), Czech (traditional rules)
-46
-
-Add defined examples to data store :: Build data store                | PASS |
+Load defined examples to test cases and report rules with missing ... .Test Case load starting
+.Login, session created
+Add Test Case 2 Keep date and month name together (2 May) Bulgarian, Dutch, English (UK), English (US), French, Greek, Irish, Italian, Maltese, Polish, Romanian, Spanish, Swedish
+Add Test Case 379 Replace colon in time values by period after time related prepositions (around 10:00 → around 10.00) Czech (academic rules), Czech (traditional rules), Slovenian
+Add Test Case 380 Replace colon in time values by period when followed by word “hour” (10:00 hod. to 10.00 hod.) Czech (academic rules), Czech (traditional rules), Hungarian, Slovenian
+...
+...
+469/471 "test info: Use comma as a decimal separator after currency symbols (€ 19,90) Has examples: False Languages: None Before: None After: None
+470/471 "test info: Nonbreaking space between value and local currency word (20 dollars) Has examples: False Languages: None Before: None After: None
+Load defined examples to test cases and report rules with missing ... | PASS |
 ------------------------------------------------------------------------------
-Admin Application                                                     | PASS |
+Load Excel                                                            | PASS |
 1 test, 1 passed, 0 failed
 ==============================================================================
-Output:  C:\Users\ocape\output.xml
-Log:     C:\Users\ocape\log.html
-Report:  C:\Users\ocape\report.html
-```
-Transfer data from DataStore Excel file to TestCase Excel file. The source file is last file on right in Excel Workbook. Newly created list is first on left in target Excel file. Based on incoming information unique anf safe test name is created (from id, name of the rule and language). 
-```bash
-C:\Users\theuser> python C:\Users\ocape\IdeaProjects\TypofixAppTest\tools\transfer_data_store_to_TC.py
-```
-Possible output:
-```bash
-Content of last list from C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\resources\test_data\DataStore.xlsx will be formatted and transferred to C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx
-For more info let try --help
-Do you like to proceed the task? [Y/n]  Y
-Selected source worksheet 2026-05-21_09_24_48
-Selected target worksheet tc_A5
-```
-Every test has as condition number of changes (count applied rules) that must be done to fix whole string. This script only calculate the counts and it them into appropriate column in Excel file. Feel to chack manually and change if wrong.
-```bash
-C:\Users\theuser> python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_prepare_excel.robot
-```
-Possible output:
-```bash
-==============================================================================
-Tested App Prepare Excel
-==============================================================================
-44__Guns_N__RosesCzech__academic_rules_                               Login, session created
-44__Guns_N__RosesCzech__academic_rules_                               | PASS |
-------------------------------------------------------------------------------
-44__Guns_N__RosesCzech__traditional_rules_                            Reuse open session
-44__Guns_N__RosesCzech__traditional_rules_                            | PASS |
-------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            Reuse open session
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            | PASS |
-------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         Reuse open session
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         | PASS |
-------------------------------------------------------------------------------
-Tested App Prepare Excel                                              | PASS |
-4 tests, 4 passed, 0 failed
-==============================================================================
-Output:  C:\Users\ocape\output.xml
-Log:     C:\Users\ocape\log.html
-Report:  C:\Users\ocape\report.html
+Output:  C:\Users\theuser\output.xml
+Log:     C:\Users\theuser\log.html
+Report:  C:\Users\theuser\report.html
+
 ```
 ## Execute tests 
-Execute test cases in first list of Excel TesCase file. Robot Framework report are created.  
+Execute test cases in first list of Excel TesCase file
 ```bash
-C:\Users\ocape>python -m robot C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_execute_main_test.robot
+C:\Users\theuser>python -m robot C:\Users\theuser\IdeaProjects\TypofixAppTest\tests\web\tt_execute_excel.robot
 ```
-Possible output 
+File C:\Users\theuser\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx
+- add test result to the worksheet 
+
+Possible output:
 ```bash
-[ ERROR ] Error in file 'C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\web\tested_app_execute_main_test.robot' on line 15: Library '..\keywords\KeywordsTypofix.py' does not exist.
 ==============================================================================
-Tested App Execute Main Test
+Tt Execute Excel
 ==============================================================================
-44__Guns_N__RosesCzech__academic_rules_                               Login, session created
-Done, no more to correct
-44__Guns_N__RosesCzech__academic_rules_                               | PASS |
+2_Keep_date_and_month_name_together_2_May_Bulgarian :: Insert a no... Login, session created
+2_Keep_date_and_month_name_together_2_May_Bulgarian :: Insert a no... | PASS |
 ------------------------------------------------------------------------------
-44__Guns_N__RosesCzech__traditional_rules_                            Reuse open session
-Done, no more to correct
-44__Guns_N__RosesCzech__traditional_rules_                            | PASS |
+2_Keep_date_and_month_name_together_2_May_Dutch :: Insert a nonbre... Reuse open session
+2_Keep_date_and_month_name_together_2_May_Dutch :: Insert a nonbre... | PASS |
 ------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            Reuse open session
-Done, no more to correct
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_            | FAIL |
-The text of element '//*[@role="textbox"]' should have been 'C.&nbsp;a&nbsp;k.
-C.&nbsp;a&nbsp;k.' but it was 'C.a k.
-C. a k.'.
+2_Keep_date_and_month_name_together_2_May_English_UK :: Insert a n... Reuse open session
+2_Keep_date_and_month_name_together_2_May_English_UK :: Insert a n... | PASS |
 ------------------------------------------------------------------------------
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         Reuse open session
-Done, no more to correct
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_         | FAIL |
-The text of element '//*[@role="textbox"]' should have been 'C.&nbsp;a&nbsp;k.
-C.&nbsp;a&nbsp;k.' but it was 'C.a k.
-C. a k.'.
+...
+...
+425_Nonbreaking_space_between_numbers_and_non_SI_single_letter_uni... Reuse open session
+425_Nonbreaking_space_between_numbers_and_non_SI_single_letter_uni... | PASS |
 ------------------------------------------------------------------------------
-Tested App Execute Main Test                                          | FAIL |
-4 tests, 2 passed, 2 failed
+426_Thin_space_between_numbers_and_non_SI_single_letter_units_24_h... Reuse open session
+426_Thin_space_between_numbers_and_non_SI_single_letter_units_24_h... | PASS |
+------------------------------------------------------------------------------
+Tt Execute Excel                                                      | PASS |
+326 tests, 326 passed, 0 failed
 ==============================================================================
 Output:  C:\Users\ocape\output.xml
 Log:     C:\Users\ocape\log.html
 Report:  C:\Users\ocape\report.html
-```
-The last run results from  Robot Framework XML report are added in test cases in first list of Excel TesCase file.
-```bash
-C:\Users\theuser> python C:\Users\ocape\IdeaProjects\TypofixAppTest\tools\add_results_to_TC.py
-```
-Possible output:
-```bash
-Results added to file C:\Users\ocape\IdeaProjects\TypofixAppTest\tests\resources\test_data\TestCases.xlsx from C:\Users\ocape\IdeaProjects\TypofixAppTest\results\output.xml
-
-Selected 4 test cases:
-44__Guns_N__RosesCzech__academic_rules_
-44__Guns_N__RosesCzech__traditional_rules_
-45__Correct_form_of_C__a_K__in_CzechCzech__academic_rules_
-45__Correct_form_of_C__a_K__in_CzechCzech__traditional_rules_
 ```
 # TODO
 https://github.com/capekond/TypofixAppTest/issues
 - prove that special characters are correctly handled 
-- add doc for execution
-  - CI/CD pipeline https://docs.robotframework.org/docs/using_rf_in_ci_systems/ci/github-actions
-  - run from container
+- add CI/CD pipeline https://docs.robotframework.org/docs/using_rf_in_ci_systems/ci/github-actions

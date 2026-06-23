@@ -14,7 +14,7 @@ Execute test New version
 
 *** Keywords ***
 Exectute Test from Excel File
-    #todo finalyze
+    #todo finalyze color coding in Excel if possible
     [Arguments]    ${link}    ${language}    ${before}    ${after}
     ${hyperlink}=    Get Hyperlink By Link Name    column_name=link    value=${link}
     ${real}=    Get Real Result     ${hyperlink}    ${language}

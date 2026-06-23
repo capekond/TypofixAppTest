@@ -15,10 +15,8 @@ Get Main Data
     Go To    ${ADMIN_BASE_URL}/rules
     ${pgs_info}=    Get Text    ${ADMIM_PG_INFO}
     ${pgs}     Evaluate    "${pgs_info}".split(" ")[2]
-    # TODO                           ${pgs}
     FOR    ${i}    IN RANGE    0     ${pgs}
         ${rows}=    Get Element Count    ${ADMIN_TABLE_TEXT_REPLACE}
-        # TODO                     0     ${rows}
         FOR    ${a}    IN RANGE     0    ${rows}
             @{ids}=             Get WebElements    //td[@class='col-ID']
             @{descriptions}=    Get WebElements    //td[@class='col-Description']
@@ -30,6 +28,7 @@ Get Main Data
             ${description}=      Get Text    ${descriptions}[${a}]
             ${tag}=              Get Text    ${tags}[${a}]
             ${langs_by_coma}=    Get Text    ${langs}[${a}]
+            Log To Console    Add Test Case ${id} ${name} ${langs_by_coma}
             @{data_item}=    Create List    ${id}    ${name}    ${description}    ${tag}    ${langs_by_coma}
             Append To List    ${data}    ${data_item}
         END
