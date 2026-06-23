@@ -14,8 +14,10 @@ Color Cell Excel
     [Documentation]
     ${excel_list}=    Create New Excel List in Excel    ColorList    use_pattern=${False}
     Log    ${excel_list}
-    ${a}   ${b}   Add String To Excel  ${excel_list}  ColorNone     ColorYes
-    Log    ${a} | ${b}
+    FOR    ${n}    IN RANGE    1    4
+        ${a}   ${b}   Add String To Excel  ${excel_list}  ColorNone     ColorYes${n}    ${n}
+        Log    ${a} | ${b}
+    END
     Put Note To Excel    cnt_ok=1    cnt_total=1    ws_name=${excel_list}
     Save Test Case Excel
 

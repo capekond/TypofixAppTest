@@ -215,9 +215,9 @@ class KeywordsTypofix(object):
         return new_real, old_real
 
 # ---------------------------------
-    def add_string_to_excel(self, sheet_name: str, after:str, real:str ) -> tuple[str, str]:
+    def add_string_to_excel(self, sheet_name: str, after:str, real:str, row:int) -> tuple[str, str]:
         sh = self.TEST_CASES_WB[sheet_name]
-        new, old = self._color_cell_text(sh.cell(2, 2), after, real)
+        new, old = self._color_cell_text(sh.cell(row, 2), after, real)
         return new, old
 
 # tp = KeywordsTypofix()

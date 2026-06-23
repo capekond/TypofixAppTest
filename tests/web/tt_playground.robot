@@ -20,5 +20,12 @@ Test Color Excel
     Add String To Excel    ${after}     ${real}
     Save Test Case Excel
 
-
+Color Cell Excel
+    [Documentation]
+    ${excel_list}=    Create New Excel List in Excel    ColorList    use_pattern=${False}
+    Log    ${excel_list}
+    ${a}   ${b}   Add String To Excel  ${excel_list}  ColorNone     ColorYes
+    Log    ${a} | ${b}
+    Put Note To Excel    cnt_ok=1    cnt_total=1    ws_name=${excel_list}
+    Save Test Case Excel
 
