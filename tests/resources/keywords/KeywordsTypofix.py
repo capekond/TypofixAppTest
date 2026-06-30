@@ -4,7 +4,6 @@ from enum import Enum
 from pathlib import Path
 from openpyxl import load_workbook
 from openpyxl.cell.cell import Cell
-from openpyxl.cell.rich_text import CellRichText,TextBlock
 from openpyxl.cell.text import InlineFont
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.comments import Comment
@@ -140,10 +139,7 @@ class KeywordsTypofix(object):
         else:
             for i, field in enumerate(self.TEST_RESULTS_FIELDS):
                 col = self._get_column_by_name(sh, field)
-                if field == "REAL":
-                    self._color_cell_text(sh.cell(row, col), after, f_values[i])
-                else:
-                    sh.cell(row, col).value = f_values[i]
+                sh.cell(row, col).value = f_values[i]
         return errors
 
     def save_test_case_excel(self) -> None:
@@ -200,22 +196,31 @@ class KeywordsTypofix(object):
     def assert_custom_typofix (self, after: str, real: str ):
         if  after.strip() == "": return  self.TR.SKIPPED.value, self.SKIPPED_TEXT
         result = self.TR.PASSED.value if after == real  else self.TR.FAILED.value
-        details = "" if after == real  else f"'{after}' is not equal to '{real}'"
+        details = self._split_cell_text(after,real)
         return  result,  details
 
-    def _color_cell_text(self, cell: Cell, after: str, real: str) -> tuple[str, str]:
-        #todo fix
-        new_real = ""
+    def _split_cell_text(self, after: str, real: str) -> str:
+        string_OK = ""
         ix = 0
         for ix, e_char in enumerate(list(after)):
             if e_char != (list(real))[ix]:  break
-            new_real += e_char
-        old_real = real[ix:]
-        cell.value = real if new_real == real else CellRichText([TextBlock(self.XLS_GREEN, new_real), TextBlock(self.XLS_RED,old_real)])
-        return new_real, old_real
+            string_OK += e_char
+        if string_OK == after:
+            return string_OK
+        else:
+            after_differ = after[ix:]
+            real_differ = real[ix:]
+            return f"{string_OK}\n{after_differ}\n{real_differ}"
 
 # FOR TESTING PURPOSES
     def add_string_to_excel(self, sheet_name: str, after:str, real:str, row:int) -> tuple[str, str]:
         sh = self.TEST_CASES_WB[sheet_name]
-        new, old = self._color_cell_text(sh.cell(row, 2), after, real)
+        new, old = self._split_cell_text(sh.cell(row, 2), after, real)
         return new, old
+
+aa = KeywordsTypofix()
+print(aa._split_cell_text("aaaBBBccc", "aaaBBBccc"))
+print(aa._split_cell_text("aaaXBBBccc", "aaaBBBccc"))
+print(aa._split_cell_text(" z", "aaaBBBccc"))
+print("----")
+print(aa._split_cell_text('13&nbSpace;януари (Bulgarian)', '13&nbSpace;януари (Bulgarian)'))
