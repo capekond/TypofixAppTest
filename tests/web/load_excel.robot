@@ -10,7 +10,7 @@ Suite Teardown      Close All Browsers
 
 *** Test Cases ***
 
-Load defined examples to test cases and report rules with missing examples
+Load examples to test cases and report rules with missing examples
     [Tags]    complete
     [Documentation]   Build excel test cases report rules with missing examples
     ${excel_list}=    Create New Excel List in Excel
