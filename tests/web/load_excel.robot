@@ -108,17 +108,24 @@ Report rules with missing examples
     Put Note To Excel    cnt_ok=${ok}    cnt_total=${ok_total}
     Save Test Case Excel
 
-ONLY FOR TEST PURPOSES Load particular example To Excel
-    Admin Login If Necessary
-    ${True}    ${final_langs}    ${before_ex}    ${after_ex}  Get Link Detail    197    Czech (academic rules), Danish, German (Germany)
-    Log    ${after_ex}
-    ${after_ex_nbspace}=    Format nbspace Character    ${after_ex}
-    Log    ${after_ex_nbspace}
-    Create New Excel List In Excel    TestSample    ${False}
-    ${cnt}=  Get length   ${final_langs}
-    FOR    ${i}    IN RANGE   ${cnt}
-        Log    ${final_langs}[${i}] | ${before_ex}[${i}] | ${after_ex_nbspace}[${i}]
-    END
-    Add Table To Excel    ${final_langs}    ${before_ex}    ${after_ex_nbspace}
-    Save Test Case Excel
+#ONLY FOR TEST PURPOSES Load particular example To Excel
+#    Admin Login If Necessary
+#    ${True}    ${final_langs}    ${before_ex}    ${after_ex}  Get Link Detail    197    Czech (academic rules), Danish, German (Germany)
+#    Log    ${after_ex}
+#    ${after_ex_nbspace}=    Format nbspace Character    ${after_ex}
+#    Log    ${after_ex_nbspace}
+#    Create New Excel List In Excel    TestSample    ${False}
+#    ${cnt}=  Get length   ${final_langs}
+#    FOR    ${i}    IN RANGE   ${cnt}
+#        Log    ${final_langs}[${i}] | ${before_ex}[${i}] | ${after_ex_nbspace}[${i}]
+#    END
+#    Add Table To Excel    ${final_langs}    ${before_ex}    ${after_ex_nbspace}
+#    Save Test Case Excel
 
+#ONLY FOR TEST PURPOSES Go thru the table
+#    [Tags]    complete
+#    [Documentation]   Build excel test cases report rules with missing examples
+#    ${excel_list}=    Create New Excel List in Excel
+#    Log To Console    Test Case load starting
+#    ${ids}    ${names}    ${descriptions}    ${tags}    ${expecteds_languages}    Get Main Data
+#    ${cnt}=  Get length   ${ids}

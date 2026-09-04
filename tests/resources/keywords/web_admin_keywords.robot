@@ -21,7 +21,7 @@ ${ADMIN_TABLE_TEXT_REPLACE}       //table[@class="table grid-field__table"]/tbod
 ${ADMIN_GO_BACK}                  //*[@id="Form_ItemEditForm"]/div[1]/div[1]/a
 ${ADMIN_BEFORE_TEXT_REPLACE}      xpath://textarea[@name='ExampleBefore']
 ${ADMIN_AFTER_TEXT_REPLACE}       xpath://textarea[@name='ExampleAfter']
-${ADMIN_NEXT}                     xpath://button[@value='Next']
+${ADMIN_NEXT}                     xpath://button[@title='Next']
 ${ADMIM_PG_INFO}                  xpath://span[@class='pagination-page-number']
 
 *** Keywords ***
@@ -36,7 +36,7 @@ Admin Let Open Browser
 Admin Login If Necessary
     [Documentation]    Opens a browser and provide email password to login
     Reload Page
-    ${element_exists} =    Run Keyword And Return Status    Page Should Contain Element    //h1[contains(text(),'Log in')]
+    ${element_exists} =    Run Keyword And Return Status    Page Should Contain Element    //h2[contains(text(),'Log in')]
     IF    ${element_exists}
         Input Text      id:MemberLoginForm_LoginForm_Email    ${EMAIL}
         Input Text      id:MemberLoginForm_LoginForm_Password    ${WEB_PASSWORD}
